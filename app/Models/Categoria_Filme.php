@@ -12,7 +12,12 @@ class Categoria_Filme extends Model
     public $timestamps = false;
 
     protected $fillable = [
-        'filme',
         'categoria',
+    ];
+    protected $hidden = [
+        'filme'
+    ];
+    protected $cast = [
+        'categoria' => Categoria::class,
     ];
 }

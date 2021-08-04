@@ -24,6 +24,7 @@ class FilmeFactory extends Factory
         return [
             'titulo' => $this->faker->title(),
             'classificação_idade' => $this->faker->randomElement(['L', '10', '12', '14', '16', '18']),
+            'metacritic'=>$this->faker->randomDigit(),
             'descrição' => 'descrição',
         ];
     }

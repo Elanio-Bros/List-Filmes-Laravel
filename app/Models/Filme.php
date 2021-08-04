@@ -12,8 +12,10 @@ class Filme extends Model
     protected $table = 'filmes';
 
     protected $filleble = [
+        'idFilme',
         'titulo',
+        'metacritic',
         'classificação_idade',
-        'descrição'
+        'descrição',
     ];
 }

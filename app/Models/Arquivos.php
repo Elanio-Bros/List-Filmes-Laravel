@@ -12,8 +12,8 @@ class Arquivos extends Model
     protected $fillable = [
         'idArquivo',
         'filme',
-        'tipo',
-        'local',
         'propriedade',
+        'local',
+        'tipo',
     ];
 }
