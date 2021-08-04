@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateUsersTable extends Migration
+class CreateFilmesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,13 +13,12 @@ class CreateUsersTable extends Migration
      */
     public function up()
     {
-        Schema::create('users', function (Blueprint $table) {
-            $table->id('idUser');
-            $table->string('nome');
-            $table->string('email')->unique();
-            $table->string('senha');
-            $table->integer('tipo_user');
-            // $table->rememberToken();
+        Schema::create('filmes', function (Blueprint $table) {
+            $table->id('idFilme');
+            $table->string('titulo');
+            $table->integer('metacritic');
+            $table->string('classificação_idade');
+            $table->string('descrição');
             $table->timestamps();
         });
     }
@@ -31,6 +30,6 @@ class CreateUsersTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('users');
+        Schema::dropIfExists('filmes');
     }
 }
