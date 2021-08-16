@@ -19,6 +19,7 @@ class CreateAvaliacaoFilmeTable extends Migration
             $table->foreignId('filme')->references('idFilme')->on('filmes');
             $table->string('comentario');
             $table->integer('pontuação');
+            $table->integer('curtidas');
             $table->timestamps();
         });
     }

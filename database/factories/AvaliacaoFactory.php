@@ -42,6 +42,7 @@ class AvaliacaoFactory extends Factory
             },
             'comentario' => 'Avalição',
             'pontuação' => 4,
+            'curtidas' => 1,
         ];
     }
 }

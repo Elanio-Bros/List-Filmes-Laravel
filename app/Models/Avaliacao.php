@@ -15,5 +15,6 @@ class Avaliacao extends Model
         'filme',
         'comentario',
         'pontuação',
+        'curtidas',
     ];
 }
