@@ -1,4 +1,15 @@
-.Cardcarroseul{
-    width: 95%;
+.Cardcarroseul {
+    width: 100%;
     margin: 0 auto;
+}
+.carousel-item img{
+    filter: brightness(50%);
+}
+
+#textAb {
+    position: absolute;
+    top: 145px;
+    right: 20px;
+    font-size: 40px;
+    color: white;
 }
