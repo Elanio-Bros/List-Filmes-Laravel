@@ -20,6 +20,8 @@ class User extends Authenticatable
         'name',
         'email',
         'senha',
+        'usuario',
+        'foto_perfil',
 
     ];
 
@@ -33,6 +35,6 @@ class User extends Authenticatable
         'tipo_user'
         // 'remember_token',
     ];
-    
+
     protected $casts = [];
 }

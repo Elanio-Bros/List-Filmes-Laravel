@@ -11,6 +11,11 @@
 @endsection
 @section('content')
     <div>
+        <div id="textAb">
+            <h1>Movies Historic</h1>
+            <p>É um site onde você pode compartilhar suas opiniões e notas sobre os filmes para outros verem</p>
+            <button type="button" class="btn btn-primary">Faça parte dessa comunidade</button>
+        </div>
         <div id="carouselFundo" class="carousel slide carousel-fade" data-ride="carousel">
             <div class="carousel-inner">
                 @foreach (File::glob(public_path('img/banner_welcome/*.*')) as $key => $imagem)
@@ -20,11 +25,6 @@
                 @endforeach
             </div>
         </div>
-    </div>
-    <div id="textAb">
-        <h1>Movies Historic</h1>
-        <p>É um site onde você pode compartilhar suas opiniões e notas sobre os filmes para outros verem</p>
-        <button type="button" class="btn btn-primary">Faça parte dessa comunidade</button>
     </div>
     <div>
         <h2>Ultimos Filmes Adicionados</h2>
