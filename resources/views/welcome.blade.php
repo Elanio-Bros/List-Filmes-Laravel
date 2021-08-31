@@ -39,6 +39,31 @@
             align-items: center;
         }
 
+        .filme .card-body {
+            padding: 5%;
+        }
+
+        .comentario .card-body {
+            padding: 1%;
+        }
+
+        .comentario .card-header {
+            background-color: #FFF;
+            border: 0px;
+            display: flex;
+        }
+
+        .comentario .card-header b {
+            padding: 5px;
+            margin: 1px;
+        }
+
+        .comentario .card-header img {
+            width: 40px;
+            height: 40px;
+            border-radius: 2px;
+        }
+
     </style>
 @endsection
 @section('content')
@@ -54,39 +79,36 @@
         </div>
         <div id="frontText">
             <div class="w-50">
-                <h1>Movies Historic</h1>
-                <p>É um site onde você pode compartilhar suas opiniões e notas sobre os filmes para outros verem</p>
+                <h1>Your Movie Ideas</h1>
+                <p>É um site onde você pode compartilhar suas opiniões, notas, ideias, teorias e pode falar de tudo sobre um
+                    ou varios filmes</p>
                 <a href="{{ url('login') }}"><button type="button" class="btn btn-primary">Faça parte
                         dessa comunidade</button></a>
             </div>
         </div>
     </div>
     <div>
-        <h2>Ultimos Filmes Adicionados</h2>
-        <div class="CardCarroseul">
+        <div class="m-4">
+            <h4>Comentarios Gerais</h4>
+        </div>
+        <div class="FilmeCarousel my-3">
             @foreach (range(1, 10) as $item)
                 <div class="mx-2">
-                    @include('card',
+                    @includeIf('content_layout.card_layout',
                     ['titulo'=>"$item Titulo Filme",
-                    'imagem'=>'https://images-na.ssl-images-amazon.com/images/I/71yDb8SKTTL.jpg'])
+                    'imagem'=>'https://images-na.ssl-images-amazon.com/images/I/71yDb8SKTTL.jpg']
+                    )
                 </div>
             @endforeach
         </div>
-        <div class="ComentariosCarroseul">
+        <div class="ComentarioCarousel">
             @foreach (range(1, 10) as $item1)
                 <div class="mx-5">
                     @foreach (range(1, 5) as $item)
                         <div class="my-2">
-                            <div class="card">
-                                <div class="card-header">
-                                    Comentario Filme {{ $item1 }}
-                                </div>
-                                <div class="card-body">
-                                    <blockquote class="blockquote mb-0">
-                                        <p>Comentario {{ $item }}</p>
-                                    </blockquote>
-                                </div>
-                            </div>
+                            @includeIf('content_layout.comentario_layout',
+                            ['name' => "Pessoa $item",
+                            'comentario'=>"Nº $item1 Filme Comentario"])
                         </div>
                     @endforeach
                 </div>
@@ -97,17 +119,16 @@
 @section('script')
     <script src="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.7.1/slick.js"></script>
     <script>
-        $('.CardCarroseul').slick({
+        $('.FilmeCarousel').slick({
             accessibility: false,
             centerMode: true,
-            slidesToShow: 3,
             variableWidth: true,
             arrows: false,
-            asNavFor: '.ComentariosCarroseul'
+            asNavFor: '.ComentarioCarousel'
         });
-        $('.ComentariosCarroseul').slick({
+        $('.ComentarioCarousel').slick({
             accessibility: false,
-            asNavFor: '.CardCarroseul',
+            asNavFor: '.FilmeCarousel',
             centerMode: true,
             autoplay: true,
             slidesToShow: 1,
