@@ -8,7 +8,7 @@
     <!-- Add the slick-theme.css if you want default styling -->
     <link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick-theme.css" />
     <style>
-        .Cardcarroseul {
+        .FilmeCarousel {
             width: 100%;
         }
 
@@ -18,7 +18,7 @@
             filter: brightness(50%);
         }
 
-        .carousel,
+        #carouselFundo .carousel,
         .carousel-inner {
             z-index: -1;
         }
@@ -31,12 +31,9 @@
             color: azure;
             position: absolute;
             top: 0;
-            margin: auto;
-            width: 100%;
-            height: 78vh;
+            margin-top: 15%;
+            margin-left: 5%;
             display: flex;
-            justify-content: center;
-            align-items: center;
         }
 
         .filme .card-body {
@@ -93,7 +90,8 @@
         </div>
         <div class="FilmeCarousel my-3">
             @foreach (range(1, 10) as $item)
-                <div class="mx-2">
+                <div id="{{ $item }}" class="mx-2 cardFilme">
+                    {{ $item }}
                     @includeIf('content_layout.card_layout',
                     ['titulo'=>"$item Titulo Filme",
                     'imagem'=>'https://images-na.ssl-images-amazon.com/images/I/71yDb8SKTTL.jpg']
@@ -120,7 +118,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.7.1/slick.js"></script>
     <script>
         $('.FilmeCarousel').slick({
-            accessibility: false,
+            // accessibility: false,
             centerMode: true,
             variableWidth: true,
             arrows: false,
@@ -130,10 +128,13 @@
             accessibility: false,
             asNavFor: '.FilmeCarousel',
             centerMode: true,
-            autoplay: true,
+            autoplay: false,
             slidesToShow: 1,
-            autoplaySpeed: 2500,
             arrows: false,
+        });
+        $('.cardFilme').click(function() {
+            let index = this.id;
+            $('.FilmeCarousel').slick('slickGoTo',index)
         });
     </script>
 @endsection
