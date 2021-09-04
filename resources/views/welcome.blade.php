@@ -43,22 +43,23 @@
             border-radius: 2px;
         }
 
-        .CarouselFilmes .buttons {
-            display: flex;
+        .CarouselFilmes .prev,
+        .next {
             position: absolute;
+            width: 50px;
             min-height: 18em;
-            border: 1px solid green;
-        }
-
-        .CarouselFilmes a {
             display: flex;
             align-items: center;
-            width: 50px;
+            align-content: center;
+            justify-content: center;
             background-color: #000000AF;
             text-decoration: none;
-            border: 1px solid royalblue;
+            z-index: 1;
+            color: red;
         }
-        .CarouselFilmes a:hover {
+
+        .CarouselFilmes a,
+        .cardFilme:hover {
             cursor: pointer;
         }
 
@@ -89,6 +90,9 @@
         <h4>Comentarios Gerais da Comunidade</h4>
     </div>
     <div class="CarouselFilmes d-flex my-3 align-items-center" style="max-height: 1280px;">
+        <a class="prev" style="left:0;">
+            <span><i class="fas fa-chevron-circle-left"></i></span>
+        </a>
         <div class="FilmCovers w-100">
             @foreach (range(1, 10) as $item)
                 <div class="mx-2 cardFilme">
@@ -99,12 +103,9 @@
                 </div>
             @endforeach
         </div>
-        <div class="buttons">
-            <a class="prev">Previous</a>
-            <a class="next">
-                <span>Next</span>
-            </a>
-        </div>
+        <a class="next" style="right: 0;">
+            <span><i class="fas fa-chevron-circle-right"></i></span>
+        </a>
     </div>
     <div class="CommentMovies">
         @foreach (range(1, 10) as $item1)
@@ -135,8 +136,9 @@
         $('.CommentMovies').slick({
             accessibility: false,
             asNavFor: '.FilmCovers',
+            autoplay: true,
+            autoplaySpeed: 3500,
             centerMode: true,
-            autoplay: false,
             slidesToShow: 1,
             arrows: false,
         });
