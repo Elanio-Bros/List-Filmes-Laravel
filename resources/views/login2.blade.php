@@ -87,21 +87,14 @@
     <div class="fundo">
         @foreach (range(1, 5) as $item)
             <div class="container">
-                <div id="carousel{{ $item }}" class="carousel vert slide" data-ride="carousel">
-                    <div class="carousel-inner">
-                        <div class="carousel-item active">
+                <div id="carousel{{ $item }}">
+                    @foreach (range(1, 4) as $item2)
+                        <div>
                             <img class="d-block mx-auto img-fluid"
-                                src="https://images-na.ssl-images-amazon.com/images/I/71yDb8SKTTL.jpg" alt="First slide">
+                                src="https://images-na.ssl-images-amazon.com/images/I/71yDb8SKTTL.jpg"
+                                alt="{{ $item2 }}">
                         </div>
-                        <div class="carousel-item">
-                            <img class="d-block mx-auto img-fluid"
-                                src="https://images-na.ssl-images-amazon.com/images/I/71yDb8SKTTL.jpg" alt="Second slide">
-                        </div>
-                        <div class="carousel-item">
-                            <img class="d-block mx-auto img-fluid"
-                                src="https://images-na.ssl-images-amazon.com/images/I/71yDb8SKTTL.jpg" alt="Third slide">
-                        </div>
-                    </div>
+                    @endforeach
                 </div>
             </div>
         @endforeach
@@ -118,11 +111,16 @@
             let senha = $("#pass")
             senha.prop("type", senha.prop("type") == "password" ? "text" : "password");
         });
-        $(".carousel").each(function(index) {
-            $("#" + $(this).attr('id')).carousel({
-                interval: Math.floor(Math.random() * (2000 - 1100)) + 1100,
-                pause: false,
-            });
-        });
+        // $(".carousel").each(function(index) {
+        //     $("#" + $(this).attr('id')).carousel({
+        //         interval: Math.floor(Math.random() * (2000 - 1100)) + 1100,
+        //         pause: false,
+        //     });
+        // });
+        setInterval(function() {
+            var elementSelect = $("img").select(Math.floor(Math.random() * $("img").length));
+            console.log(elementSelect)
+            elementSelect.toggle("slow");
+        },1000);
     </script>
 @endsection

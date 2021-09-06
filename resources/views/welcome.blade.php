@@ -43,23 +43,26 @@
             border-radius: 2px;
         }
 
-        .CarouselFilmes .prev,
-        .next {
+        .CarouselFilmes .buttonCarousel {
             position: absolute;
             width: 50px;
             min-height: 18em;
             display: flex;
             align-items: center;
-            align-content: center;
             justify-content: center;
             background-color: #000000AF;
-            text-decoration: none;
             z-index: 1;
-            color: red;
+            color: white;
+            text-decoration: none;
         }
 
-        .CarouselFilmes a,
+        .CarouselFilmes .buttonCarousel span {
+            font-size: 2.5em;
+        }
+
+        .CarouselFilmes .buttonCarousel:hover,
         .cardFilme:hover {
+            color: #4E89E0;
             cursor: pointer;
         }
 
@@ -90,8 +93,8 @@
         <h4>Comentarios Gerais da Comunidade</h4>
     </div>
     <div class="CarouselFilmes d-flex my-3 align-items-center" style="max-height: 1280px;">
-        <a class="prev" style="left:0;">
-            <span><i class="fas fa-chevron-circle-left"></i></span>
+        <a class="buttonCarousel prev" style="left:0;">
+            <span><i class="fas fa-chevron-left"></i></span>
         </a>
         <div class="FilmCovers w-100">
             @foreach (range(1, 10) as $item)
@@ -103,8 +106,8 @@
                 </div>
             @endforeach
         </div>
-        <a class="next" style="right: 0;">
-            <span><i class="fas fa-chevron-circle-right"></i></span>
+        <a class="buttonCarousel next" style="right: 0;">
+            <span><i class="fas fa-chevron-right"></i></span>
         </a>
     </div>
     <div class="CommentMovies">
@@ -126,16 +129,16 @@
     <script type="text/javascript" src="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
     <script>
         $('.FilmCovers').slick({
+            asNavFor: '.CommentMovies',
             accessibility: false,
             centerMode: true,
             variableWidth: true,
             prevArrow: $('.prev'),
             nextArrow: $('.next'),
-            asNavFor: '.CommentMovies',
         });
         $('.CommentMovies').slick({
-            accessibility: false,
             asNavFor: '.FilmCovers',
+            accessibility: false,
             autoplay: true,
             autoplaySpeed: 3500,
             centerMode: true,
