@@ -19,38 +19,15 @@
             padding: 10vh;
         }
 
-        .vert .carousel-item-next.carousel-item-left,
-        .vert .carousel-item-prev.carousel-item-right {
-            -webkit-transform: translateY(0);
-            transform: translateY(0);
-        }
-
-        .vert .carousel-item-next,
-        .vert .active.carousel-item-right {
-            -webkit-transform: translateY(100%);
-            transform: translateY(100%);
-        }
-
-        .vert .carousel-item-prev,
-        .vert .active.carousel-item-left {
-            -webkit-transform: translateY(-100%);
-            transform: translateY(-100%);
-        }
-
         .fundo {
-            display: flex;
-            flex-flow: row wrap;
+            /* display: flex;
+            flex-flow: row wrap; */
+            width: 100%;
             border: 1px solid red;
         }
 
-        .container {
-            width: 20%;
-        }
-
-        .carousel,
-        .carousel-inner {
-            height: 100vh;
-            z-index: -1;
+        .fundo img {
+            height: 260px;
         }
 
         .quadrado {
@@ -59,6 +36,7 @@
             right: 0;
             top: 0;
             bottom: 0;
+            z-index: 5;
             background: #000000AA;
             /* border: 1px solid red; */
         }
@@ -86,41 +64,39 @@
     </div> --}}
     <div class="fundo">
         @foreach (range(1, 5) as $item)
-            <div class="container">
-                <div id="carousel{{ $item }}">
+            <div class="coluna">
+                <div class="linha">
                     @foreach (range(1, 4) as $item2)
                         <div>
-                            <img class="d-block mx-auto img-fluid"
-                                src="https://images-na.ssl-images-amazon.com/images/I/71yDb8SKTTL.jpg"
+                            <img src="https://images-na.ssl-images-amazon.com/images/I/71yDb8SKTTL.jpg"
                                 alt="{{ $item2 }}">
                         </div>
                     @endforeach
                 </div>
             </div>
+
         @endforeach
     </div>
-
-
-
 @endsection
 @section('script')
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.7.1/slick.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js"
+        integrity="sha512-z4OUqw38qNLpn1libAN9BsoDx6nbNFio5lA6CuTp9NlK83b89hgyCVq+N5FdBJptINztxn1Z3SaKSKUS5UP60Q=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <script>
         $("#ocultaLogin").click(function() {
             $(this).children("i").toggle();
             let senha = $("#pass")
             senha.prop("type", senha.prop("type") == "password" ? "text" : "password");
         });
-        // $(".carousel").each(function(index) {
-        //     $("#" + $(this).attr('id')).carousel({
-        //         interval: Math.floor(Math.random() * (2000 - 1100)) + 1100,
-        //         pause: false,
-        //     });
-        // });
-        setInterval(function() {
-            var elementSelect = $("img").select(Math.floor(Math.random() * $("img").length));
-            console.log(elementSelect)
-            elementSelect.toggle("slow");
-        },1000);
+        // setInterval(function() {
+        //     var elem = document.getElementsByTagName('img')
+        //     var selectEle = elem[Math.floor(Math.random() * (elem.length))];
+        //     anime({
+        //         targets: selectEle,
+        //         duration: 10000,
+        //         opacity: [0, 1],
+        //     })
+        //     selectEle.setAttribute('src', 'https://macmagazine.com.br/wp-content/uploads/2018/01/05-filme.jpg')
+        // }, 2000)
     </script>
 @endsection
