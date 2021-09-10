@@ -1,3 +1,13 @@
+a {
+    text-decoration: none;
+    color: black;
+}
+
+a:hover {
+    text-decoration: none;
+    color: black
+}
+
 .btn {
     background-color: white;
     border-color: black;
@@ -8,4 +18,27 @@
     background-color: black;
     color: white;
     border-color: black;
+}
+
+.CarouselFilmes .buttonCarousel {
+    position: absolute;
+    width: 50px;
+    min-height: 18em;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #000000AF;
+    z-index: 1;
+    color: white;
+    text-decoration: none;
+}
+
+.CarouselFilmes .buttonCarousel span {
+    font-size: 2.5em;
+}
+
+.CarouselFilmes .buttonCarousel:hover,
+.cardFilme:hover {
+    color: #3f3f3f;
+    cursor: pointer;
 }

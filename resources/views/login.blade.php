@@ -12,14 +12,6 @@
             overflow-y: hidden
         }
 
-        a {
-            color: black
-        }
-
-        a:hover {
-            color: black
-        }
-
         .fundo {
             display: grid;
             grid-template-columns: 1fr 1fr 1fr 1fr;
