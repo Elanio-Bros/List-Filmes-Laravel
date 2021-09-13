@@ -3,10 +3,6 @@
     Login
 @endsection
 @section('style')
-    <!-- Add the slick-theme.css if you want default styling -->
-    <link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css" />
-    <!-- Add the slick-theme.css if you want default styling -->
-    <link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick-theme.css" />
     <style>
         html {
             overflow-y: hidden
@@ -76,7 +72,8 @@
                 </div>
                 <button type="submit" class="btn" style="width: 100%;">Entrar</button>
             </form>
-            <span class="mt-2 d-flex flex-column"><a class="text-light" href="{{ url('conta') }}">Click aqui e crie uma conta</a></span>
+            <span class="mt-2 d-flex flex-column"><a class="text-light" href="{{ url('conta') }}">Click aqui e crie
+                    uma conta</a></span>
         </div>
     </div>
     <div class="fundo">

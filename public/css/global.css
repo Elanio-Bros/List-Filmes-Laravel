@@ -6,7 +6,8 @@ a {
 a:hover,
 a:active {
     text-decoration: none;
-    color: black
+    color: black;
+    cursor: pointer;
 }
 
 .btn {

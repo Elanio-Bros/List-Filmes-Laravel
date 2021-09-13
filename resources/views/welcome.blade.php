@@ -16,7 +16,6 @@
             filter: brightness(50%);
         }
 
-
         #frontText {
             color: azure;
             position: absolute;
@@ -45,7 +44,7 @@
 @endsection
 @section('content')
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
-        <a class="navbar-brand" href="{{ url('') }}"><svg id="svg2" width="40" height="40" viewBox="0 0 512 512"
+        <a class="navbar-brand" href="{{ route('entrada') }}"><svg id="svg2" width="40" height="40" viewBox="0 0 512 512"
                 sodipodi:docname="icone.svg">
                 <g inkscape:groupmode="layer" inkscape:label="Image" id="g10">
                     <path style="fill-opacity:1"
@@ -67,7 +66,7 @@
                     <a class="nav-link" href="#cometariosFilmes">Filmes Mais Comentados</a>
                 </li>
             </ul>
-            <div><a href="{{ url('login') }}">Login</a></div>
+            <div><a href="{{ route('login') }}">Login</a></div>
         </div>
     </nav>
     <div>
@@ -85,7 +84,7 @@
                 <h1>Your Movie Ideas</h1>
                 <p>É um site onde você pode compartilhar suas opiniões, notas, ideias, teorias e pode falar de tudo sobre um
                     ou varios filmes</p>
-                <a href="{{ url('conta') }}"><button type="button" class="btn">Faça parte
+                <a href="{{ route('conta') }}"><button type="button" class="btn">Faça parte
                         dessa comunidade</button></a>
             </div>
         </div>
