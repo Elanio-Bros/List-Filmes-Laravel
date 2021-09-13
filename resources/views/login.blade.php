@@ -74,8 +74,9 @@
                         </div>
                     </div>
                 </div>
-                <button type="submit" class="btn btn-primary" style="width: 100%;">Entrar</button>
+                <button type="submit" class="btn" style="width: 100%;">Entrar</button>
             </form>
+            <span class="mt-2 d-flex flex-column"><a class="text-light" href="{{ url('conta') }}">Click aqui e crie uma conta</a></span>
         </div>
     </div>
     <div class="fundo">
@@ -104,7 +105,9 @@
                 duration: 10000,
                 opacity: [0, 1],
             })
-            selectEle.setAttribute('src', 'https://macmagazine.com.br/wp-content/uploads/2018/01/05-filme.jpg')
+            selectEle.setAttribute('src',
+                'https://macmagazine.com.br/wp-content/uploads/2018/01/05-filme.jpg?__cf_chl_jschl_tk__=pmd_b157d66b7dd7e9fdd6b8c1b3bd7b4f516cedf869-1631542095-0-gqNtZGzNAfijcnBszQb6'
+            )
         }, 2000)
     </script>
 @endsection

@@ -3,21 +3,27 @@ a {
     color: black;
 }
 
-a:hover {
+a:hover,
+a:active {
     text-decoration: none;
     color: black
 }
 
 .btn {
     background-color: white;
-    border-color: black;
-    color: #000;
+    color: black;
 }
 
-.btn:hover {
+.btn:hover,
+.btn:active {
     background-color: black;
     color: white;
     border-color: black;
+}
+
+.btn:focus {
+    outline: none;
+    box-shadow: none;
 }
 
 .CarouselFilmes .buttonCarousel {

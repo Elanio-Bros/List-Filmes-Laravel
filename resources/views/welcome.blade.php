@@ -25,6 +25,12 @@
             margin-left: 5%;
         }
 
+        #explanation {
+            background: black;
+            color: white;
+            padding: 5px;
+        }
+
         .filme .card-body {
             padding: 5%;
         }
@@ -39,7 +45,7 @@
 @endsection
 @section('content')
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
-        <a class="navbar-brand" href="#"><svg id="svg2" width="40" height="40" viewBox="0 0 512 512"
+        <a class="navbar-brand" href="{{ url('') }}"><svg id="svg2" width="40" height="40" viewBox="0 0 512 512"
                 sodipodi:docname="icone.svg">
                 <g inkscape:groupmode="layer" inkscape:label="Image" id="g10">
                     <path style="fill-opacity:1"
@@ -55,7 +61,7 @@
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav mr-auto">
                 <li class="nav-item">
-                    <a class="nav-link" href="#">Como Funciona</a>
+                    <a class="nav-link" href="#explanation">Como funciona a comunidade</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="#cometariosFilmes">Filmes Mais Comentados</a>
@@ -79,8 +85,20 @@
                 <h1>Your Movie Ideas</h1>
                 <p>É um site onde você pode compartilhar suas opiniões, notas, ideias, teorias e pode falar de tudo sobre um
                     ou varios filmes</p>
-                <a href="{{ url('criarConta') }}"><button type="button" class="btn btn-primary">Faça parte
+                <a href="{{ url('conta') }}"><button type="button" class="btn">Faça parte
                         dessa comunidade</button></a>
+            </div>
+        </div>
+    </div>
+    <div id="explanation">
+        <div class="m-4">
+            <h4>Como Funciona a Comunidade</h4>
+            <div>
+                <p>Se junte a comunidade e compartilhe suas notas, ideias, teorias entre várias outras coisas sobre cada um
+                    dos filmes. Fale com a comunidade e compartilhe seus pontos comentando ou criando tópicos e gerenciando
+                    os seus tópicos para melhor uso. Crie também comentários gerais sobre cada um dos filmes dando um
+                    explicação razão ou mesmos funcionalidade.Fale tudo que sabe e explique a outras cenas e situações de
+                    cada um dos filmes</p>
             </div>
         </div>
     </div>
