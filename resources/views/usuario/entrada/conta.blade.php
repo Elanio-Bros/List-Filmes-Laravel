@@ -4,12 +4,14 @@
 @endsection
 @section('styleEntrada')
     <style>
-        .form-check-label{
-            font-size: 10px;
+        .checkbox label {
+            font-size: 12px;
         }
-        .form-check-input{
-            width: 10%;
+        .checkbox a:hover{
+            text-decoration: underline;
         }
+
+
     </style>
 @endsection
 @section('contentEntrada')
@@ -33,7 +35,7 @@
             <input type="email" class="form-control" id="email" aria-describedby="email" placeholder="Email">
         </div>
         <div class="form-group">
-            <input type="text" class="form-control" id="user " aria-describedby="Usuário" placeholder="Usuário">
+            <input type="text" class="form-control" id="user" aria-describedby="Usuário" placeholder="Usuário">
         </div>
         <div class="form-group">
             <div class="input-group mb-3">
@@ -47,7 +49,7 @@
         </div>
         <div class="form-group">
             <div class="input-group mb-3">
-                <input type="password" class="form-control" id="Confipass" placeholder="Confirmação de Senha">
+                <input type="password" class="form-control" id="Confirpass" placeholder="Confirmação de Senha">
                 <div class="input-group-append">
                     <span class="input-group-text" id="basic-addon2"><a class="ocultaLogin">
                             <i class="fas fa-eye" style="display: none"></i>
@@ -55,19 +57,10 @@
                 </div>
             </div>
         </div>
-        <div class="form-check">
-            <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
-            <label class="form-check-label" for="flexCheckDefault">
-                Default checkbox
-            </label>
-        </div>
-        <div class="form-check">
-            <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
-            <label class="form-check-label" for="flexCheckDefault">
-                Default checkbox
-            </label>
-        </div>
-        <button type="submit" class="btn" style="width: 100%;">Crie Conta</button>
+        <span class="d-flex checkbox">
+            <input class="mr-1" type="checkbox" required>
+            <label>Aceito os Termos e as <a class="text-light" href="{{url('termo')}}">Politicas de Privacidade</a></label></span>
+        <button type=" submit" class="btn" style="width: 100%;">Crie Conta</button>
     </form>
     <span class="mt-2 d-flex flex-column"><a class="text-light" href="{{ route('login') }}">Click aqui se já tem uma
             conta</a></span>

@@ -22,3 +22,6 @@ Route::get('/login', function () {
 Route::get('/conta', function () {
     return view('usuario.entrada.conta');
 })->name('conta');
+Route::get('/termo', function () {
+    return view('termo');
+});

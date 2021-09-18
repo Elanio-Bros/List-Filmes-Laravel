@@ -1,0 +1,1 @@
+Aqui ficar o termos e politicas de resposabilidade
