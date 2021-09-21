@@ -17,11 +17,15 @@ Route::get('/', function () {
     return view('welcome');
 })->name('entrada');
 Route::get('/login', function () {
-    return view('usuario.entrada.login');
+    return view('usuario.login');
 })->name('login');
 Route::get('/conta', function () {
-    return view('usuario.entrada.conta');
+    return view('usuario.conta');
 })->name('conta');
+Route::get('/home', function () {
+    return view('filme.home');
+})->name('home');
+
 Route::get('/termo', function () {
     return view('termo');
 });

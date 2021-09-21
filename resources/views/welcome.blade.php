@@ -30,16 +30,6 @@
             padding: 5px;
         }
 
-        .filme .card-body {
-            padding: 5%;
-        }
-
-        .comentario .card-header img {
-            width: 40px;
-            height: 40px;
-            border-radius: 2px;
-        }
-
     </style>
 @endsection
 @section('content')
@@ -95,9 +85,10 @@
             <div>
                 <p>Se junte a comunidade e compartilhe suas notas, ideias, teorias entre várias outras coisas sobre cada um
                     dos filmes. Fale com a comunidade e compartilhe seus pontos comentando ou criando tópicos e gerenciando
-                    os seus tópicos para melhor uso. Crie também comentários gerais sobre cada um dos filmes dando um
-                    explicação razão ou mesmos funcionalidade.Fale tudo que sabe e explique a outras cenas e situações de
-                    cada um dos filmes</p>
+                    os seus tópicos para melhor uso. Crie também comentários em gerais sobre cada um dos filmes dando um
+                    explicação razão ou mesmos funcionalidade. Fale tudo que sabe e explique a outras cenas e situações de
+                    cada um dos filmes. Crie e coloque filmes ajudando assim a comunidade a ficar melhor e com mais contéudo
+                </p>
             </div>
         </div>
     </div>

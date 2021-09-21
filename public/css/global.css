@@ -49,3 +49,13 @@ a:active {
     color: #3f3f3f;
     cursor: pointer;
 }
+
+.filme .card-body {
+    padding: 5%;
+}
+
+.perfil{
+    width: 40px;
+    height: 40px;
+    border-radius: 2px;
+}
