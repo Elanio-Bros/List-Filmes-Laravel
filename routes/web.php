@@ -25,6 +25,9 @@ Route::get('/conta', function () {
 Route::get('/home', function () {
     return view('filme.home');
 })->name('home');
+Route::get('/filme/{idFilme}', function ($idFilme) {
+    return view('filme.filme', compact("idFilme"));
+});
 
 Route::get('/termo', function () {
     return view('termo');
