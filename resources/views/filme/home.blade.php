@@ -33,7 +33,7 @@
                     @foreach (range(1, 10) as $item)
                         <a href="#">
                             <div class="mx-2 cardFilme">
-                                @includeIf('content_layout.card_layout',
+                                @includeIf('content.card_layout',
                                 ['titulo'=>"$item Titulo Filme",
                                 'imagem'=>'https://images-na.ssl-images-amazon.com/images/I/71yDb8SKTTL.jpg']
                                 )
@@ -57,7 +57,7 @@
                 <div class="FilmCovers w-100">
                     @foreach (range(1, 10) as $item)
                         <div class="mx-2 cardFilme">
-                            @includeIf('content_layout.card_layout',
+                            @includeIf('content.card_layout',
                             ['titulo'=>"$item Titulo Filme",
                             'imagem'=>'https://images-na.ssl-images-amazon.com/images/I/71yDb8SKTTL.jpg']
                             )
@@ -83,7 +83,7 @@
                 <div class="FilmCovers w-100">
                     @foreach (range(1, 10) as $item)
                         <div class="mx-2 cardFilme">
-                            @includeIf('content_layout.card_layout',
+                            @includeIf('content.card_layout',
                             ['titulo'=>"$item Titulo Filme",
                             'imagem'=>'https://images-na.ssl-images-amazon.com/images/I/71yDb8SKTTL.jpg']
                             )
@@ -106,7 +106,7 @@
                 <div class="FilmCovers w-100">
                     @foreach (range(1, 10) as $item)
                         <div class="mx-2 cardFilme">
-                            @includeIf('content_layout.card_layout',
+                            @includeIf('content.card_layout',
                             ['titulo'=>"$item Titulo Filme",
                             'imagem'=>'https://images-na.ssl-images-amazon.com/images/I/71yDb8SKTTL.jpg']
                             )
@@ -129,7 +129,7 @@
                 <div class="FilmCovers w-100">
                     @foreach (range(1, 10) as $item)
                         <div class="mx-2 cardFilme">
-                            @includeIf('content_layout.card_layout',
+                            @includeIf('content.card_layout',
                             ['titulo'=>"$item Titulo Filme",
                             'imagem'=>'https://images-na.ssl-images-amazon.com/images/I/71yDb8SKTTL.jpg']
                             )

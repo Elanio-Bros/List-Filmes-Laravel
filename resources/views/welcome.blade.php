@@ -102,7 +102,7 @@
             <div class="FilmCovers w-100">
                 @foreach (range(1, 10) as $item)
                     <div class="mx-2 cardFilme">
-                        @includeIf('content_layout.card_layout',
+                        @includeIf('content.card_layout',
                         ['titulo'=>"$item Titulo Filme",
                         'imagem'=>'https://images-na.ssl-images-amazon.com/images/I/71yDb8SKTTL.jpg']
                         )
@@ -118,7 +118,7 @@
                 <div class="mx-5">
                     @foreach (range(1, 5) as $item)
                         <div class="my-2">
-                            @includeIf('content_layout.comentario_layout',
+                            @includeIf('content.comentario_layout',
                             ['name' => "Pessoa $item",
                             'comentario'=>"Nº $item1 Filme Comentario"])
                         </div>

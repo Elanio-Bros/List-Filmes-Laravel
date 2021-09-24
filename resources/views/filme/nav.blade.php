@@ -1,4 +1,4 @@
-<nav class="navbar navbar-expand-lg navbar-light bg-light">
+<nav class="navbar navbar-expand-lg navbar-light bg-light mb-2">
     <a class="navbar-brand" href="{{ route('entrada') }}"><svg id="svg2" width="40" height="40" viewBox="0 0 512 512"
             sodipodi:docname="icone.svg">
             <g inkscape:groupmode="layer" inkscape:label="Image" id="g10">
@@ -43,8 +43,8 @@
                     src="https://d11a6trkgmumsb.cloudfront.net/original/3X/f/b/fbbaacfa1033254471f614b67d58dae45236ce5b.jpg">
             </a>
             <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuLink">
-                <a class="dropdown-item" href="#">Action</a>
-                <a class="dropdown-item" href="#">Another action</a>
+                <a class="dropdown-item" href="#">Minha Conta</a>
+                <a class="dropdown-item" href="#">Favoritos</a>
                 <a class="dropdown-item" href="#">Sair</a>
             </div>
         </div>
