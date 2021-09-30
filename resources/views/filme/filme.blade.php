@@ -30,11 +30,11 @@
             stroke: #FFA500FF;
         }
 
-        /* .star_full:hover,
-                                                                                                                                                                                                                                                                            .star_middle:hover,
-                                                                                                                                                                                                                                                                            .star_void:hover {
-                                                                                                                                                                                                                                                                                cursor: pointer;
-                                                                                                                                                                                                                                                                            } */
+        .star_full:hover,
+        .star_middle:hover,
+        .star_void:hover {
+            cursor: pointer;
+        }
 
         .star_full {
             fill: #FFA500FF;
@@ -63,9 +63,10 @@
             <h3>Titulo Filme</h3>
             <div>Cantegorias</div>
             <div>Classificação</div>
-            <div id="voteUsers" class="vote w-25 border3"></div><span>4.1 media de 250 votos</span>
+            <div id="voteUsers" class="vote w-25 border3"></div>
+            <span><span class="voteUserVal">3.1</span> media de 250 votos</span>
             <div id="voteIMDB" class="vote w-25 border3"></div>
-            <span>4.1 media de 250 votos</span>
+            <span><span class="voteIMDBVal">4.5</span> media de 250 votos no IMDB</span>
             <div class="w-100 border3">
                 Descrição e outros
             </div>
@@ -78,24 +79,26 @@
 @endsection
 @section('script')
     <script>
-        let vote_user = $("#voteUsers")
-        let vote_imdb = $("#voteIMDB")
-        let Mediavote = 1.4;
-
         function voteStar(result, element) {
-            result = (result * 2).toFixed() / 2;
+            var result = (result * 2).toFixed() / 2;
+            let starOnView = null;
             for (stars = 0.5; stars <= 5; stars++) {
                 if (!Number.isInteger(result) && stars == result) {
-                    $(".star_middle:first").clone().appendTo(element).show();
+                    starOnView = $(".star_middle:first")
                 } else if (stars <= parseInt(result)) {
-                    $(".star_full:first").clone().appendTo(element).show();
+                    starOnView = $(".star_full:first")
                 } else {
-                    $(".star_void:first").clone().appendTo(element).show();
+                    starOnView = $(".star_void:first")
                 }
+                starOnView.clone().attr("date-value", parseInt(stars + 1)).appendTo(element).show();
             }
         }
+        voteStar(parseFloat($('.voteUserVal').text()), $("#voteUsers"))
+        voteStar(parseFloat($('.voteIMDBVal').text()), $("#voteIMDB"))
 
-        voteStar(Mediavote, vote_user)
-        voteStar(3.5, vote_imdb)
+        $('.star').click(function() {
+            console.log($(this).siblings().hide())
+            $(this).attr("date-value")
+        });
     </script>
 @endsection
