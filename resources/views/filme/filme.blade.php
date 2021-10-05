@@ -3,10 +3,7 @@
     {{ $idFilme }}
 @endsection
 @section('style')
-    <!-- Add the slick-theme.css if you want default styling -->
-    <link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css" />
-    <!-- Add the slick-theme.css if you want default styling -->
-    <link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick-theme.css" />
+    <link rel="stylesheet" type="text/css" href="{{ URL::asset('libs/rating/css/star-rating-svg.css') }}">
     <style>
         #mostFilme {
             display: flex;
@@ -17,55 +14,52 @@
             width: 20%;
         }
 
-        .vote {
-            display: flex;
-            width: 100%;
-        }
-
-        .star_full,
-        .star_middle,
-        .star_void {
+        .formUser {
             display: none;
-            width: 2em;
-            stroke: #FFA500FF;
         }
 
-        .star_full:hover,
-        .star_middle:hover,
-        .star_void:hover {
-            cursor: pointer;
+        #categorias span {
+            border: solid black 1px;
+            border-radius: 4px;
+            padding: 2px;
         }
 
-        .star_full {
-            fill: #FFA500FF;
-        }
-
-        .star_middle #star_middle-left {
-            fill: #FFA500FF;
-        }
-
-        .star_middle #star_middle-right {
-            fill: #00000000;
-        }
-
-        .star_void {
-            fill: #00000000;
+        #clasificacao {
+            border: solid black 1px;
+            border-radius: 1px;
+            padding: 2px;
         }
 
     </style>
 @endsection
 @section('content')
+
     @include('filme.nav')
-    @include('content.stars')
+    {{-- @include('content.stars') --}}
     <div id="mostFilme" class="border1">
         <img class="ml-2 py-2" src="https://images-na.ssl-images-amazon.com/images/I/71yDb8SKTTL.jpg">
         <div id="values" class="ml-3 m-2 w-100 border2">
             <h3>Titulo Filme</h3>
-            <div>Cantegorias</div>
-            <div>Classificação</div>
-            <div id="voteUsers" class="vote w-25 border3"></div>
+            <div id="categorias">
+                <span><a href="Categoria1">Categoria1</a></span>
+                <span><a href="Categoria2">Categoria2</a></span>
+            </div>
+            <div id="clasificacao">XX</div>
+            <div id="voteUsers" class="w-25">
+            </div>
+            <form class="formUser">
+                <div id="voteUsersForm" class="w-25">
+                </div>
+                <button type="button" class="btn btn-primary">Votar</button>
+                <button type="button" class="btn btn-primary" onclick="document.location.reload()">Cancelar</button>
+            </form>
             <span><span class="voteUserVal">3.1</span> media de 250 votos</span>
-            <div id="voteIMDB" class="vote w-25 border3"></div>
+            {{-- <a href="https://www.google.com.br/">
+                <div id="voteIMDB" class="vote w-25 border3"></div>
+            </a> --}}
+            <a href="#">
+                <div id="voteIMDB" class="w-25"></div>
+            </a>
             <span><span class="voteIMDBVal">4.5</span> media de 250 votos no IMDB</span>
             <div class="w-100 border3">
                 Descrição e outros
@@ -78,27 +72,33 @@
     </div>
 @endsection
 @section('script')
+    <script src='{{ URL::asset('libs/rating/jquery.star-rating-svg.js') }}'></script>
     <script>
-        function voteStar(result, element) {
-            var result = (result * 2).toFixed() / 2;
-            let starOnView = null;
-            for (stars = 0.5; stars <= 5; stars++) {
-                if (!Number.isInteger(result) && stars == result) {
-                    starOnView = $(".star_middle:first")
-                } else if (stars <= parseInt(result)) {
-                    starOnView = $(".star_full:first")
-                } else {
-                    starOnView = $(".star_void:first")
-                }
-                starOnView.clone().attr("date-value", parseInt(stars + 1)).appendTo(element).show();
-            }
+        let configRating = {
+            totalStars: 5,
+            minRating: 0,
+            starShape: 'rounded',
+            starSize: 40,
+            emptyColor: '#FFFFFFFF',
+            hoverColor: '#FFAE00FF',
+            strokeColor: '#FFA500FF',
+            strokeWidth: 9,
+            useGradient: false,
+            disableAfterRate: true,
+            readOnly: true,
+            useFullStars: true,
         }
-        voteStar(parseFloat($('.voteUserVal').text()), $("#voteUsers"))
-        voteStar(parseFloat($('.voteIMDBVal').text()), $("#voteIMDB"))
-
-        $('.star').click(function() {
-            console.log($(this).siblings().hide())
-            $(this).attr("date-value")
+        $(function() {
+            $('#voteUsers, #voteIMDB').starRating(configRating);
+            $('#voteUsers').starRating('setRating', parseFloat($('.voteUserVal').text()))
+            $('#voteIMDB').starRating('setRating', parseFloat($('.voteIMDBVal').text()))
+        });
+        $('#voteUsers').dblclick(function() {
+            $('#voteUsers').hide();
+            configRating['disableAfterRate'] = false
+            configRating['readOnly'] = false
+            $('.formUser').css('display', 'flex');
+            $("#voteUsersForm").starRating(configRating);
         });
     </script>
 @endsection
