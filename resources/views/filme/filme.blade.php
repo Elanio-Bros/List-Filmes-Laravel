@@ -18,33 +18,63 @@
             display: none;
         }
 
-        #categorias span {
+        #categorias ul {
             border: solid black 1px;
             border-radius: 4px;
             padding: 2px;
         }
 
-        #clasificacao {
-            border: solid black 1px;
-            border-radius: 1px;
-            padding: 2px;
+        #clasificacao span {
+            text-align: center;
+            border-radius: 3px;
+            color: white;
+            font-size: 18px
+        }
+
+        #clasificacao span[date-value='18'] {
+            border: 7px solid black;
+            background-color: black;
+        }
+
+        #clasificacao span[date-value='16'] {
+            border: 7px solid red;
+            background-color: red;
+        }
+
+        #clasificacao span[date-value='14'] {
+            border: 7px solid orange;
+            background-color: orange;
+        }
+
+        #clasificacao span[date-value='12'] {
+            border: 7px solid gold;
+            background-color: gold;
+        }
+
+        #clasificacao span[date-value='10'] {
+            border: 7px solid blue;
+            background-color: blue;
+        }
+
+        #clasificacao span[date-value='L'] {
+            border: 7px solid green;
+            background-color: green;
         }
 
     </style>
 @endsection
 @section('content')
-
     @include('filme.nav')
-    {{-- @include('content.stars') --}}
     <div id="mostFilme" class="border1">
         <img class="ml-2 py-2" src="https://images-na.ssl-images-amazon.com/images/I/71yDb8SKTTL.jpg">
         <div id="values" class="ml-3 m-2 w-100 border2">
             <h3>Titulo Filme</h3>
-            <div id="categorias">
-                <span><a href="Categoria1">Categoria1</a></span>
-                <span><a href="Categoria2">Categoria2</a></span>
+            <div id="categorias" class="d-flex">
+                @foreach (range(1, 4) as $item)
+                    <ul><a href="Categoria{{ $item }}">Categoria{{ $item }}</a></ul>
+                @endforeach
             </div>
-            <div id="clasificacao">XX</div>
+            <div id="clasificacao" class="mb-1"><span date-value="16" class="font-weight-bold">16</span></div>
             <div id="voteUsers" class="w-25">
             </div>
             <form class="formUser">
