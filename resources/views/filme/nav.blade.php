@@ -26,7 +26,7 @@
                 </a>
                 <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                     <a class="dropdown-item" href="#">Ação</a>
-                    <a class="dropdown-item" href="#">Anvetura</a>
+                    <a class="dropdown-item" href="#">Aventura</a>
                     <div class="dropdown-divider"></div>
                     <a class="dropdown-item" href="#">Outras Categorias</a>
                 </div>

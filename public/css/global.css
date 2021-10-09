@@ -76,10 +76,12 @@ input:focus {
 .filme .card-body {
     padding: 5%;
 }
-.filme:hover{
+
+.filme:hover {
     cursor: pointer;
 }
-.card-body {
+
+.filme .card-body {
     position: absolute;
     bottom: 0;
     width: 100%;

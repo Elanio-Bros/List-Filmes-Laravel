@@ -14,101 +14,209 @@
             width: 20%;
         }
 
-        .formUser {
-            display: none;
-        }
-
-        #categorias ul {
+        #categorias li {
+            list-style-type: none;
             border: solid black 1px;
             border-radius: 4px;
-            padding: 2px;
+            padding: 2px 4px;
+            font-size: 0.8em;
+            margin-left: 0.2em;
         }
 
-        #clasificacao span {
-            text-align: center;
-            border-radius: 3px;
-            color: white;
-            font-size: 18px
-        }
-
-        #clasificacao span[date-value='18'] {
-            border: 7px solid black;
+        #categorias li:hover {
             background-color: black;
+            color: white;
         }
 
-        #clasificacao span[date-value='16'] {
-            border: 7px solid red;
-            background-color: red;
+        .desc {
+            max-width: 100%;
+            font-size: 15px;
+            text-align: justify;
+            overflow: hidden;
+            display: -webkit-box;
+            -webkit-line-clamp: 6;
+            -webkit-box-orient: vertical;
+            -webkit-box-pack: end;
         }
 
-        #clasificacao span[date-value='14'] {
-            border: 7px solid orange;
-            background-color: orange;
+        .descOcult {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100vh;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            background-color: #000000DD;
+            z-index: 5;
         }
 
-        #clasificacao span[date-value='12'] {
-            border: 7px solid gold;
+        .descOcult p {
+            background-color: white;
+            padding: 5px;
+            width: 80%;
+            text-align: justify;
+            border-radius: 5px;
+        }
+
+        .descOcult #close {
+            display: flex;
+            justify-content: flex-end;
+            width: 80%;
+            color: white;
+            font-size: 20px;
+        }
+
+        .comentario {
+            margin-bottom: 5px;
+        }
+        .chat{
+            border: 1px solid red;
+        }
+        .chat .dot {
+            height: 1.4vh;
+            width: 1.4vh;
+            border-radius: 50%;
+            display: inline-block;
+        }
+
+        .chat .dot[date-value='active'] {
+            background-color: green;
+        }
+
+        .chat .dot[date-value='suspended'] {
             background-color: gold;
         }
 
-        #clasificacao span[date-value='10'] {
-            border: 7px solid blue;
-            background-color: blue;
-        }
-
-        #clasificacao span[date-value='L'] {
-            border: 7px solid green;
-            background-color: green;
+        .chat .dot[date-value='not active'] {
+            background-color: red;
         }
 
     </style>
 @endsection
 @section('content')
     @include('filme.nav')
-    <div id="mostFilme" class="border1">
+    <div id="mostFilme">
         <img class="ml-2 py-2" src="https://images-na.ssl-images-amazon.com/images/I/71yDb8SKTTL.jpg">
-        <div id="values" class="ml-3 m-2 w-100 border2">
+        <div class="ml-3 m-2 w-100">
             <h3>Titulo Filme</h3>
-            <div id="categorias" class="d-flex">
+            <div id="categorias" class="d-flex flex-row">
                 @foreach (range(1, 4) as $item)
-                    <ul><a href="Categoria{{ $item }}">Categoria{{ $item }}</a></ul>
+                    <a href="Categoria{{ $item }}">
+                        <li>Categoria{{ $item }}</li>
+                    </a>
                 @endforeach
             </div>
-            <div id="clasificacao" class="mb-1"><span date-value="16" class="font-weight-bold">16</span></div>
-            <div id="voteUsers" class="w-25">
-            </div>
-            <form class="formUser">
-                <div id="voteUsersForm" class="w-25">
-                </div>
-                <button type="button" class="btn btn-primary">Votar</button>
-                <button type="button" class="btn btn-primary" onclick="document.location.reload()">Cancelar</button>
-            </form>
-            <span><span class="voteUserVal">3.1</span> media de 250 votos</span>
-            {{-- <a href="https://www.google.com.br/">
+            <div class="my-1">
+                <div id="voteUsers"></div>
+                <form class="formUser d-none">
+                    <div id="voteUsersForm" class=""></div>
+                <button type=" button" class="btn btn-primary">
+                        Votar</button>
+                        <button type="button" class="btn btn-primary" onclick="document.location.reload()">Cancelar</button>
+                </form>
+                <span><span class="voteUserVal">3.1</span> media de 250 votos</span>
+                {{-- <a href="https://www.google.com.br/">
                 <div id="voteIMDB" class="vote w-25 border3"></div>
             </a> --}}
-            <a href="#">
-                <div id="voteIMDB" class="w-25"></div>
-            </a>
-            <span><span class="voteIMDBVal">4.5</span> media de 250 votos no IMDB</span>
-            <div class="w-100 border3">
-                Descrição e outros
+                <a href="#">
+                    <div id="voteIMDB"></div>
+                </a>
+                <span><span class="voteIMDBVal">4.5</span> media de 250 votos no IMDB</span>
+            </div>
+            <div>
+                <div id="desc" class="w-100 desc">
+                    Descrição wiki
+                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas a quam vestibulum, dapibus tellus ac,
+                    commodo lorem. Ut elementum tempus aliquam. Duis faucibus tincidunt sem a placerat. Nullam facilisis,
+                    urna.
+                </div>
+                <a id="leanMore">leia mais</a>
+                <div class="descOcult d-none">
+                    <div id="close">
+                        <a><i class="fas fa-times"></i></a>
+                    </div>
+                    <p></p>
+                </div>
             </div>
         </div>
     </div>
-    <div>
-        <div>Div Comentarios</div>
-        <div>Chats</div>
+    <hr class="my-2">
+    <div class="d-flex flex-row justify-content-between p-2 w-100">
+        <div class="w-75 d-flex flex-column">
+            <div class="accordion" id="accordionExample">
+                <div class="card">
+                    <div class="card-header" id="headingOne">
+                        <h2 class="mb-0">
+                            <button class="btn btn-block text-left" type="button" data-toggle="collapse"
+                                data-target="#collapse1" aria-expanded="true">Comentarios Gerais</button>
+                        </h2>
+                    </div>
+                    <div id="collapse1" class="collapse" aria-labelledby="headingOne" data-parent="#accordionExample">
+                        <div class="card-body">
+                            @includeIf('content.comentario_layout',['name'=>'juaão','comentario'=>'olaolaolaolaolaolaolaolaolaolaolaolaolaolaolaolaolaolaolaolaolaolaolaolaolaolaolaolaolaolaolaolaolaola'])
+                            @includeIf('content.comentario_layout',['name'=>'juaão','comentario'=>'olaolaolaolaolaolaolaolaolaolaolaolaolaolaolaolaolaolaolaolaolaolaolaolaolaolaolaolaolaolaolaolaolaola'])
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="accordion" id="accordionExample">
+                <div class="card">
+                    <div class="card-header" id="headingOne">
+                        <h2 class="mb-0">
+                            <button class="btn btn-block text-left" type="button" data-toggle="collapse"
+                                data-target="#collapse2" aria-expanded="true">Comentario Sobre Ola</button>
+                        </h2>
+                    </div>
+                    <div id="collapse2" class="collapse" aria-labelledby="headingOne" data-parent="#accordionExample">
+                        <div class="card-body">
+                            @includeIf('content.comentario_layout',['name'=>'juaão','comentario'=>'olaolaolaolaolaolaolaolaolaolaolaolaolaolaolaolaolaolaolaolaolaolaolaolaolaolaolaolaolaolaolaolaolaola'])
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="border2 w-25 ml-2">
+            <div class="d-flex flex-column">
+                <div class="chat d-flex justify-content-between">
+                    <span>
+                        <div>Titulo Chats</div>
+                        <div>15/56 Usuário</div>
+                    </span>
+                    <span class="dot mr-2 mt-2" date-value='active'></span>
+                </div>
+                <div class="chat d-flex justify-content-between">
+                    <span>
+                        <div>Titulo Chats</div>
+                        <div>15/56 Usuário</div>
+                    </span>
+                    <span class="dot mr-2 mt-2" date-value='suspensed'></span>
+                </div>
+            </div>
+        </div>
     </div>
+
 @endsection
 @section('script')
     <script src='{{ URL::asset('libs/rating/jquery.star-rating-svg.js') }}'></script>
     <script>
+        $('#leanMore').click(function() {
+            if ($('.descOcult p').text().length <= 0) {
+                $('.descOcult p').text($('.desc').text())
+            }
+            $('.descOcult').attr('style', 'display: flex !important');
+            $('body').attr('style', 'overflow: hidden');
+        });
+        $('#close').click(function() {
+            $('.descOcult').removeAttr('style', 'display: flex !important');
+            $('body').removeAttr('style', 'overflow: hidden');
+        });
         let configRating = {
             totalStars: 5,
             minRating: 0,
             starShape: 'rounded',
-            starSize: 40,
+            starSize: 30,
             emptyColor: '#FFFFFFFF',
             hoverColor: '#FFAE00FF',
             strokeColor: '#FFA500FF',
@@ -127,7 +235,7 @@
             $('#voteUsers').hide();
             configRating['disableAfterRate'] = false
             configRating['readOnly'] = false
-            $('.formUser').css('display', 'flex');
+            $('.formUser').attr('style', 'display: flex !important');
             $("#voteUsersForm").starRating(configRating);
         });
     </script>
