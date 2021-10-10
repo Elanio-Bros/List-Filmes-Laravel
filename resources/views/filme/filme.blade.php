@@ -71,9 +71,37 @@
         .comentario {
             margin-bottom: 5px;
         }
-        .chat{
-            border: 1px solid red;
+
+        .chat,
+        .titulo-chat {
+            background-color: black;
+            color: #ffffff;
+            border: 0.1em solid black;
+            border-radius: 2px;
+            margin-top: 0.1em;
         }
+
+        .formUser button{
+            font-size: 2vh;
+        }
+
+        .titulo-chat {
+            font-weight: bolder;
+            border-radius: 5px 5px 0px 0px;
+        }
+
+        .chat:hover {
+            cursor: pointer;
+            background-color: #000000AA;
+        }
+
+        .chat:active {
+            cursor: pointer;
+            background-color: #FFFFFF;
+            color: black;
+            border: 0.1em solid black;
+        }
+
         .chat .dot {
             height: 1.4vh;
             width: 1.4vh;
@@ -89,7 +117,7 @@
             background-color: gold;
         }
 
-        .chat .dot[date-value='not active'] {
+        .chat .dot[date-value='deactivate'] {
             background-color: red;
         }
 
@@ -109,12 +137,14 @@
                 @endforeach
             </div>
             <div class="my-1">
+                <div>Quantidade de Votos</div>
                 <div id="voteUsers"></div>
                 <form class="formUser d-none">
                     <div id="voteUsersForm" class=""></div>
-                <button type=" button" class="btn btn-primary">
-                        Votar</button>
+                    <span class="ml-2">
+                        <button type=" button" class="btn btn-primary">Votar</button>
                         <button type="button" class="btn btn-primary" onclick="document.location.reload()">Cancelar</button>
+                    </span>
                 </form>
                 <span><span class="voteUserVal">3.1</span> media de 250 votos</span>
                 {{-- <a href="https://www.google.com.br/">
@@ -145,6 +175,8 @@
     <hr class="my-2">
     <div class="d-flex flex-row justify-content-between p-2 w-100">
         <div class="w-75 d-flex flex-column">
+            <button class="btn btn-block" arial-label="criar novo tópico" type="button"><i
+                    class="fas fa-plus"></i></button>
             <div class="accordion" id="accordionExample">
                 <div class="card">
                     <div class="card-header" id="headingOne">
@@ -177,21 +209,32 @@
                 </div>
             </div>
         </div>
-        <div class="border2 w-25 ml-2">
+        <div class="w-25 ml-2 chats">
+            <div class="titulo-chat text-center">Chat</div>
             <div class="d-flex flex-column">
-                <div class="chat d-flex justify-content-between">
-                    <span>
-                        <div>Titulo Chats</div>
-                        <div>15/56 Usuário</div>
-                    </span>
-                    <span class="dot mr-2 mt-2" date-value='active'></span>
+                <div class="chat p-2 d-flex justify-content-center">
+                    <i class="fas fa-plus"></i>
                 </div>
-                <div class="chat d-flex justify-content-between">
+                <div class="chat p-2 d-flex justify-content-between">
                     <span>
-                        <div>Titulo Chats</div>
-                        <div>15/56 Usuário</div>
+                        <div class="h6">Titulo Chat</div>
+                        <div style="font-size:80%">09/11 Usuário</div>
                     </span>
-                    <span class="dot mr-2 mt-2" date-value='suspensed'></span>
+                    <span class="dot" date-value='active'></span>
+                </div>
+                <div class="chat p-2 d-flex justify-content-between">
+                    <span>
+                        <div class="h6">Titulo Chat</div>
+                        <div style="font-size:80%">09/11 Usuário</div>
+                    </span>
+                    <span class="dot" date-value='suspended'></span>
+                </div>
+                <div class="chat p-2 d-flex justify-content-between">
+                    <span>
+                        <div class="h6">Titulo Chat</div>
+                        <div style="font-size:80%">09/11 Usuário</div>
+                    </span>
+                    <span class="dot" date-value='deactivate'></span>
                 </div>
             </div>
         </div>

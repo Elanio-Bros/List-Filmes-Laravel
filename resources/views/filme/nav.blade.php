@@ -45,6 +45,7 @@
             <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuLink">
                 <a class="dropdown-item" href="#">Minha Conta</a>
                 <a class="dropdown-item" href="#">Favoritos</a>
+                <a class="dropdown-item" href="#">Chats</a>
                 <a class="dropdown-item" href="#">Sair</a>
             </div>
         </div>
