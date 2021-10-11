@@ -8,6 +8,8 @@
         #mostFilme {
             display: flex;
             width: 100%;
+            background-color: #000000DD;
+            color: #F8F8FF;
         }
 
         #mostFilme img {
@@ -16,27 +18,40 @@
 
         #categorias li {
             list-style-type: none;
-            border: solid black 1px;
+            border: solid #F8F8FFFF 1px;
             border-radius: 4px;
             padding: 2px 4px;
             font-size: 0.8em;
             margin-left: 0.2em;
+            color: #F8F8FFFF;
         }
 
         #categorias li:hover {
-            background-color: black;
-            color: white;
+            background-color: #F8F8FFFF;
+            color: #000000DD;
         }
 
         .desc {
-            max-width: 100%;
-            font-size: 15px;
+            padding: 5px;
+            background-color:#000000DD;
+            color: #F8F8FFFF;
+        }
+
+        #desc,
+        #leanMore {
+            font-size: 0.9em;
             text-align: justify;
             overflow: hidden;
             display: -webkit-box;
-            -webkit-line-clamp: 6;
+            -webkit-line-clamp: 4;
             -webkit-box-orient: vertical;
             -webkit-box-pack: end;
+        }
+        #leanMore{
+            width:5em;
+        }
+        #leanMore:hover{
+            text-decoration:underline #F8F8FFFF;
         }
 
         .descOcult {
@@ -53,18 +68,20 @@
         }
 
         .descOcult p {
-            background-color: white;
-            padding: 5px;
-            width: 80%;
+            background-color: #F8F8FFFF;
+            padding: 1em;
+            width: 70%;
             text-align: justify;
             border-radius: 5px;
+            overflow-y: scroll;
+            max-height: 50%;
         }
 
         .descOcult #close {
             display: flex;
             justify-content: flex-end;
-            width: 80%;
-            color: white;
+            width: 70%;
+            color: #F8F8FFFF;
             font-size: 20px;
         }
 
@@ -72,39 +89,43 @@
             margin-bottom: 5px;
         }
 
-        .chat,
-        .titulo-chat {
-            background-color: black;
-            color: #ffffff;
-            border: 0.1em solid black;
-            border-radius: 2px;
-            margin-top: 0.1em;
-        }
-
-        .formUser button{
-            font-size: 2vh;
-        }
-
-        .titulo-chat {
-            font-weight: bolder;
+        .titulo {
+            background-color: #000000DD;
+            color: #F8F8FFFF;
+            border: 0.1em solid #000000DD;
+            height: 2em;
+            font-size: 1em;
             border-radius: 5px 5px 0px 0px;
+        }
+
+        .formUser button {
+            font-size: 0.9em;
+        }
+
+        .chat {
+            background-color: #000000DD;
+            color: #F8F8FF;
+            border-radius: 3px;
+            margin-top: 0.1em;
         }
 
         .chat:hover {
             cursor: pointer;
-            background-color: #000000AA;
+            background-color: #000000FF;
+            color: #F8F8FF;
+            -webkit-transition: all 0.2s ease-in-out;
+
         }
 
         .chat:active {
             cursor: pointer;
-            background-color: #FFFFFF;
-            color: black;
-            border: 0.1em solid black;
+            background-color: #F8F8FF;
+            color: #000000DD;
         }
 
         .chat .dot {
-            height: 1.4vh;
-            width: 1.4vh;
+            height: 0.5em;
+            width: 0.5em;
             border-radius: 50%;
             display: inline-block;
         }
@@ -142,8 +163,8 @@
                 <form class="formUser d-none">
                     <div id="voteUsersForm" class=""></div>
                     <span class="ml-2">
-                        <button type=" button" class="btn btn-primary">Votar</button>
-                        <button type="button" class="btn btn-primary" onclick="document.location.reload()">Cancelar</button>
+                        <button type=" button" class="btn">Votar</button>
+                        <button type="button" class="btn" onclick="document.location.reload()">Cancelar</button>
                     </span>
                 </form>
                 <span><span class="voteUserVal">3.1</span> media de 250 votos</span>
@@ -156,13 +177,42 @@
                 <span><span class="voteIMDBVal">4.5</span> media de 250 votos no IMDB</span>
             </div>
             <div>
-                <div id="desc" class="w-100 desc">
-                    Descrição wiki
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas a quam vestibulum, dapibus tellus ac,
-                    commodo lorem. Ut elementum tempus aliquam. Duis faucibus tincidunt sem a placerat. Nullam facilisis,
-                    urna.
+                <div class="desc">
+                    <div id="desc" class="w-100">
+                        Descrição wiki
+                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas a quam vestibulum, dapibus tellus
+                        ac,
+                        commodo lorem. Ut elementum tempus aliquam. Duis faucibus tincidunt sem a placerat. Nullam
+                        facilisis,
+                        urna.Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas a quam vestibulum, dapibus
+                        tellus
+                        ac,
+                        commodo lorem. Ut elementum tempus aliquam. Duis faucibus tincidunt sem a placerat. Nullam
+                        facilisis,
+                        urna.Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas a quam vestibulum, dapibus
+                        tellus
+                        ac,
+                        commodo lorem. Ut elementum tempus aliquam. Duis faucibus tincidunt sem a placerat. Nullam
+                        facilisis,
+                        urna.
+                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas a quam vestibulum, dapibus tellus
+                        ac,
+                        commodo lorem. Ut elementum tempus aliquam. Duis faucibus tincidunt sem a placerat. Nullam
+                        facilisis,
+                        urna.Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas a quam vestibulum, dapibus
+                        tellus
+                        ac,
+                        commodo lorem. Ut elementum tempus aliquam. Duis faucibus tincidunt sem a placerat. Nullam
+                        facilisis,
+                        urna.Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas a quam vestibulum, dapibus
+                        tellus
+                        ac,
+                        commodo lorem. Ut elementum tempus aliquam. Duis faucibus tincidunt sem a placerat. Nullam
+                        facilisis,
+                        urna.
+                    </div>
+                    <a id="leanMore">Ler Mais</a>
                 </div>
-                <a id="leanMore">leia mais</a>
                 <div class="descOcult d-none">
                     <div id="close">
                         <a><i class="fas fa-times"></i></a>
@@ -175,8 +225,18 @@
     <hr class="my-2">
     <div class="d-flex flex-row justify-content-between p-2 w-100">
         <div class="w-75 d-flex flex-column">
-            <button class="btn btn-block" arial-label="criar novo tópico" type="button"><i
-                    class="fas fa-plus"></i></button>
+            <div class="titulo text-center">Comentários</div>
+            <div class="accordion" id="accordionExample">
+                <div class="card">
+                    <div class="card-header">
+                        <h2 class="mb-0">
+                            <button class="btn btn-block" arial-label="criar novo tópico" type="button"><i
+                                    class="fas fa-plus"></i></button>
+                        </h2>
+                    </div>
+                </div>
+            </div>
+
             <div class="accordion" id="accordionExample">
                 <div class="card">
                     <div class="card-header" id="headingOne">
@@ -198,19 +258,19 @@
                     <div class="card-header" id="headingOne">
                         <h2 class="mb-0">
                             <button class="btn btn-block text-left" type="button" data-toggle="collapse"
-                                data-target="#collapse2" aria-expanded="true">Comentario Sobre Ola</button>
+                                data-target="#collapse2" aria-expanded="true">Comentário Sobre Ola</button>
                         </h2>
                     </div>
                     <div id="collapse2" class="collapse" aria-labelledby="headingOne" data-parent="#accordionExample">
                         <div class="card-body">
-                            @includeIf('content.comentario_layout',['name'=>'juaão','comentario'=>'olaolaolaolaolaolaolaolaolaolaolaolaolaolaolaolaolaolaolaolaolaolaolaolaolaolaolaolaolaolaolaolaolaola'])
+                            @includeIf('content.comentario_layout',['name'=>'maria','comentario'=>'olaolaolaolaolaolaolaolaolaolaolaolaolaolaolaolaolaolaolaolaolaolaolaolaolaolaolaolaolaolaolaolaolaola'])
                         </div>
                     </div>
                 </div>
             </div>
         </div>
         <div class="w-25 ml-2 chats">
-            <div class="titulo-chat text-center">Chat</div>
+            <div class="titulo text-center">Chats</div>
             <div class="d-flex flex-column">
                 <div class="chat p-2 d-flex justify-content-center">
                     <i class="fas fa-plus"></i>
@@ -245,6 +305,7 @@
     <script src='{{ URL::asset('libs/rating/jquery.star-rating-svg.js') }}'></script>
     <script>
         $('#leanMore').click(function() {
+            window.scrollTo(0, 0);
             if ($('.descOcult p').text().length <= 0) {
                 $('.descOcult p').text($('.desc').text())
             }
