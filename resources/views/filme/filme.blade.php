@@ -8,12 +8,11 @@
         #mostFilme {
             display: flex;
             width: 100%;
-            background-color: #000000DD;
-            color: #F8F8FF;
         }
 
         #mostFilme img {
             width: 20%;
+            max-height: 50vh;
         }
 
         #categorias li {
@@ -31,15 +30,15 @@
             color: #000000DD;
         }
 
-        .desc {
+        .area {
             padding: 5px;
-            background-color:#000000DD;
+            background-color: #000000DD;
             color: #F8F8FFFF;
+            font-size: 0.8em;
         }
 
         #desc,
         #leanMore {
-            font-size: 0.9em;
             text-align: justify;
             overflow: hidden;
             display: -webkit-box;
@@ -47,11 +46,13 @@
             -webkit-box-orient: vertical;
             -webkit-box-pack: end;
         }
-        #leanMore{
-            width:5em;
+
+        #leanMore {
+            width: 5em;
         }
-        #leanMore:hover{
-            text-decoration:underline #F8F8FFFF;
+
+        #leanMore:hover {
+            text-decoration: underline #F8F8FFFF;
         }
 
         .descOcult {
@@ -68,11 +69,11 @@
         }
 
         .descOcult p {
-            background-color: #F8F8FFFF;
+            background-color: #000000DD;
             padding: 1em;
             width: 70%;
             text-align: justify;
-            border-radius: 5px;
+            border-radius: 1px;
             overflow-y: scroll;
             max-height: 50%;
         }
@@ -87,12 +88,13 @@
 
         .comentario {
             margin-bottom: 5px;
+            color: #000000DD;
         }
 
         .titulo {
-            background-color: #000000DD;
+            background-color: #151515FF;
             color: #F8F8FFFF;
-            border: 0.1em solid #000000DD;
+            border: 0.1em solid #202020FF;
             height: 2em;
             font-size: 1em;
             border-radius: 5px 5px 0px 0px;
@@ -102,8 +104,13 @@
             font-size: 0.9em;
         }
 
+        .groups {
+            overflow-y: scroll;
+            height: 30vh;
+        }
+
         .chat {
-            background-color: #000000DD;
+            background-color: #292929FF;
             color: #F8F8FF;
             border-radius: 3px;
             margin-top: 0.1em;
@@ -111,7 +118,7 @@
 
         .chat:hover {
             cursor: pointer;
-            background-color: #000000FF;
+            background-color: #202020;
             color: #F8F8FF;
             -webkit-transition: all 0.2s ease-in-out;
 
@@ -120,7 +127,7 @@
         .chat:active {
             cursor: pointer;
             background-color: #F8F8FF;
-            color: #000000DD;
+            color: #292929;
         }
 
         .chat .dot {
@@ -142,6 +149,18 @@
             background-color: red;
         }
 
+        .accordion .card {
+            background-color: #191919;
+        }
+
+        .comentario .card-body {
+            border: 1px solid white;
+        }
+
+        .accordion .card-body {
+            color: white;
+        }
+
     </style>
 @endsection
 @section('content')
@@ -149,7 +168,18 @@
     <div id="mostFilme">
         <img class="ml-2 py-2" src="https://images-na.ssl-images-amazon.com/images/I/71yDb8SKTTL.jpg">
         <div class="ml-3 m-2 w-100">
-            <h3>Titulo Filme</h3>
+            <div>
+                <span class="h4">Titulo Filme</span>
+                <span class="dropdown ml-3">
+                    <a class="ropdown-toggle" role="button" id="moreOptionDropDown" data-toggle="dropdown"
+                        aria-haspopup="true"><i class="fas fa-ellipsis-h" style='color:white;'></i></a>
+                    <div class="dropdown-menu dropdown-menu-left" aria-labelledby="moreOptionDropDown">
+                        <a class="dropdown-item">Favorito</a>
+                        <a class="dropdown-item">Novo Group</a>
+                        <a class="dropdown-item">Novo Aba Comentarios</a>
+                    </div>
+                </span>
+            </div>
             <div id="categorias" class="d-flex flex-row">
                 @foreach (range(1, 4) as $item)
                     <a href="Categoria{{ $item }}">
@@ -157,13 +187,13 @@
                     </a>
                 @endforeach
             </div>
-            <div class="my-1">
-                <div>Quantidade de Votos</div>
+            <div class="my-2 area">
+                <strong>Quantidade de Votos</strong>
                 <div id="voteUsers"></div>
                 <form class="formUser d-none">
                     <div id="voteUsersForm" class=""></div>
                     <span class="ml-2">
-                        <button type=" button" class="btn">Votar</button>
+                        <button type="submit" class="btn">Votar</button>
                         <button type="button" class="btn" onclick="document.location.reload()">Cancelar</button>
                     </span>
                 </form>
@@ -177,9 +207,8 @@
                 <span><span class="voteIMDBVal">4.5</span> media de 250 votos no IMDB</span>
             </div>
             <div>
-                <div class="desc">
+                <div class="area">
                     <div id="desc" class="w-100">
-                        Descrição wiki
                         Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas a quam vestibulum, dapibus tellus
                         ac,
                         commodo lorem. Ut elementum tempus aliquam. Duis faucibus tincidunt sem a placerat. Nullam
@@ -217,6 +246,7 @@
                     <div id="close">
                         <a><i class="fas fa-times"></i></a>
                     </div>
+                    <div class="h4">Descrição completa</div>
                     <p></p>
                 </div>
             </div>
@@ -226,7 +256,7 @@
     <div class="d-flex flex-row justify-content-between p-2 w-100">
         <div class="w-75 d-flex flex-column">
             <div class="titulo text-center">Comentários</div>
-            <div class="accordion" id="accordionExample">
+            {{-- <div class="accordion" id="accordionExample">
                 <div class="card">
                     <div class="card-header">
                         <h2 class="mb-0">
@@ -235,7 +265,7 @@
                         </h2>
                     </div>
                 </div>
-            </div>
+            </div> --}}
 
             <div class="accordion" id="accordionExample">
                 <div class="card">
@@ -249,6 +279,15 @@
                         <div class="card-body">
                             @includeIf('content.comentario_layout',['name'=>'juaão','comentario'=>'olaolaolaolaolaolaolaolaolaolaolaolaolaolaolaolaolaolaolaolaolaolaolaolaolaolaolaolaolaolaolaolaolaola'])
                             @includeIf('content.comentario_layout',['name'=>'juaão','comentario'=>'olaolaolaolaolaolaolaolaolaolaolaolaolaolaolaolaolaolaolaolaolaolaolaolaolaolaolaolaolaolaolaolaolaola'])
+                        </div>
+                        <div class="card-footer">
+                            <form>
+                                <div class="input-group mb-3">
+                                    <input type="text" class="form-control" placeholder="Username" aria-label="Username"
+                                        aria-describedby="basic-addon1">
+                                    <button type="button" class="btn">Comentar</button>
+                                </div>
+                            </form>
                         </div>
                     </div>
                 </div>
@@ -269,33 +308,18 @@
                 </div>
             </div>
         </div>
-        <div class="w-25 ml-2 chats">
-            <div class="titulo text-center">Chats</div>
-            <div class="d-flex flex-column">
-                <div class="chat p-2 d-flex justify-content-center">
+        <div class="w-25 ml-2">
+            <div class="titulo text-center">Groups</div>
+            <div class="d-flex flex-column groups">
+                {{-- <div class="chat p-2 d-flex justify-content-center">
                     <i class="fas fa-plus"></i>
-                </div>
-                <div class="chat p-2 d-flex justify-content-between">
-                    <span>
-                        <div class="h6">Titulo Chat</div>
-                        <div style="font-size:80%">09/11 Usuário</div>
-                    </span>
-                    <span class="dot" date-value='active'></span>
-                </div>
-                <div class="chat p-2 d-flex justify-content-between">
-                    <span>
-                        <div class="h6">Titulo Chat</div>
-                        <div style="font-size:80%">09/11 Usuário</div>
-                    </span>
-                    <span class="dot" date-value='suspended'></span>
-                </div>
-                <div class="chat p-2 d-flex justify-content-between">
-                    <span>
-                        <div class="h6">Titulo Chat</div>
-                        <div style="font-size:80%">09/11 Usuário</div>
-                    </span>
-                    <span class="dot" date-value='deactivate'></span>
-                </div>
+                </div> --}}
+                @includeIf('content.chat_layout',['title'=>'Titulo Massa','users'=>'12/30','value'=>'active'])
+                @includeIf('content.chat_layout',['title'=>'Titulo Massa','users'=>'12/30','value'=>'suspended'])
+                @includeIf('content.chat_layout',['title'=>'Titulo Massa','users'=>'12/30','value'=>'deactivate'])
+                @includeIf('content.chat_layout',['title'=>'Titulo Massa','users'=>'12/30','value'=>'active'])
+                @includeIf('content.chat_layout',['title'=>'Titulo Massa','users'=>'12/30','value'=>'suspended'])
+                @includeIf('content.chat_layout',['title'=>'Titulo Massa','users'=>'12/30','value'=>'deactivate'])
             </div>
         </div>
     </div>
@@ -307,7 +331,7 @@
         $('#leanMore').click(function() {
             window.scrollTo(0, 0);
             if ($('.descOcult p').text().length <= 0) {
-                $('.descOcult p').text($('.desc').text())
+                $('.descOcult p').text($('#desc').text())
             }
             $('.descOcult').attr('style', 'display: flex !important');
             $('body').attr('style', 'overflow: hidden');

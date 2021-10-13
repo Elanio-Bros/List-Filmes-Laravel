@@ -28,8 +28,8 @@ Route::get('/home', function () {
 Route::get('/filme/{idFilme}', function ($idFilme) {
     return view('filme.filme', compact("idFilme"));
 });
-Route::get('/categoria/{categoria}', function ($idFilme) {
-    return view('filme.filme', compact("categoria"));
+Route::get('/categoria/{categoria}', function ($categoria) {
+    return view('filme.categoria', compact("categoria"));
 })->name('categoria');
 Route::get('/termo', function () {
     return view('termo');

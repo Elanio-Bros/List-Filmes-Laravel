@@ -10,30 +10,28 @@
     border: 1px solid green;
 }
 
+body{
+    background-color: #202020FF;
+    color: #F8F8FF;
+}
 a {
     text-decoration: none;
-    color: #000000DD;
+    color: #202020FF;
 }
 
 a:hover,
 a:active {
     text-decoration: none;
-    color: #000000DD;
+    color: #202020FF;
     cursor: pointer;
 }
 
 input {
     box-shadow: none !important;
-    border: 1px solid #000000DD;
-}
-
-input:focus {
-    box-shadow: none !important;
-    border: 1px solid #000000DD;
 }
 
 .btn {
-    background-color: #000000DD;
+    background-color: #202020FF;
     color: #F8F8FF;
 }
 .btn:hover {
@@ -43,8 +41,8 @@ input:focus {
 
 .btn:active {
     background-color: #F8F8FF;
-    border-color: #000000DD;
-    color: #000000DD;
+    border-color: #202020FF;
+    color: #202020FF;
 }
 
 

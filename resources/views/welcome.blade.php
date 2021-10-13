@@ -8,6 +8,27 @@
     <!-- Add the slick-theme.css if you want default styling -->
     <link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick-theme.css" />
     <style>
+        body {
+            background-color: #F8F8FF;
+            color: #000000DD;
+        }
+
+        .btn {
+            background-color: #F8F8FF;
+            color: #000000DD;
+        }
+
+        .btn:hover {
+            background-color: #000000FF;
+            color: #F8F8FF;
+        }
+
+        .btn:active {
+            background-color: #F8F8FF;
+            border-color: #000000DD;
+            color: #000000DD;
+        }
+
         #carouselFundo .carousel,
         .carousel-inner {
             z-index: -1;
