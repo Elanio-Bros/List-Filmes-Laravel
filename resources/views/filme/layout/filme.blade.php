@@ -164,7 +164,7 @@
     </style>
 @endsection
 @section('content')
-    @include('filme.nav')
+    @include('content.nav')
     <div id="mostFilme">
         <img class="ml-2 py-2" src="https://images-na.ssl-images-amazon.com/images/I/71yDb8SKTTL.jpg">
         <div class="ml-3 m-2 w-100">

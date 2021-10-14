@@ -1,4 +1,4 @@
-@extends('usuario.layout')
+@extends('usuario.layout.layout')
 @section('title')
     Login
 @endsection

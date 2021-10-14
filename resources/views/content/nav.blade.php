@@ -14,7 +14,7 @@
     <div class="collapse navbar-collapse" id="conteudoNavbarSuportado">
         <ul class="navbar-nav mr-auto">
             <li class="nav-item">
-                <a class="nav-link" href="#">Mais Visitados<span class="sr-only">(página atual)</span></a>
+                <a class="nav-link" href="#">Vistos<span class="sr-only">(página atual)</span></a>
             </li>
             <li class="nav-item">
                 <a class="nav-link" href="#">Por Nota</a>
@@ -49,7 +49,8 @@
                 <a class="dropdown-item" href="#">Minha Conta</a>
                 <a class="dropdown-item" href="#">Favoritos</a>
                 <a class="dropdown-item" href="#">Chats</a>
-                <a class="dropdown-item" href="#">Sair</a>
+                <div class="dropdown-divider"></div>
+                <a type="button" class="dropdown-item btn-danger" >Sair</a>
             </div>
         </div>
     </div>
