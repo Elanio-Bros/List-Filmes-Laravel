@@ -58,7 +58,7 @@
         integrity="sha512-z4OUqw38qNLpn1libAN9BsoDx6nbNFio5lA6CuTp9NlK83b89hgyCVq+N5FdBJptINztxn1Z3SaKSKUS5UP60Q=="
         crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <script>
-        $(".ocultaLogin").click(function() {
+        $(".ocultaPass").click(function() {
             $(this).children("i").toggle();
             let senha = $("#" + $(this).parents().children().get(2).id)
             senha.prop("type", senha.prop("type") == "password" ? "text" : "password");

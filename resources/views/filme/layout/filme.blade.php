@@ -105,48 +105,8 @@
         }
 
         .groups {
-            overflow-y: scroll;
+            overflow-y: auto;
             height: 30vh;
-        }
-
-        .chat {
-            background-color: #292929FF;
-            color: #F8F8FF;
-            border-radius: 3px;
-            margin-top: 0.1em;
-        }
-
-        .chat:hover {
-            cursor: pointer;
-            background-color: #202020;
-            color: #F8F8FF;
-            -webkit-transition: all 0.2s ease-in-out;
-
-        }
-
-        .chat:active {
-            cursor: pointer;
-            background-color: #F8F8FF;
-            color: #292929;
-        }
-
-        .chat .dot {
-            height: 0.5em;
-            width: 0.5em;
-            border-radius: 50%;
-            display: inline-block;
-        }
-
-        .chat .dot[date-value='active'] {
-            background-color: green;
-        }
-
-        .chat .dot[date-value='suspended'] {
-            background-color: gold;
-        }
-
-        .chat .dot[date-value='deactivate'] {
-            background-color: red;
         }
 
         .accordion .card {
@@ -311,9 +271,6 @@
         <div class="w-25 ml-2">
             <div class="titulo text-center">Groups</div>
             <div class="d-flex flex-column groups">
-                {{-- <div class="chat p-2 d-flex justify-content-center">
-                    <i class="fas fa-plus"></i>
-                </div> --}}
                 @includeIf('content.chat_layout',['title'=>'Titulo Massa','users'=>'12/30','value'=>'active'])
                 @includeIf('content.chat_layout',['title'=>'Titulo Massa','users'=>'12/30','value'=>'suspended'])
                 @includeIf('content.chat_layout',['title'=>'Titulo Massa','users'=>'12/30','value'=>'deactivate'])

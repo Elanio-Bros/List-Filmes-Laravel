@@ -49,6 +49,7 @@
                 <a class="dropdown-item" href="#">Minha Conta</a>
                 <a class="dropdown-item" href="#">Favoritos</a>
                 <a class="dropdown-item" href="#">Chats</a>
+                <a class="dropdown-item" href="#">Administração</a>
                 <div class="dropdown-divider"></div>
                 <a type="button" class="dropdown-item btn-danger" >Sair</a>
             </div>

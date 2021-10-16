@@ -41,7 +41,7 @@
             <div class="input-group mb-3">
                 <input type="password" class="form-control" id="pass" placeholder="Senha">
                 <div class="input-group-append">
-                    <span class="input-group-text" id="basic-addon2"><a class="ocultaLogin">
+                    <span class="input-group-text" id="basic-addon2"><a class="ocultaPass">
                             <i class="fas fa-eye" style="display: none"></i>
                             <i class="fas fa-eye-slash"></i></a></span>
                 </div>
@@ -51,7 +51,7 @@
             <div class="input-group mb-3">
                 <input type="password" class="form-control" id="Confirpass" placeholder="Confirmação de Senha">
                 <div class="input-group-append">
-                    <span class="input-group-text" id="basic-addon2"><a class="ocultaLogin">
+                    <span class="input-group-text" id="basic-addon2"><a class="ocultaPass">
                             <i class="fas fa-eye" style="display: none"></i>
                             <i class="fas fa-eye-slash"></i></a></span>
                 </div>
