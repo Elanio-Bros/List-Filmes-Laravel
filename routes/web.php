@@ -45,8 +45,8 @@ Route::get('/filme/{idFilme}', function ($idFilme) {
     return view('filme.layout.filme', compact("idFilme"));
 });
 
-Route::get('/usuario/conta', function () {
-    return view('filme.layout.filme');
+Route::get('/usuario/gerência', function () {
+    return view('usuario.gerencia');
 });
 Route::get('/usuario/conta', function () {
     return view('usuario.conta_usuario');

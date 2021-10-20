@@ -1,6 +1,6 @@
 @extends('layout')
 @section('title')
-
+    Grupos
 @endsection
 @section('style')
     <style>
@@ -25,6 +25,9 @@
         <div class="w-25 ml-2">
             <div class="titulo text-center">Groups</div>
             <div class="d-flex flex-column groups">
+                <div class="chat p-2 d-flex justify-content-center">
+                    <i class="fas fa-plus"></i>
+                </div>
                 @includeIf('content.chat_layout',['title'=>'Titulo Massa','users'=>'12/30','value'=>'active'])
                 @includeIf('content.chat_layout',['title'=>'Titulo Massa','users'=>'12/30','value'=>'suspended'])
                 @includeIf('content.chat_layout',['title'=>'Titulo Massa','users'=>'12/30','value'=>'deactivate'])
@@ -46,7 +49,6 @@
                 </div>
             </div>
         </div>
-
     </div>
 @endsection
 @section('script')

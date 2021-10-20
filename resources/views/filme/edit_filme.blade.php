@@ -218,16 +218,6 @@
             <div class="titulo text-center">Comentários</div>
             <div class="accordion" id="accordionExample">
                 <div class="card">
-                    <div class="card-header">
-                        <h2 class="mb-0">
-                            <button class="btn btn-block" arial-label="criar novo tópico" type="button"><i
-                                    class="fas fa-plus"></i></button>
-                        </h2>
-                    </div>
-                </div>
-            </div>
-            <div class="accordion" id="accordionExample">
-                <div class="card">
                     <div class="card-header" id="headingOne">
                         <h2 class="mb-0">
                             <button class="btn btn-block text-left" type="button" data-toggle="collapse"
@@ -270,9 +260,6 @@
         <div class="w-25 ml-2">
             <div class="titulo text-center">Groups</div>
             <div class="d-flex flex-column groups">
-                <div class="chat p-2 d-flex justify-content-center">
-                        <i class="fas fa-plus"></i>
-                </div>
                 @includeIf('content.chat_layout',['title'=>'Titulo Massa','users'=>'12/30','value'=>'active'])
                 @includeIf('content.chat_layout',['title'=>'Titulo Massa','users'=>'12/30','value'=>'suspended'])
                 @includeIf('content.chat_layout',['title'=>'Titulo Massa','users'=>'12/30','value'=>'deactivate'])
