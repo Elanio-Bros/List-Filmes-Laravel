@@ -31,24 +31,24 @@ input {
     box-shadow: none !important;
 }
 
-.btn {
+.btnPerson {
     background-color: #202020FF;
     color: #F8F8FF;
 }
 
-.btn:hover {
+.btnPerson:hover {
     background-color: #000000FF;
     color: #F8F8FF;
 }
 
-.btn:active {
+.btnPerson:active {
     background-color: #F8F8FF;
     border-color: #202020FF;
     color: #202020FF;
 }
 
 
-.btn:focus {
+.btnPerson:focus {
     outline: none;
     box-shadow: none;
 }

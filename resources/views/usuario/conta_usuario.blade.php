@@ -97,7 +97,7 @@
                     </div>
                 </div>
             </div>
-            <button type="submit" name="save" class="btn w-100">Salvar</button>
+            <button type="submit" name="save" class="btn btnPerson w-100">Salvar</button>
         </form>
     </div>
 @endsection

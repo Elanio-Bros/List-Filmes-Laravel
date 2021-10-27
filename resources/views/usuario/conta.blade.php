@@ -60,7 +60,7 @@
         <span class="d-flex checkbox">
             <input class="mr-1" type="checkbox" required>
             <label>Aceito os Termos e as <a class="text-light" href="{{url('termo')}}">Politicas de Privacidade</a></label></span>
-        <button type=" submit" class="btn" style="width: 100%;">Crie Conta</button>
+        <button type=" submit" class="btn btnPerson" style="width: 100%;">Crie Conta</button>
     </form>
     <span class="mt-2 d-flex flex-column"><a class="text-light" href="{{ route('login') }}">Click aqui se já tem uma
             conta</a></span>

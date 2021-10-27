@@ -153,8 +153,8 @@
                 <form class="formUser d-none">
                     <div id="voteUsersForm" class=""></div>
                     <span class="ml-2">
-                        <button type="submit" class="btn">Votar</button>
-                        <button type="button" class="btn" onclick="document.location.reload()">Cancelar</button>
+                        <button type="submit" class="btn btnPerson ">Votar</button>
+                        <button type="button" class="btn btnPerson " onclick="document.location.reload()">Cancelar</button>
                     </span>
                 </form>
                 <span><span class="voteUserVal">3.1</span> media de 250 votos</span>
@@ -220,7 +220,7 @@
                 <div class="card">
                     <div class="card-header">
                         <h2 class="mb-0">
-                            <button class="btn btn-block" arial-label="criar novo tópico" type="button"><i
+                            <button class="btn btnPerson  btn-block" arial-label="criar novo tópico" type="button"><i
                                     class="fas fa-plus"></i></button>
                         </h2>
                     </div>
@@ -230,7 +230,7 @@
                 <div class="card">
                     <div class="card-header" id="headingOne">
                         <h2 class="mb-0">
-                            <button class="btn btn-block text-left" type="button" data-toggle="collapse"
+                            <button class="btn btnPerson  btn-block text-left" type="button" data-toggle="collapse"
                                 data-target="#collapse1" aria-expanded="true">Comentarios Gerais</button>
                         </h2>
                     </div>
@@ -244,7 +244,7 @@
                                 <div class="input-group mb-3">
                                     <input type="text" class="form-control" placeholder="Username" aria-label="Username"
                                         aria-describedby="basic-addon1">
-                                    <button type="button" class="btn">Comentar</button>
+                                    <button type="button" class="btn btnPerson ">Comentar</button>
                                 </div>
                             </form>
                         </div>
@@ -255,7 +255,7 @@
                 <div class="card">
                     <div class="card-header" id="headingOne">
                         <h2 class="mb-0">
-                            <button class="btn btn-block text-left" type="button" data-toggle="collapse"
+                            <button class="btn btnPerson btn-block text-left" type="button" data-toggle="collapse"
                                 data-target="#collapse2" aria-expanded="true">Comentário Sobre Ola</button>
                         </h2>
                     </div>

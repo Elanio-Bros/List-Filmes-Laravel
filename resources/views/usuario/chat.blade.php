@@ -45,7 +45,7 @@
                 <div class="card-footer d-flex flex-row">
                     <input type="text" class="form-control" placeholder="Username" aria-label="Username"
                         aria-describedby="addon-wrapping">
-                    <button type="button" class="btn">Enviar</button>
+                    <button type="button" class="btn btnPerson">Enviar</button>
                 </div>
             </div>
         </div>

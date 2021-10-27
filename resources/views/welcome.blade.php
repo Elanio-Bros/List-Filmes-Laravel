@@ -13,17 +13,17 @@
             color: #000000DD;
         }
 
-        .btn {
+        .btnPerson{
             background-color: #F8F8FF;
             color: #000000DD;
         }
 
-        .btn:hover {
+        .btnPerson:hover {
             background-color: #000000FF;
             color: #F8F8FF;
         }
 
-        .btn:active {
+        .btnPerson:active {
             background-color: #F8F8FF;
             border-color: #000000DD;
             color: #000000DD;
@@ -94,7 +94,7 @@
                 <h1>Your Movie Ideas</h1>
                 <p>É um site onde você pode compartilhar suas opiniões, notas, ideias, teorias e pode falar de tudo sobre um
                     ou varios filmes</p>
-                <a href="{{ route('conta') }}"><button type="button" class="btn">Faça parte
+                <a href="{{ route('conta') }}"><button type="button" class="btn btnPerson">Faça parte
                         dessa comunidade</button></a>
             </div>
         </div>
@@ -123,7 +123,7 @@
             <div class="FilmCovers w-100">
                 @foreach (range(1, 10) as $item)
                     <div class="mx-2 cardFilme">
-                        @includeIf('content.card_layout',
+                        @includeIf('content.card_filme_layout',
                         ['titulo'=>"$item Titulo Filme",
                         'imagem'=>'https://images-na.ssl-images-amazon.com/images/I/71yDb8SKTTL.jpg']
                         )
