@@ -1,7 +1,7 @@
 <?php
 
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
-
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -33,9 +33,9 @@ Route::get('/filme/notas', function () {
     return view('filme.nota');
 })->name('notas');
 
-Route::get('/filme/visitados', function () {
-    return view('filme.visitados');
-});
+Route::get('/filme/votados', function () {
+    return view('filme.votados');
+})->name('votados');
 
 Route::get('filme/categoria/{categoria}', function ($categoria) {
     return view('filme.categoria', compact("categoria"));
@@ -45,8 +45,8 @@ Route::get('/filme/{idFilme}', function ($idFilme) {
     return view('filme.layout.filme', compact("idFilme"));
 });
 
-Route::get('/usuario/gerência', function () {
-    return view('usuario.gerencia');
+Route::get('/usuario/gerência', function (Request $request) {
+    return view('usuario.gerencia',['request' => $request->all()]);
 });
 Route::get('/usuario/conta', function () {
     return view('usuario.conta_usuario');

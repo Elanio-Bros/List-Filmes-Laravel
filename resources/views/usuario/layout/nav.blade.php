@@ -14,10 +14,10 @@
     <div class="collapse navbar-collapse" id="conteudoNavbarSuportado">
         <ul class="navbar-nav mr-auto">
             <li class="nav-item">
-                <a class="nav-link" href="{{route('votados')}}">Votados<span class="sr-only">(página atual)</span></a>
+                <a class="nav-link" href="#">Vistos<span class="sr-only">(página atual)</span></a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="{{route('notas')}}">Por Nota</a>
+                <a class="nav-link" href="#">Por Nota</a>
             </li>
             <li class="nav-item dropdown">
                 <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
@@ -25,7 +25,7 @@
                     Categoria
                 </a>
                 <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                    <a class="dropdown-item" href="{{url('filme/categoria/ação')}}">Ação</a>
+                    <a class="dropdown-item" href="#">Ação</a>
                     <a class="dropdown-item" href="#">Aventura</a>
                     <a class="dropdown-item" href="#">Aventura</a>
                     <a class="dropdown-item" href="#">Aventura</a>
@@ -35,10 +35,10 @@
                 </div>
             </li>
         </ul>
-        <form class="form-inline my-1">
+        {{-- <form class="form-inline my-1">
             <input class="form-control" type="search" placeholder="Nome do Filmes" aria-label="Pesquisar">
             <button class="btn btnPerson" type="submit">Pesquisar</button>
-        </form>
+        </form> --}}
         <div class="dropdown ml-3">
             <a class="ropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown"
                 aria-haspopup="true" aria-expanded="false">

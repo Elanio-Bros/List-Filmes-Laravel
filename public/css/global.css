@@ -36,6 +36,7 @@ input {
     color: #F8F8FF;
 }
 
+
 .btnPerson:hover {
     background-color: #000000FF;
     color: #F8F8FF;
@@ -76,6 +77,10 @@ input {
     cursor: pointer;
 }
 
+.filme {
+    width: 90%;
+}
+
 .filme .card-body {
     padding: 5%;
 }
@@ -90,7 +95,7 @@ input {
     width: 100%;
     background-color: #00000099;
     color: white;
-    height: 18%;
+    height: 15%;
     display: none;
 }
 
@@ -130,21 +135,31 @@ input {
     color: #292929;
 }
 
-.chat .dot {
+.gridPerson {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(auto, 25%));
+
+}
+
+.dot {
     height: 0.5em;
     width: 0.5em;
     border-radius: 50%;
     display: inline-block;
 }
 
-.chat .dot[date-value='active'] {
+.dot[date-value='active'] {
     background-color: green;
 }
 
-.chat .dot[date-value='suspended'] {
+.dot[date-value='suspended'] {
     background-color: gold;
 }
 
-.chat .dot[date-value='deactivate'] {
+.dot[date-value='deactivate'] {
     background-color: red;
+}
+
+.dot[date-value='noti'] {
+    background-color: orange;
 }
