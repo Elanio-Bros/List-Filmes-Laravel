@@ -17,7 +17,7 @@
                 <a class="nav-link" href="{{route('votados')}}">Votados<span class="sr-only">(página atual)</span></a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="{{route('notas')}}">Por Nota</a>
+                <a class="nav-link" href="{{route('nota')}}">Por Nota</a>
             </li>
             <li class="nav-item dropdown">
                 <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
@@ -25,11 +25,9 @@
                     Categoria
                 </a>
                 <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                    <a class="dropdown-item" href="{{url('filme/categoria/ação')}}">Ação</a>
-                    <a class="dropdown-item" href="#">Aventura</a>
-                    <a class="dropdown-item" href="#">Aventura</a>
-                    <a class="dropdown-item" href="#">Aventura</a>
-                    <a class="dropdown-item" href="#">Aventura</a>
+                    @foreach (['Ação','Aventeura','Comedia','Animação'] as $item)
+                        <a class="dropdown-item" href="{{url('filme/categoria/'.$item)}}">{{$item}}</a>
+                    @endforeach
                     <div class="dropdown-divider"></div>
                     <a class="dropdown-item" href="#">Outras Categorias</a>
                 </div>
@@ -46,11 +44,11 @@
                     src="https://d11a6trkgmumsb.cloudfront.net/original/3X/f/b/fbbaacfa1033254471f614b67d58dae45236ce5b.jpg">
             </a>
             <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuLink">
-                <a class="dropdown-item" href="#">Minha Conta</a>
-                <a class="dropdown-item" href="#">Favoritos</a>
-                <a class="dropdown-item" href="#">Chats</a>
-                <a class="dropdown-item" href="#">Avisos <span class='dot' date-value='noti'></span></a>
-                <a class="dropdown-item" href="#">Administração</a>
+                <a class="dropdown-item" href="{{route('minha_conta')}}">Minha Conta</a>
+                <a class="dropdown-item" href="{{route('favorito')}}">Favoritos</a>
+                <a class="dropdown-item" href="{{route('chat')}}">Chats</a>
+                <a class="dropdown-item" href="{{route('aviso')}}">Avisos <span class='dot' date-value='noti'></span></a>
+                <a class="dropdown-item" href="{{route('admin')}}">Administração</a>
                 <div class="dropdown-divider"></div>
                 <a type="button" class="dropdown-item btn-danger" >Sair</a>
             </div>

@@ -30,7 +30,7 @@
                 </div>
             </div>
         </div>
-        <button type="submit" class="btn" style="width: 100%;">Entrar</button>
+        <button type="submit" class="btn btnPerson" style="width: 100%;">Entrar</button>
     </form>
     <span class="mt-2 d-flex flex-column"><a class="text-light" href="{{ route('conta') }}">Click aqui e crie
             uma conta</a></span>

@@ -13,6 +13,10 @@
             color: #000000DD;
         }
 
+        .filme {
+    width: 13rem;
+}
+
         .btnPerson{
             background-color: #F8F8FF;
             color: #000000DD;

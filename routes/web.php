@@ -29,9 +29,9 @@ Route::get('/home', function () {
     return view('filme.home');
 })->name('home');
 
-Route::get('/filme/notas', function () {
+Route::get('/filme/nota', function () {
     return view('filme.nota');
-})->name('notas');
+})->name('nota');
 
 Route::get('/filme/votados', function () {
     return view('filme.votados');
@@ -46,18 +46,21 @@ Route::get('/filme/{idFilme}', function ($idFilme) {
 });
 
 Route::get('/usuario/gerência', function (Request $request) {
-    return view('usuario.gerencia',['request' => $request->all()]);
-});
+    return view('usuario.gerenciar.gerencia',['request' => $request->all()]);
+})->name('admin');
+
 Route::get('/usuario/conta', function () {
     return view('usuario.conta_usuario');
-});
+})->name('minha_conta');
 Route::get('/usuario/chat', function () {
     return view('usuario.chat');
-});
+})->name('chat');
 Route::get('/usuario/favorito', function () {
     return view('usuario.favorito');
-});
-
+})->name('favorito');
+Route::get('/usuario/aviso', function () {
+    return view('usuario.favorito');
+})->name('aviso');
 Route::get('/termo', function () {
     return view('termo');
 });

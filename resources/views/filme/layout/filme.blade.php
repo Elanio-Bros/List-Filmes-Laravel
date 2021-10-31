@@ -158,7 +158,7 @@
                     </span>
                 </form>
                 <span><span class="voteUserVal">3.1</span> media de 250 votos</span>
-                {{-- <a href="https://www.google.com.br/">
+                {{-- <a href="https://www.imdb.com/title/{code}/">
                 <div id="voteIMDB" class="vote w-25 border3"></div>
             </a> --}}
                 <a href="#">
