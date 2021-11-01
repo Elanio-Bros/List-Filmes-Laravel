@@ -21,14 +21,12 @@
                 </a>
                 <div class="FilmCovers w-100">
                     @foreach (range(1, 10) as $item)
-                        <a href="#">
                             <div class="mx-2 cardFilme">
                                 @includeIf('content.card_filme_layout',
                                 ['titulo'=>"$item Titulo Filme",
                                 'imagem'=>'https://images-na.ssl-images-amazon.com/images/I/71yDb8SKTTL.jpg']
                                 )
                             </div>
-                        </a>
                     @endforeach
                 </div>
                 <a class="buttonCarousel next" style="right: 0;">

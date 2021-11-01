@@ -37,6 +37,10 @@ Route::get('/filme/votados', function () {
     return view('filme.votados');
 })->name('votados');
 
+Route::get('filme/categorias', function () {
+    return view('filme.categorias');
+})->name('categorias');
+
 Route::get('filme/categoria/{categoria}', function ($categoria) {
     return view('filme.categoria', compact("categoria"));
 })->name('categoria');
@@ -58,6 +62,12 @@ Route::get('/usuario/chat', function () {
 Route::get('/usuario/favorito', function () {
     return view('usuario.favorito');
 })->name('favorito');
+Route::get('/usuario/gerência/filme', function () {
+    return view('usuario.gerenciar.edit_filme');
+});
+Route::get('/usuario/gerência/filme/{idFilme}', function () {
+    return view('usuario.gerenciar.edit_filme');
+});
 Route::get('/usuario/aviso', function () {
     return view('usuario.favorito');
 })->name('aviso');

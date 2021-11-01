@@ -29,7 +29,7 @@
                         <a class="dropdown-item" href="{{url('filme/categoria/'.$item)}}">{{$item}}</a>
                     @endforeach
                     <div class="dropdown-divider"></div>
-                    <a class="dropdown-item" href="#">Outras Categorias</a>
+                    <a class="dropdown-item" href="{{route('categorias')}}">Outras Categorias</a>
                 </div>
             </li>
         </ul>
@@ -46,7 +46,7 @@
             <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuLink">
                 <a class="dropdown-item" href="{{route('minha_conta')}}">Minha Conta</a>
                 <a class="dropdown-item" href="{{route('favorito')}}">Favoritos</a>
-                <a class="dropdown-item" href="{{route('chat')}}">Chats</a>
+                {{-- <a class="dropdown-item" href="{{route('chat')}}">Chats</a> --}}
                 <a class="dropdown-item" href="{{route('aviso')}}">Avisos <span class='dot' date-value='noti'></span></a>
                 <a class="dropdown-item" href="{{route('admin')}}">Administração</a>
                 <div class="dropdown-divider"></div>

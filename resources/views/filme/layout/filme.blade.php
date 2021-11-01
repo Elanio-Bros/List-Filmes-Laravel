@@ -134,15 +134,15 @@
                     <a class="ropdown-toggle" role="button" id="moreOptionDropDown" data-toggle="dropdown"
                         aria-haspopup="true"><i class="fas fa-ellipsis-h" style='color:white;'></i></a>
                     <div class="dropdown-menu dropdown-menu-left" aria-labelledby="moreOptionDropDown">
-                        <a class="dropdown-item">Favorito</a>
-                        <a class="dropdown-item">Novo Group</a>
+                        <a class="dropdown-item">Adicionar aos Favoritos</a>
+                        {{-- <a class="dropdown-item">Novo Group</a> --}}
                         <a class="dropdown-item">Novo Aba Comentarios</a>
                     </div>
                 </span>
             </div>
             <div id="categorias" class="d-flex flex-row">
                 @foreach (range(1, 4) as $item)
-                    <a href="Categoria{{ $item }}">
+                    <a href="{{url('/filme/categoria/'.$item)}}">
                         <li>Categoria{{ $item }}</li>
                     </a>
                 @endforeach
@@ -214,7 +214,7 @@
     </div>
     <hr class="my-2">
     <div class="d-flex flex-row justify-content-between p-2 w-100">
-        <div class="w-75 d-flex flex-column">
+        <div class="w-100 d-flex flex-column">
             <div class="titulo text-center">Comentários</div>
             <div class="accordion" id="accordionExample">
                 <div class="card">
@@ -267,7 +267,7 @@
                 </div>
             </div>
         </div>
-        <div class="w-25 ml-2">
+        {{-- <div class="w-25 ml-2">
             <div class="titulo text-center">Groups</div>
             <div class="d-flex flex-column groups">
                 <div class="chat p-2 d-flex justify-content-center">
@@ -280,7 +280,7 @@
                 @includeIf('content.chat_layout',['title'=>'Titulo Massa','users'=>'12/30','value'=>'suspended'])
                 @includeIf('content.chat_layout',['title'=>'Titulo Massa','users'=>'12/30','value'=>'deactivate'])
             </div>
-        </div>
+        </div> --}}
     </div>
 
 @endsection

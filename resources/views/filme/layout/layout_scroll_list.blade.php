@@ -19,7 +19,6 @@
 @endsection
 @section('script')
     <script type="text/javascript" src="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
-    @yield('script_list')
     <script>
         $('.FilmCovers').slick({
             accessibility: false,
@@ -37,4 +36,5 @@
             $(this).children().next().slideToggle('fast')
         });
     </script>
+    @yield('script_list')
 @endsection

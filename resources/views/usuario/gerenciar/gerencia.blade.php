@@ -19,6 +19,18 @@
             grid-template-columns: repeat(auto-fill, minmax(auto, 25%));
 
         }
+        .add-filme{
+            width: 94%;
+            height:100%;
+            font-size:2em;
+            background-color:#FFFFFFCC;
+        }
+        .add-filme:hover{
+            background-color:#FFFFFFEE;
+        }
+        .add-filme:active{
+            background-color:#FFFFFFCC;
+        }
 
         .cardUser:hover {
             cursor: pointer;
@@ -69,13 +81,16 @@
                 </form>
             </div>
             <div class="btn btnPerson" id="user">Usuários</div>
+            <div class="btn btnPerson" id="category">Categorias Filme</div>
         </div>
         <div class="w-100">
             <div class="d-none filmes">
                 <div id="ult" class="@if (isset($request['categoria'])) d-none @endif gridPerson">
-                    {{-- <div class="card filme" style="width: 13rem;">
-                        <img class="d-block mx-auto img-fluid" src="Ola" alt="Imagem de um Filme">
-                    </div> --}}
+                    <a href="" class="m-1">
+                        <div class="card add-filme d-flex justify-content-center align-items-center">
+                            <i class="fas fa-plus mb-2"></i>
+                        </div>
+                    </a>
                     @foreach (range(1, 10) as $item)
                         @includeIf('content.card_filme_layout', ['titulo'=>"$item Titulo Filme",
                         'imagem'=>'https://images-na.ssl-images-amazon.com/images/I/71yDb8SKTTL.jpg'])
@@ -115,14 +130,19 @@
                     @endforeach
                 </div>
             </div>
+            <div class="d-none category">
+                <div class="gridPerson">Ola</div>
+            </div>
+            <div class="popUp">
+            </div>
         </div>
     </div>
 @endsection
 @section('script')
     <script>
-        $('#filmes,#user').click(function() {
+        $('#filmes,#user,#category').click(function() {
             let id = $(this).attr('id')
-            let gradeClass = (id == 'filmes' ? 'user' : 'filmes')
+            let gradeClass = (id == 'filmes' ? 'user' : 'filmes') //fazer switch case
             $('.' + id).toggleClass('d-none');
             if (!$('.' + gradeClass).hasClass('d-none')) {
                 $('.' + gradeClass).toggleClass('d-none');
