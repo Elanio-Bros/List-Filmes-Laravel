@@ -19,22 +19,25 @@
             grid-template-columns: repeat(auto-fill, minmax(auto, 25%));
 
         }
-        .add-filme{
+
+        .add-filme {
             width: 94%;
-            height:100%;
-            font-size:2em;
-            background-color:#FFFFFFCC;
-        }
-        .add-filme:hover{
-            background-color:#FFFFFFEE;
-        }
-        .add-filme:active{
-            background-color:#FFFFFFCC;
+            height: 100%;
+            font-size: 2em;
+            background-color: #FFFFFFCC;
         }
 
-        .cardUser:hover {
-            cursor: pointer;
+        .add-filme:hover {
+            background-color: #FFFFFFEE;
         }
+
+        .add-filme:active {
+            background-color: #FFFFFFCC;
+        }
+
+        /* .cardUser:hover {
+                    cursor: pointer;
+                } */
 
         .cardUser {
             width: 95%;
@@ -62,6 +65,26 @@
             -webkit-box-orient: vertical;
         }
 
+        .gridPerson .btnPerson {
+            background-color: #F8F8FF;
+            color: #000000DD;
+        }
+
+        .gridPerson .btnPerson:hover {
+            background-color: #000000FF;
+            color: #F8F8FF;
+        }
+
+        .gridPerson .btnPerson:active {
+            background-color: #F8F8FF;
+            border-color: #000000DD;
+            color: #000000DD;
+        }
+
+        .modal {
+            color: black;
+        }
+
     </style>
 @endsection
 @section('content')
@@ -69,7 +92,7 @@
     <div class="d-flex">
         <div id="list-btn" class="d-flex flex-column">
             <div class="btn btnPerson" id="filmes">Filmes</div>
-            <div id='drop'>
+            <span id='drop'>
                 <form method="get">
                     <ul class="d-flex flex-column">
                         <input class="btn btnPerson" type="submit" value="Últimos adicionados">
@@ -79,11 +102,11 @@
                         @endforeach
                     </ul>
                 </form>
-            </div>
+            </span>
             <div class="btn btnPerson" id="user">Usuários</div>
             <div class="btn btnPerson" id="category">Categorias Filme</div>
         </div>
-        <div class="w-100">
+        <div class="w-100 container">
             <div class="d-none filmes">
                 <div id="ult" class="@if (isset($request['categoria'])) d-none @endif gridPerson">
                     <a href="" class="m-1">
@@ -110,20 +133,26 @@
                             <div class="head mt-1">
                                 <img class="perfil"
                                     src="https://d11a6trkgmumsb.cloudfront.net/original/3X/f/b/fbbaacfa1033254471f614b67d58dae45236ce5b.jpg">
-                                <b class="p-2">Nome UsuarioNome Usuario</b>
+                                <b class="p-2">Usuário {{ $item }}</b>
                                 <span class="dropdown">
                                     <button class="btn btn-warning" type="button" id="buttonNoticeUser"
                                         data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                         <i class="fas fa-exclamation-triangle"></i></button>
                                     <div class="dropdown-menu" aria-labelledby="buttonNoticeUser">
-                                        <a class="dropdown-item" href="#">Notificar Sobre Comentário</a>
-                                        <a class="dropdown-item" href="#">Notificar Sobre Filme</a>
+                                        <a class="dropdown-item" href="#" data-toggle="modal" data-target="#notf-user"
+                                            date-value='1'>Avisar Sobre Comentário</a>
+                                        <a class="dropdown-item" href="#" data-toggle="modal" data-target="#notf-user"
+                                            date-value='2'>Avisar Sobre Nome Do Usuário</a>
+                                        <a class="dropdown-item" href="#" data-toggle="modal" data-target="#notf-user"
+                                            date-value='3'>Avisar Sobre Outra Coisa</a>
+                                        {{-- <a class="dropdown-item" href="#">Notificar Sobre Filme</a> --}}
+
                                     </div>
                                 </span>
                                 {{-- <button type="button" class="btn btn-danger"><i class="far fa-trash-alt"></i></button> --}}
                             </div>
                             <div class="body m-2">
-                                <div>Hoje as 10 horas</div>
+                                <div>Hoje</div>
                                 <div>Normal</div>
                             </div>
                         </div>
@@ -131,29 +160,122 @@
                 </div>
             </div>
             <div class="d-none category">
-                <div class="gridPerson">Ola</div>
+                <div class="gridPerson">
+                    <span id="addCategori" onClick="$('#categories .modal-body input').val('')" class="btn btnPerson m-2"
+                        data-toggle="modal" data-target="#categories"><i class="fas fa-plus"></i></span>
+                    @foreach (range(1, 10) as $item)
+                        <span class="btn btnPerson m-2 categories" date-id='{{ $item }}' data-toggle="modal"
+                            data-target="#categories">Ação{{ $item }}</span>
+                    @endforeach
+                </div>
             </div>
-            <div class="popUp">
-            </div>
+        </div>
+    </div>
+    <div id="categories" class="modal fade" data-backdrop="static" aria-hidden="false">
+        <div class="modal-dialog">
+            <form class="modal-content" id="categories">
+                <div class="modal-header">
+                    <h5 class="modal-title">Categoria</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="input-group mb-3">
+                        <input type="text" class="form-control" name="categoria" placeholder="Categoria" date-value=""
+                            required>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="submit" class="btn btnPerson" id="saveCategorie">Salvar</button>
+                </div>
+            </form>
+        </div>
+    </div>
+    <div id="notf-user" class="modal fade" data-backdrop="static" aria-hidden="false">
+        <div class="modal-dialog">
+            <form class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Aviso [Nome Usuário]</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="input-group mb-3">
+                        <select class="custom-select">
+                            <option value="1">Comentario</option>
+                            <option value="2">Nome Usuário</option>
+                            <option value="3">Outro Assunto</option>
+                        </select>
+                    </div>
+                    <div class="input-group mb-3">
+                        <input type="text" class="form-control" name="titulo" placeholder="Título" value=""
+                            required>
+                    </div>
+                    <div class="input-group mb-3">
+                        <textarea class="form-control" rows="3" required></textarea>
+                    </div>
+                    <div class="form-group select-comentario">
+                        <label>Comentário</label>
+                        <select multiple class="form-control" id="exampleFormControlSelect2">
+                          <option>Filme:Seção:Comentario</option>
+                          <option>Filme:Seção:Comentario</option>
+                          <option>Filme:Seção:Comentario</option>
+                          <option>Filme:Seção:Comentario</option>
+                          <option>Filme:Seção:Comentario</option>
+                        </select>
+                      </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="submit" class="btn btnPerson">Enviar</button>
+                </div>
+            </form>
         </div>
     </div>
 @endsection
 @section('script')
     <script>
-        $('#filmes,#user,#category').click(function() {
-            let id = $(this).attr('id')
-            let gradeClass = (id == 'filmes' ? 'user' : 'filmes') //fazer switch case
-            $('.' + id).toggleClass('d-none');
-            if (!$('.' + gradeClass).hasClass('d-none')) {
-                $('.' + gradeClass).toggleClass('d-none');
-            } else if ($('.' + id).hasClass('d-none') && $('.' + gradeClass).hasClass('d-none')) {
-                $('.' + gradeClass).toggleClass('d-none');
-            }
-            $('#drop').toggle('slow');
+        $('.categories').click(function() {
+            let value = $(this).html()
+            $('#categories .modal-body input').attr('date-value', value)
+            $('#categories .modal-body input').val(value)
         });
-        $("#filmes").trigger('click');
+        $('#saveCategorie').click(function() {
+            let val = $('#categories .modal-body input').attr('date-value')
+            if (val != '') {
+                $('#categories .modal-body').append("<input type='hidden' name='atgCategoria' value=" + val + ">")
+            }
+        });
+        $('#list-btn div').click(function() {
+            let id = $(this).attr('id')
+            $('.container').children().each(function() {
+                if (!$(this).hasClass('d-none')) {
+                    $(this).toggleClass('d-none');
+                }
+            });
+            $('.' + id).toggleClass('d-none');
+            if (id == 'filmes') {
+                $('#drop').toggle('slow');
+            } else if (id != 'filmes' && $('#drop').css('display') == 'block') {
+                $('#drop').toggle('slow');
+            }
+        });
+        // $("#filmes").trigger('click');
+        $("#user").trigger('click');
         $('.filme').hover(function() {
             $(this).children().next().slideToggle('fast')
+        });
+        $('#notf-user .custom-select').change(function(){
+            if($(this).val()!=1){
+                $('.select-comentario').addClass('d-none');
+            }else{
+                $('.select-comentario').removeClass('d-none');
+            }
+        })
+        $('.cardUser .dropdown-item').click(function() {
+            // console.log($(this));
+            // console.log($(this).attr('date-value'));
         });
     </script>
 

@@ -28,11 +28,6 @@
             background-color:#FFFFFFCC;
         }
 
-        textarea {
-            resize: none;
-            min-height: 9em;
-        }
-
     </style>
 @endsection
 @section('content')

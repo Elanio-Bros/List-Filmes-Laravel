@@ -81,16 +81,13 @@ input {
     width: 90%;
 }
 
-.filme .card-body {
-    padding: 5%;
-}
-
 .filme:hover {
     cursor: pointer;
 }
 
 .filme .card-body {
     position: absolute;
+    padding: 5%;
     bottom: 0;
     width: 100%;
     background-color: #00000099;
@@ -162,4 +159,9 @@ input {
 
 .dot[date-value='noti'] {
     background-color: orange;
+}
+
+textarea {
+    resize: none;
+    min-height: 9em;
 }
