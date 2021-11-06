@@ -3,6 +3,7 @@
     Gerenciar
 @endsection
 @section('style')
+    <link rel="stylesheet" href="{{ URL::asset('libs/bootstrap-select/dist/css/bootstrap-select.css') }}">
     <style>
         #drop {
             display: none;
@@ -35,9 +36,33 @@
             background-color: #FFFFFFCC;
         }
 
-        /* .cardUser:hover {
-                    cursor: pointer;
-                } */
+        .h-80 {
+            height: 80vh !important;
+        }
+
+        .add-filme-case {
+            width: 3.5em;
+            height: 5em;
+            font-size: 2em;
+            background-color: #FFFFFFCC;
+        }
+
+        .add-filme-active-case {
+            color: black;
+        }
+
+        .add-filme-case-disable {
+            color: #a1a1a1FF;
+        }
+
+        .add-filme-case-active:hover {
+            cursor: pointer;
+            background-color: #FFFFFFEE;
+        }
+
+        .add-filme-case-active:active {
+            background-color: #FFFFFFCC;
+        }
 
         .cardUser {
             width: 95%;
@@ -85,6 +110,8 @@
             color: black;
         }
 
+        option {}
+
     </style>
 @endsection
 @section('content')
@@ -109,19 +136,21 @@
         <div class="w-100 container">
             <div class="d-none filmes">
                 <div id="ult" class="@if (isset($request['categoria'])) d-none @endif gridPerson">
-                    <a href="" class="m-1">
+                    <a href='#' class="m-1" data-toggle="modal" data-target="#add-filme">
                         <div class="card add-filme d-flex justify-content-center align-items-center">
                             <i class="fas fa-plus mb-2"></i>
                         </div>
                     </a>
                     @foreach (range(1, 10) as $item)
-                        @includeIf('content.card_filme_layout', ['titulo'=>"$item Titulo Filme",
+                        @includeIf('content.card_filme_layout', ['date_target'=>'edit-filme','url'=>'#','titulo'=>"$item
+                        Titulo Filme",
                         'imagem'=>'https://images-na.ssl-images-amazon.com/images/I/71yDb8SKTTL.jpg'])
                     @endforeach
                 </div>
                 <div id="categeria" class="@if (!isset($request['categoria'])) d-none @endif gridPerson">
                     @foreach (range(1, 10) as $item)
-                        @includeIf('content.card_filme_layout', ['titulo'=>"$item Titulo Filme",
+                        @includeIf('content.card_filme_layout', ['date_target'=>'edit-filme','url'=>'#','titulo'=>"$item
+                        Titulo Filme",
                         'imagem'=>'https://images-na.ssl-images-amazon.com/images/I/71yDb8SKTTL.jpg'])
                     @endforeach
                 </div>
@@ -133,7 +162,7 @@
                             <div class="head mt-1">
                                 <img class="perfil"
                                     src="https://d11a6trkgmumsb.cloudfront.net/original/3X/f/b/fbbaacfa1033254471f614b67d58dae45236ce5b.jpg">
-                                <b class="p-2">Usuário {{ $item }}</b>
+                                <b class="p-2 name-user">Usuário {{ $item }}</b>
                                 <span class="dropdown">
                                     <button class="btn btn-warning" type="button" id="buttonNoticeUser"
                                         data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -196,7 +225,7 @@
         <div class="modal-dialog">
             <form class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title">Aviso [Nome Usuário]</h5>
+                    <h5 class="modal-title"></h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
@@ -210,8 +239,7 @@
                         </select>
                     </div>
                     <div class="input-group mb-3">
-                        <input type="text" class="form-control" name="titulo" placeholder="Título" value=""
-                            required>
+                        <input type="text" class="form-control" name="titulo" placeholder="Título" value="" required>
                     </div>
                     <div class="input-group mb-3">
                         <textarea class="form-control" rows="3" required></textarea>
@@ -219,13 +247,85 @@
                     <div class="form-group select-comentario">
                         <label>Comentário</label>
                         <select multiple class="form-control" id="exampleFormControlSelect2">
-                          <option>Filme:Seção:Comentario</option>
-                          <option>Filme:Seção:Comentario</option>
-                          <option>Filme:Seção:Comentario</option>
-                          <option>Filme:Seção:Comentario</option>
-                          <option>Filme:Seção:Comentario</option>
+                            @foreach (range(1, 10) as $item)
+                                <option value="">Filme{{ $item }}:Seção:Comentario</option>
+                            @endforeach
                         </select>
-                      </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="submit" class="btn btnPerson">Enviar</button>
+                </div>
+            </form>
+        </div>
+    </div>
+    <div id="add-filme" class="modal fade" data-backdrop="static" aria-hidden="false">
+        <div class="modal-dialog">
+            <form class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Adicionar Filme</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="d-flex justify-content-center align-items-center">
+                        <div class="d-flex flex-column">
+                            <div class="form-group d-flex flex-row w-100">
+                                <div class="mr-2 d-flex flex-column">
+                                    <div
+                                        class="card add-filme-case add-filme-case-active d-flex justify-content-center align-items-center mb-2">
+                                        <i class="fas fa-plus mb-2"></i>
+                                    </div>
+                                    <input type="file" name="img" style="display:none" id="case-filme"
+                                        accept=".png, .jpge, .jpg">
+                                    <select name="type_file" class="form-control">
+                                        <option value="file" selected>Capa Arquivo</option>
+                                        <option value="imdb">Capa IMDB</option>
+                                    </select>
+                                </div>
+                                <div class="d-flex flex-column w-75">
+                                    <div class="form-group">
+                                        <input type="text" class="form-control" name="title" placeholder="Titulo Filme">
+                                    </div>
+                                    <div class="form-group">
+                                        <input type="text" class="form-control" name="cod" placeholder="Código IMDB">
+                                    </div>
+                                    <div class="form-group">
+                                        <select name="categoria" class="selectpicker w-100" title="Selecione as categorias"
+                                            data-live-search="true" data-size="4" multiple>
+                                            <option value="ola">Ola</option>
+                                            <option value='tudo bem'>Tudo bem</option>
+                                            <option value='massa'>Massa</option>
+                                            <option>Ola1</option>
+                                            <option>Tudo bem2</option>
+                                            <option>Massa</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <textarea class="form-control" name="description" placeholder="Descrição"></textarea>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="submit" class="btn btnPerson">Adicionar Filme</button>
+                </div>
+            </form>
+        </div>
+    </div>
+    <div id="edit-filme" class="modal fade" data-backdrop="static" aria-hidden="false">
+        <div class="modal-dialog">
+            <form class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Editar Filme {Nome Filme}</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
                 </div>
                 <div class="modal-footer">
                     <button type="submit" class="btn btnPerson">Enviar</button>
@@ -235,7 +335,9 @@
     </div>
 @endsection
 @section('script')
+    <script src='{{ URL::asset('libs/bootstrap-select/dist/js/bootstrap-select.js') }}'></script>
     <script>
+        $('.add-filme .selectpicker').selectpicker();
         $('.categories').click(function() {
             let value = $(this).html()
             $('#categories .modal-body input').attr('date-value', value)
@@ -261,21 +363,43 @@
                 $('#drop').toggle('slow');
             }
         });
-        // $("#filmes").trigger('click');
-        $("#user").trigger('click');
+        $("#filmes").trigger('click');
+        // $("#user").trigger('click');
         $('.filme').hover(function() {
             $(this).children().next().slideToggle('fast')
         });
-        $('#notf-user .custom-select').change(function(){
-            if($(this).val()!=1){
+        $('#notf-user .custom-select').change(function() {
+            if ($(this).val() != 1) {
                 $('.select-comentario').addClass('d-none');
-            }else{
+            } else {
                 $('.select-comentario').removeClass('d-none');
             }
         })
         $('.cardUser .dropdown-item').click(function() {
-            // console.log($(this));
-            // console.log($(this).attr('date-value'));
+            $('#notf-user .custom-select').val($(this).attr('date-value'));
+            if ($(this).attr('date-value') != 1) {
+                $('.select-comentario').addClass('d-none');
+            } else {
+                $('.select-comentario').removeClass('d-none');
+            }
+            var nameUser = $(this).closest('.cardUser .head').children().map(function(elem) {
+                if (elem == 1) return $(this)
+            })[0].text();
+            $('#notf-user .modal-title').text(nameUser)
+        });
+        $('form .add-filme-case').click(function() {
+            $('#case-filme').trigger('click');
+        });
+        $('select').change(function() {
+            if (this.value == 'imdb') {
+                $('#case-filme').attr('disabled', '')
+                $('#case-filme').removeAttr('name')
+                $('.add-filme-case').removeClass('add-filme-case-active').addClass('add-filme-case-disable')
+            } else {
+                $('#case-filme').removeAttr('disabled')
+                $('#case-filme').attr('name', 'img')
+                $('.add-filme-case').removeClass('add-filme-case-disable').addClass('add-filme-case-active')
+            }
         });
     </script>
 

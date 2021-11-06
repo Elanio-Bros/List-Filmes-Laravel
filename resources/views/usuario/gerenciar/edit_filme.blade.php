@@ -94,6 +94,6 @@
                 $('.add-filme').removeClass('add-filme-disable')
                 $('.add-filme').addClass('add-filme-active')
             }
-        })
+        });
     </script>
 @endsection
