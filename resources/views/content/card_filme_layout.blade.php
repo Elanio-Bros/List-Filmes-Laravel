@@ -1,10 +1,10 @@
 @if (isset($url))
-<a href="{{$url}}" @if(isset($date_target)) data-toggle="modal" data-target="#{{$date_target}}"@endif>
+<a href="{{$url}}" class="card filme m-1" date-value="{{$date_value}}">
 @else
-<a href="{{url('filme/'.$titulo)}}">
+<a href="{{url('filme/'.$titulo)}}" class="card filme m-1">
 @endif
-<div class="card filme m-1">
-    <img class="d-block mx-auto img-fluid" src="{{ $imagem }}" alt="Imagem de um Filme">
+<div>
+    <img class="d-block mx-auto img-fluid" src="{{ $imagem }}" alt="Imagem Filme">
     <div class="card-body">
         <p class="card-title">{{ $titulo }}</p>
     </div>
