@@ -428,7 +428,7 @@
             }
             var IdUser = $(this).closest('.cardUser').attr('date-value');
             // $('#notf-user .modal-title').text(nameUser)
-            $('#notf-user').modal('show')
+            $('#notf-user').modal('show');
         });
         $('form .add-filme-case').click(function() {
             $('#case-filme').trigger('click');
