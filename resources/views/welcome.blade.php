@@ -58,6 +58,7 @@
     </style>
 @endsection
 @section('content')
+    {{-- {{ dd($filmes_comentarios) }} --}}
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
         <a class="navbar-brand" href="{{ route('entrada') }}"><svg id="svg2" width="40" height="40" viewBox="0 0 512 512"
                 sodipodi:docname="icone.svg">
@@ -125,11 +126,11 @@
                 <span><i class="fas fa-chevron-left"></i></span>
             </a>
             <div class="FilmCovers w-100">
-                @foreach (range(1, 10) as $item)
+                @foreach ($filmes_comentarios as $filme)
                     <div class="mx-2 cardFilme">
                         @includeIf('content.card_filme_layout',
-                        ['titulo'=>"$item Titulo Filme",
-                        'imagem'=>'https://images-na.ssl-images-amazon.com/images/I/71yDb8SKTTL.jpg']
+                        ['titulo'=>$filme['titulo'],
+                        'imagem'=>$filme['imagem']]
                         )
                     </div>
                 @endforeach
@@ -139,13 +140,13 @@
             </a>
         </div>
         <div class="CommentMovies">
-            @foreach (range(1, 10) as $item1)
+            @foreach ($filmes_comentarios as $filme)
                 <div class="mx-5">
-                    @foreach (range(1, 5) as $item)
+                    @foreach ($filme['comentarios'] as $comentario)
                         <div class="my-2">
                             @includeIf('content.comentario_layout',
-                            ['name' => "Pessoa $item",
-                            'comentario'=>"Nº $item1 Filme Comentario"])
+                            ['name' => $comentario['nome_usuario'],
+                            'comentario'=>$comentario['comentario']])
                         </div>
                     @endforeach
                 </div>

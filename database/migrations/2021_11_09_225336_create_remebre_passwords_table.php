@@ -20,7 +20,7 @@ class CreateRemebrePasswordsTable extends Migration
             $table->foreign('id_usuario')->references('id')->on('usuarios');
             $table->string('token',30);
             $table->timestamp('create_at');
-            $table->timestamp('validate_at')->default(DB::raw('CURRENT_TIMESTAMP'));
+            $table->dateTime('validate_at');
         });
     }
 
