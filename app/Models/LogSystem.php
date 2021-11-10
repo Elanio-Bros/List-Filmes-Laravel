@@ -9,7 +9,7 @@ class LogSystem extends Model
 {
     use HasFactory;
     protected $table = 'log_system';
-    public $updated_at=false;
+    const UPDATED_AT=false;
     protected $filleble = [
         'message', 'level'
     ];

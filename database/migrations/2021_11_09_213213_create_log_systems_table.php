@@ -37,6 +37,6 @@ class CreateLogSystemsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('log_systems');
+        Schema::dropIfExists('log_system');
     }
 }

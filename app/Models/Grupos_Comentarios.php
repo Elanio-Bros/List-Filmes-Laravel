@@ -5,11 +5,13 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Categoria_Filme extends Model
+class Grupos_Comentarios extends Model
 {
     use HasFactory;
-    protected $table = 'categorias_filmes';
+    protected $table = 'grupos_comentario';
     protected $fillable = [
-        'id_categoria', 'id_filme'
+        'titulo',
+        'id_filme',
+        'id_usuario',
     ];
 }

@@ -20,11 +20,11 @@ Route::get('/', function () {
 })->name('entrada');
 
 Route::get('/login', function () {
-    return view('usuario.login');
+    return view('usuario.entrada.login');
 })->name('login');
 
 Route::get('/conta', function () {
-    return view('usuario.conta');
+    return view('usuario.entrada.conta');
 })->name('conta');
 
 Route::get('/home', function () {
@@ -50,29 +50,32 @@ Route::get('filme/categoria/{categoria}', function ($categoria) {
 Route::get('/filme/{idFilme}', function ($idFilme) {
     return view('filme.layout.filme', compact("idFilme"));
 });
-
-Route::get('/usuario/gerência', function (Request $request) {
-    return view('usuario.gerenciar.gerencia',['request' => $request->all()]);
-})->name('admin');
+//usuário
+Route::get('/usuario/aviso', function () {
+    return view('usuario.favorito');
+})->name('aviso');
 
 Route::get('/usuario/conta', function () {
     return view('usuario.conta_usuario');
 })->name('minha_conta');
-Route::get('/usuario/chat', function () {
-    return view('usuario.chat');
-})->name('chat');
+// Route::get('/usuario/chat', function () {
+//     return view('usuario.chat');
+// })->name('chat');
+
+
+//gerência
+Route::get('/gerência', function (Request $request) {
+    return view('usuario.gerenciar.gerencia',['request' => $request->all()]);
+})->name('admin');
 Route::get('/usuario/favorito', function () {
     return view('usuario.favorito');
 })->name('favorito');
-Route::get('/usuario/gerência/filme', function () {
-    return view('usuario.gerenciar.edit_filme');
-});
-Route::get('/usuario/gerência/filme/{idFilme}', function () {
-    return view('usuario.gerenciar.edit_filme');
-});
-Route::get('/usuario/aviso', function () {
-    return view('usuario.favorito');
-})->name('aviso');
+// Route::get('/gerência/filme', function () {
+//     return view('usuario.gerenciar.edit_filme');
+// });
+// Route::get('/gerência/filme/{idFilme}', function () {
+//     return view('usuario.gerenciar.edit_filme');
+// });
 Route::get('/termo', function () {
     return view('termo');
 });

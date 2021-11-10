@@ -5,16 +5,13 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Avaliacao extends Model
+class Filme_Votos extends Model
 {
     use HasFactory;
-    protected $table = 'avaliacao_filme';
-
+    protected $table = 'filme_votos';
     protected $fillable = [
-        'user',
-        'filme',
-        'comentario',
-        'pontuação',
-        'curtidas',
+        'voto',
+        'id_usuario',
+        'id_filme',
     ];
 }

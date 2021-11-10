@@ -33,10 +33,10 @@
                 </div>
             </li>
         </ul>
-        <form class="form-inline my-1">
+        {{-- <form class="form-inline my-1">
             <input class="form-control" type="search" placeholder="Nome do Filmes" aria-label="Pesquisar">
             <button class="btn btnPerson" type="submit">Pesquisar</button>
-        </form>
+        </form> --}}
         <div class="dropdown ml-3">
             <a class="ropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown"
                 aria-haspopup="true" aria-expanded="false">

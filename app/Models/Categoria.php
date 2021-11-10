@@ -8,11 +8,6 @@ use Illuminate\Database\Eloquent\Model;
 class Categoria extends Model
 {
     use HasFactory;
-    protected $table = 'categoria';
-    public $timestamps = false;
-
-    protected $fillable = [
-        'idCategoria',
-        'categoria',
-    ];
+    protected $table = 'categorias';
+    protected $fillable = ['nome'];
 }

@@ -8,14 +8,12 @@ use Illuminate\Database\Eloquent\Model;
 class Filme extends Model
 {
     use HasFactory;
-
     protected $table = 'filmes';
-
-    protected $filleble = [
-        'idFilme',
-        'titulo',
-        'metacritic',
-        'classificação_idade',
-        'descrição',
+    protected $fillable = [
+        'imdb_code',
+        'title',
+        'descricao',
+        'capa_url',
+        'nota_imdb'
     ];
 }
