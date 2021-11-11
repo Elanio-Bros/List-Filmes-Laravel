@@ -18,6 +18,7 @@ class CreateFilmesTable extends Migration
             $table->string('imdb_code')->unique();
             $table->longtext('titulo');
             $table->longtext('descricao');
+            $table->enum('tipo_capa',['imdb','file']);
             $table->text('capa_url');
             $table->float('nota_imdb');
             $table->timestamps();

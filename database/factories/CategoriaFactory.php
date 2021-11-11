@@ -23,7 +23,7 @@ class CategoriaFactory extends Factory
     public function definition()
     {
         return [
-            'categoria' => $this->faker->unique->randomElement([
+            'nome' => $this->faker->unique()->randomElement([
                 'Aventura', 'Biográfico',
                 'Comédia', 'Comédia dramática', 'Comédia romântica',
                 'Histórico', 'Drama', 'Ficção'

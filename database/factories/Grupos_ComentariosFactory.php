@@ -2,19 +2,19 @@
 
 namespace Database\Factories;
 
-use App\Models\Categoria_Filme;
+use App\Models\Grupos_Comentarios;
 use App\Models\Filme;
-use App\Models\Categoria;
+use App\Models\Usuario;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
-class Categoria_FilmeFactory extends Factory
+class Grupos_ComentariosFactory extends Factory
 {
     /**
      * The name of the factory's corresponding model.
      *
      * @var string
      */
-    protected $model = Categoria_Filme::class;
+    protected $model = Grupos_Comentarios::class;
 
     /**
      * Define the model's default state.
@@ -24,18 +24,19 @@ class Categoria_FilmeFactory extends Factory
     public function definition()
     {
         return [
+            'id_usuario' => function () {
+                $usuarios = Usuario::all();
+                return $usuarios->count() === 0 ?
+                    Usuario::factory()->create()->id :
+                    $this->faker->randomElement($usuarios)->id;
+            },
             'id_filme' => function () {
                 $filmes = Filme::all();
                 return $filmes->count() === 0 ?
                     Filme::factory()->create()->id :
                     $this->faker->randomElement($filmes)->id;
             },
-            'id_categoria' => function () {
-                $categorias = Categoria::all();
-                return $categorias->count() === 0 ?
-                    Filme::factory()->create()->id :
-                    $this->faker->randomElement($categorias)->id;
-            },
+            'titulo' =>$this->faker->title(),
         ];
     }
 }

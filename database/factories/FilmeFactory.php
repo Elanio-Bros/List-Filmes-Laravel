@@ -28,9 +28,10 @@ class FilmeFactory extends Factory
         return [
             'imdb_code' => $code,
             'titulo' => $datasMovie['titulo'],
+            'tipo_capa' => 'imdb',
             'capa_url' => $datasMovie['imagem'],
             'nota_imdb' => $datasMovie['nota'],
-            'descricao' => 'Filme Factory Descrição',
+            'descricao' => 'Filme Factory Descrição Teste',
         ];
     }
 }
