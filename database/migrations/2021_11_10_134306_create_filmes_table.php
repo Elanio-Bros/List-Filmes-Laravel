@@ -15,7 +15,7 @@ class CreateFilmesTable extends Migration
     {
         Schema::create('filmes', function (Blueprint $table) {
             $table->increments('id')->unique();
-            $table->string('imdb_code');
+            $table->string('imdb_code')->unique();
             $table->longtext('titulo');
             $table->longtext('descricao');
             $table->text('capa_url');

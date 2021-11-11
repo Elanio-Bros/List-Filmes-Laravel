@@ -11,7 +11,7 @@ class Filme extends Model
     protected $table = 'filmes';
     protected $fillable = [
         'imdb_code',
-        'title',
+        'titulo',
         'descricao',
         'capa_url',
         'nota_imdb'

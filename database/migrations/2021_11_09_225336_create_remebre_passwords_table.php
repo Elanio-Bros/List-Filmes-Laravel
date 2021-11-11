@@ -18,7 +18,7 @@ class CreateRemebrePasswordsTable extends Migration
             $table->increments('id')->unique();
             $table->unsignedInteger('id_usuario');
             $table->foreign('id_usuario')->references('id')->on('usuarios');
-            $table->string('token',30);
+            $table->string('token',25);
             $table->timestamp('create_at');
             $table->dateTime('validate_at');
         });

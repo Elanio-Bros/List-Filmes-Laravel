@@ -3,6 +3,7 @@
 namespace Database\Factories;
 
 use App\Models\Filme;
+use App\Class\IMDB_API;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 class FilmeFactory extends Factory
@@ -21,11 +22,15 @@ class FilmeFactory extends Factory
      */
     public function definition()
     {
+        $code = $this->faker->randomElement(['tt2277860', 'tt0266543', 'tt1677720', 'tt3748528', 'tt0983193']);
+        $imdb = new IMDB_API();
+        $datasMovie = $imdb->getDatasFilmesCode($code);
         return [
-            'titulo' => $this->faker->title(),
-            'classificação_idade' => $this->faker->randomElement(['L', '10', '12', '14', '16', '18']),
-            'metacritic'=>$this->faker->randomDigit(),
-            'descrição' => 'descrição',
+            'imdb_code' => $code,
+            'titulo' => $datasMovie['titulo'],
+            'capa_url' => $datasMovie['imagem'],
+            'nota_imdb' => $datasMovie['nota'],
+            'descricao' => 'Filme Factory Descrição',
         ];
     }
 }

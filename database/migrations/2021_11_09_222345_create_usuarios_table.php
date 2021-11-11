@@ -18,8 +18,8 @@ class CreateUsuariosTable extends Migration
             $table->string('nome');
             $table->string('usuario')->unique();
             $table->string('email')->unique();
-            $table->string('senha');
-            $table->string('token_api')->unique();
+            $table->longText('senha');
+            $table->string('token_api',25)->unique();
             $table->enum('tipo', ['Admin', 'Gerente', 'Normal']);
             $table->timestamps();
         });
