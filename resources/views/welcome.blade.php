@@ -58,7 +58,7 @@
     </style>
 @endsection
 @section('content')
-    {{-- {{ dd($filmes_comentarios) }} --}}
+{{-- {{dd($filmes_comentarios)}} --}}
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
         <a class="navbar-brand" href="{{ route('entrada') }}"><svg id="svg2" width="40" height="40" viewBox="0 0 512 512"
                 sodipodi:docname="icone.svg">
@@ -130,7 +130,7 @@
                     <div class="mx-2 cardFilme">
                         @includeIf('content.card_filme_layout',
                         ['titulo'=>$filme['titulo'],
-                        'imagem'=>$filme['imagem']]
+                        'imagem'=>$filme['capa_url']]
                         )
                     </div>
                 @endforeach
@@ -145,7 +145,7 @@
                     @foreach ($filme['comentarios'] as $comentario)
                         <div class="my-2">
                             @includeIf('content.comentario_layout',
-                            ['name' => $comentario['nome_usuario'],
+                            ['name' => $comentario['usuario'][0]['nome'],
                             'comentario'=>$comentario['comentario']])
                         </div>
                     @endforeach

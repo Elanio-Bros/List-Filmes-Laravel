@@ -4,6 +4,9 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use App\Models\Grupos_Comentarios;
+use App\Models\Comentarios;
+
 
 class Filme extends Model
 {
@@ -17,4 +20,14 @@ class Filme extends Model
         'capa_url',
         'nota_imdb'
     ];
+
+    public function grupos(){
+        return $this->hasMany(Grupos_Comentarios::class,'id_filme','id');
+    }
+    public function comentarios(){
+        return $this->hasManyThrough(Comentarios::class,Grupos_Comentarios::class,'id_filme','id_grupo','id','id');
+    }
+    public function categoria(){
+        
+    }
 }

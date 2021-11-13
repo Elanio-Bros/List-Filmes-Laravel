@@ -25,9 +25,7 @@ Route::get('/conta', function () {
     return view('usuario.entrada.conta');
 })->name('conta');
 
-Route::get('/home', function () {
-    return view('filme.home');
-})->name('home');
+Route::get('/home',[UsuarioController::class,'home'])->name('home');
 
 Route::get('/filme/nota', function () {
     return view('filme.nota');

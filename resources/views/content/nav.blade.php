@@ -25,8 +25,8 @@
                     Categoria
                 </a>
                 <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                    @foreach (['Ação','Aventeura','Comedia','Animação'] as $item)
-                        <a class="dropdown-item" href="{{url('filme/categoria/'.$item)}}">{{$item}}</a>
+                    @foreach ($categoria_nav as $item)
+                        <a class="dropdown-item" href="{{url('filme/categoria/'.$item['nome'])}}">{{$item['nome']}}</a>
                     @endforeach
                     <div class="dropdown-divider"></div>
                     <a class="dropdown-item" href="{{route('categorias')}}">Outras Categorias</a>
