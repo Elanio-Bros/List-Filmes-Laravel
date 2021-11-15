@@ -26,12 +26,14 @@ class AppServiceProvider extends ServiceProvider
     public function boot()
     {
         view()->composer(['content.nav'], function ($view) {
-            $arra = Categoria::withCount('filmes')->orderBy('filmes_count', 'DESC')->take(5)->get();
-            $view->with('categoria_nav', $arra);
+            $cateogiras = Categoria::withCount('filmes')->orderBy('filmes_count', 'DESC')->take(5)->get();
+            $view->with('categoria_nav', $cateogiras);
         });
         view()->composer(['usuario.layout.layout'], function ($view) {
-            $arra =Filme::select('capa_url','tipo_capa')->get();
-            $view->with('test', $arra);
+            $capa_filmes = Filme::select('capa_url', 'tipo_capa')->get()->toArray();
+            if (count($capa_filmes) >= 8) {
+                $view->with('capa_filmes', $capa_filmes);
+            }
         });
     }
 }

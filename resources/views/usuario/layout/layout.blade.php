@@ -42,16 +42,13 @@
         </div>
     </div>
     <div class="fundo">
-        @if (count($test) == 8)
+        @if (isset($capa_filmes))
             <div class="d-none" id="Listimgs">
-                @foreach ($test as $item)
+                @foreach ($capa_filmes as $item)
                     <img src="@if ($item['tipo_capa'] == 'file') {{ URL::asset($item['capa_url']) }} @else {{ $item['capa_url'] }} @endif">
                 @endforeach
             </div>
-            @foreach ($test as $key => $item)
-                @if ($key == 8)
-                @break
-            @endif
+            @foreach (array_slice($capa_filmes, 0, 8) as $key => $item)
             <div class="imgsFundo">
                 <img src="@if ($item['tipo_capa'] == 'file') {{ URL::asset($item['capa_url']) }} @else {{ $item['capa_url'] }} @endif">
             </div>
