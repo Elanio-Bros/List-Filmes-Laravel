@@ -3,6 +3,7 @@
 namespace App\Providers;
 
 use App\Models\Categoria;
+use App\Models\Filme;
 use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider
@@ -25,7 +26,7 @@ class AppServiceProvider extends ServiceProvider
     public function boot()
     {
         view()->composer(['content.nav'], function ($view) {
-            $arra = Categoria::all();
+            $arra = Categoria::withCount('filmes')->orderBy('filmes_count', 'DESC')->take(5)->get();
             $view->with('categoria_nav', $arra);
         });
     }

@@ -6,7 +6,8 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use App\Models\Grupos_Comentarios;
 use App\Models\Comentarios;
-
+use App\Models\Categoria_Filme;
+use App\Models\Categoria;
 
 class Filme extends Model
 {
@@ -27,7 +28,7 @@ class Filme extends Model
     public function comentarios(){
         return $this->hasManyThrough(Comentarios::class,Grupos_Comentarios::class,'id_filme','id_grupo','id','id');
     }
-    public function categoria(){
-        
+    public function categoriasFilmes(){
+        return $this->hasManyThrough(Categoria::class,Categoria_Filme::class,'id_filme','id','id','id_filme');
     }
 }
