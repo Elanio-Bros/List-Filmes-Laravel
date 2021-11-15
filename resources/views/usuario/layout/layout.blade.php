@@ -7,11 +7,7 @@
 
         .fundo {
             display: grid;
-            grid-template-columns: 1fr 1fr 1fr 1fr;
-            width: 100%;
-            margin: 0 auto;
-            height: 100vh;
-            background-color: black;
+            grid-template-columns: repeat(auto-fill, minmax(auto, 25%));
         }
 
         .fundo img {
@@ -24,7 +20,7 @@
             width: 100%;
             height: 100%;
             z-index: 5;
-            background: #000000AA;
+            background-color: #000000AA;
         }
 
         .quadrado .login {
@@ -46,11 +42,21 @@
         </div>
     </div>
     <div class="fundo">
-        @foreach (range(1, 8) as $item)
-            <div>
-                <img src="https://images-na.ssl-images-amazon.com/images/I/71yDb8SKTTL.jpg">
+        @if (count($test) == 8)
+            <div class="d-none" id="Listimgs">
+                @foreach ($test as $item)
+                    <img src="@if ($item['tipo_capa'] == 'file') {{ URL::asset($item['capa_url']) }} @else {{ $item['capa_url'] }} @endif">
+                @endforeach
+            </div>
+            @foreach ($test as $key => $item)
+                @if ($key == 8)
+                @break
+            @endif
+            <div class="imgsFundo">
+                <img src="@if ($item['tipo_capa'] == 'file') {{ URL::asset($item['capa_url']) }} @else {{ $item['capa_url'] }} @endif">
             </div>
         @endforeach
+        @endif
     </div>
 @endsection
 @section('script')
@@ -63,17 +69,23 @@
             let senha = $("#" + $(this).parents().children().get(2).id)
             senha.prop("type", senha.prop("type") == "password" ? "text" : "password");
         });
-        setInterval(function() {
-            let elem = document.getElementsByTagName('img')
-            let selectEle = elem[Math.floor(Math.random() * (elem.length))];
-            anime({
-                targets: selectEle,
-                duration: 10000,
-                opacity: [0, 1],
-            })
-            selectEle.setAttribute('src',
-                'https://macmagazine.com.br/wp-content/uploads/2018/01/05-filme.jpg?__cf_chl_jschl_tk__=pmd_b157d66b7dd7e9fdd6b8c1b3bd7b4f516cedf869-1631542095-0-gqNtZGzNAfijcnBszQb6'
-            )
-        }, 2000)
+        $(function() {
+            if ($('.imgsFundo').length == 0) {
+                $('body').css('background-color', '#AAAAAAAA')
+            } else {
+                setInterval(function() {
+                    let ListImgsSelect = $('#Listimgs').children().eq(Math.floor(Math.random() * ($(
+                        '#Listimgs').children().length)));
+                    let gridImgSelect = $('.imgsFundo').children().eq(Math.floor(Math.random() * ($(
+                        '.imgsFundo').children().length)));
+                    anime({
+                        targets: gridImgSelect[0],
+                        duration: 10000,
+                        opacity: [0, 1],
+                    });
+                    gridImgSelect.attr('src', ListImgsSelect.attr('src'));
+                }, 2000)
+            }
+        })
     </script>
 @endsection

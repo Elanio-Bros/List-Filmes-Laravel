@@ -4,6 +4,8 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UsuarioController;
+use App\Models\Usuario;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -15,17 +17,18 @@ use App\Http\Controllers\UsuarioController;
 |
 */
 
-Route::get('/',[UsuarioController::class,'welcome'])->name('entrada');
+Route::get('/', [UsuarioController::class, 'welcome'])->name('entrada');
 
 Route::get('/login', function () {
     return view('usuario.entrada.login');
 })->name('login');
+Route::post('/login', [UsuarioController::class, 'login']);
 
-Route::get('/conta', function () {
-    return view('usuario.entrada.conta');
-})->name('conta');
+Route::post('/conta', [UsuarioController::class, 'criarConta'])->name('conta');
 
-Route::get('/home',[UsuarioController::class,'home'])->name('home');
+
+//usuario auth
+Route::get('/home', [UsuarioController::class, 'home'])->name('home');
 
 Route::get('/filme/nota', function () {
     return view('filme.nota');
@@ -61,7 +64,7 @@ Route::get('/usuario/conta', function () {
 
 //gerência
 Route::get('/gerência', function (Request $request) {
-    return view('usuario.gerenciar.gerencia',['request' => $request->all()]);
+    return view('usuario.gerenciar.gerencia', ['request' => $request->all()]);
 })->name('admin');
 Route::get('/usuario/favorito', function () {
     return view('usuario.favorito');

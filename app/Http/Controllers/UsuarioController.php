@@ -3,10 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\Categoria;
 use App\Models\Filme;
-use Illuminate\Support\Facades\DB;
-use PhpParser\Node\Expr\FuncCall;
+use Illuminate\Support\Facades\Validator;
 
 class UsuarioController extends Controller
 {
@@ -20,12 +18,21 @@ class UsuarioController extends Controller
     }
     public function login(Request $request)
     {
+        $request->validate([
+            'senha' => 'required|string',
+            'usuario' => 'required|string',
+        ],[
+            'usuario.required' => 'Faltando campo usuário ou email',
+            'senha.required' => 'Faltando campo senha',
+        ]);
+        return route('login');
     }
     public function criarConta(Request $request)
     {
+        return view('usuario.entrada.conta');
     }
     public function home(Request $request)
     {
-        return view('filme.home', []);
+        return view('filme.home');
     }
 }

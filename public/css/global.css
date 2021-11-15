@@ -10,6 +10,11 @@
     border: 1px solid green;
 }
 
+textarea {
+    resize: none;
+    min-height: 9em;
+}
+
 body {
     background-color: #202020FF;
     color: #F8F8FF;
@@ -159,9 +164,4 @@ input {
 
 .dot[date-value='noti'] {
     background-color: orange;
-}
-
-textarea {
-    resize: none;
-    min-height: 9em;
 }
