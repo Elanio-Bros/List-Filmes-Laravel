@@ -19,15 +19,28 @@ use App\Models\Usuario;
 
 Route::get('/', [UsuarioController::class, 'welcome'])->name('entrada');
 
+Route::get('/termo', function () {
+    return view('termo');
+});
+
 Route::get('/login', function () {
     return view('usuario.entrada.login');
 })->name('login');
+
 Route::post('/login', [UsuarioController::class, 'login']);
 
-Route::post('/conta', [UsuarioController::class, 'criarConta'])->name('conta');
+Route::get('/conta', function () {
+    return view('usuario.entrada.conta');
+})->name('conta');
+
+Route::post('/conta', [UsuarioController::class, 'criarConta']);
+
+
 
 
 //usuario auth
+Route::get('/logout', [UsuarioController::class, 'logout'])->name('logout');
+
 Route::get('/home', [UsuarioController::class, 'home'])->name('home');
 
 Route::get('/filme/nota', function () {
@@ -50,13 +63,12 @@ Route::get('/filme/{idFilme}', function ($idFilme) {
     return view('filme.layout.filme', compact("idFilme"));
 });
 //usuário
-Route::get('/usuario/aviso', function () {
-    return view('usuario.favorito');
-})->name('aviso');
-
 Route::get('/usuario/conta', function () {
     return view('usuario.conta_usuario');
 })->name('minha_conta');
+Route::get('/usuario/favorito', function () {
+    return view('usuario.favorito');
+})->name('favorito');
 // Route::get('/usuario/chat', function () {
 //     return view('usuario.chat');
 // })->name('chat');
@@ -66,15 +78,9 @@ Route::get('/usuario/conta', function () {
 Route::get('/gerência', function (Request $request) {
     return view('usuario.gerenciar.gerencia', ['request' => $request->all()]);
 })->name('admin');
-Route::get('/usuario/favorito', function () {
-    return view('usuario.favorito');
-})->name('favorito');
 // Route::get('/gerência/filme', function () {
 //     return view('usuario.gerenciar.edit_filme');
 // });
 // Route::get('/gerência/filme/{idFilme}', function () {
 //     return view('usuario.gerenciar.edit_filme');
 // });
-Route::get('/termo', function () {
-    return view('termo');
-});

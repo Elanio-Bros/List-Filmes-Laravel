@@ -1,4 +1,4 @@
-@extends('usuario.layout.layout')
+@extends('usuario.layout.fundo_layout')
 @section('title')
     Crie sua conta
 @endsection
@@ -7,14 +7,14 @@
         .checkbox label {
             font-size: 12px;
         }
-        .checkbox a:hover{
+
+        .checkbox a:hover {
             text-decoration: underline;
         }
 
-
     </style>
 @endsection
-@section('contentEntrada')
+@section('contentUsuario')
     <div class="mb-3">
         <svg id="svg2" width="50" height="50" viewBox="0 0 512 512" sodipodi:docname="icone.svg">
             <g inkscape:groupmode="layer" inkscape:label="Image" id="g10">
@@ -27,19 +27,23 @@
     <div class="mb-3">
         <h5>Crie sua conta Já!</h5>
     </div>
-    <form>
+    <form id="formConta" method="POST">
+        @csrf
         <div class="form-group">
-            <input type="text" class="form-control" id="nome" aria-describedby="Nome" placeholder="Nome">
+            <input type="text" class="form-control" name="nome" id="nome" aria-describedby="Nome" placeholder="Nome"
+                required>
         </div>
         <div class="form-group">
-            <input type="email" class="form-control" id="email" aria-describedby="email" placeholder="Email">
+            <input type="email" class="form-control" name="email" id="email" aria-describedby="email" placeholder="Email"
+                required>
         </div>
         <div class="form-group">
-            <input type="text" class="form-control" id="user" aria-describedby="Usuário" placeholder="Usuário">
+            <input type="text" class="form-control" name="usuario" id="user" aria-describedby="Usuário"
+                placeholder="Usuário" required>
         </div>
         <div class="form-group">
             <div class="input-group mb-3">
-                <input type="password" class="form-control" id="pass" placeholder="Senha">
+                <input type="password" name="senha" class="form-control" id="pass" placeholder="Senha" required>
                 <div class="input-group-append">
                     <span class="input-group-text" id="basic-addon2"><a class="ocultaPass">
                             <i class="fas fa-eye" style="display: none"></i>
@@ -49,7 +53,7 @@
         </div>
         <div class="form-group">
             <div class="input-group mb-3">
-                <input type="password" class="form-control" id="Confirpass" placeholder="Confirmação de Senha">
+                <input type="password" class="form-control" id="Confirpass" placeholder="Confirmação de Senha" required>
                 <div class="input-group-append">
                     <span class="input-group-text" id="basic-addon2"><a class="ocultaPass">
                             <i class="fas fa-eye" style="display: none"></i>
@@ -59,9 +63,23 @@
         </div>
         <span class="d-flex checkbox">
             <input class="mr-1" type="checkbox" required>
-            <label>Aceito os Termos e as <a class="text-light" href="{{url('termo')}}">Politicas de Privacidade</a></label></span>
-        <button type=" submit" class="btn btnPerson" style="width: 100%;">Crie Conta</button>
+            <label>Aceito os Termos e as <a class="text-light" href="{{ url('termo') }}">Politicas de
+                    Privacidade</a></label></span>
+        <button type="submit" id="btnConta" class="btn btnPerson" style="width: 100%;">Crie Conta</button>
     </form>
     <span class="mt-2 d-flex flex-column"><a class="text-light" href="{{ route('login') }}">Click aqui se já tem uma
             conta</a></span>
+@endsection
+
+@section('scriptUsuario')
+    <script>
+        $('#btnConta').click(function(e) {
+            if ($('#pass').val() != $('#Confirpass').val()) {
+                $('#error').html('<div class="alert alert-danger alert-dismissible fade show" role="alert">' +
+                    '<span>Senha e Confirmações de Senha Incorretas</span><button type="button" class="close" data-dismiss="alert" aria-label="Close">' +
+                    '<span aria-hidden="true">&times;</span></button></div>');
+                e.preventDefault();
+            }
+        });
+    </script>
 @endsection

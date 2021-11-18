@@ -36,9 +36,21 @@
     @yield('styleEntrada')
 @endsection
 @section('content')
-    <div class="quadrado d-flex justify-content-center align-items-center">
+    <div class="quadrado d-flex flex-column justify-content-center align-items-center">
+        <div id="error">
+            @if ($errors->any())
+                <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                    @foreach ($errors->all() as $erro)
+                        <span>{{ $erro }}</span>
+                    @endforeach
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+            @endif
+        </div>
         <div class="login d-flex flex-column justify-content-center align-items-center">
-            @yield('contentEntrada')
+            @yield('contentUsuario')
         </div>
     </div>
     <div class="fundo">
@@ -49,10 +61,10 @@
                 @endforeach
             </div>
             @foreach (array_slice($capa_filmes, 0, 8) as $key => $item)
-            <div class="imgsFundo">
-                <img src="@if ($item['tipo_capa'] == 'file') {{ URL::asset($item['capa_url']) }} @else {{ $item['capa_url'] }} @endif">
-            </div>
-        @endforeach
+                <div class="imgsFundo">
+                    <img src="@if ($item['tipo_capa'] == 'file') {{ URL::asset($item['capa_url']) }} @else {{ $item['capa_url'] }} @endif">
+                </div>
+            @endforeach
         @endif
     </div>
 @endsection
@@ -83,6 +95,8 @@
                     gridImgSelect.attr('src', ListImgsSelect.attr('src'));
                 }, 2000)
             }
-        })
+        });
     </script>
+    @yield('scriptUsuario')
+
 @endsection

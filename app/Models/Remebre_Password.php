@@ -9,8 +9,9 @@ class Remebre_Password extends Model
 {
     use HasFactory;
     protected $table='remebre_passwords';
-    const UPDATED_AT=false;
-    protected $fillable=['id_usuario','token','validate_at'];
+    const UPDATED_AT=null;
+    const CREATE_AT='create_at';
+    protected $fillable=['id_usuario','token','validate_at','create_at'];
     protected $hidden=['create_at'];
     
 }

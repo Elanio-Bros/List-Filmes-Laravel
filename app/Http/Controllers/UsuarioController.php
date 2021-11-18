@@ -4,10 +4,25 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Filme;
+use App\Models\LogSystem;
+use App\Models\Usuario;
+use Exception;
+use Illuminate\Database\QueryException;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Str;
+use PDOException;
 
 class UsuarioController extends Controller
 {
+    protected $logSystem;
+    public function __construct()
+    {
+        $this->logSystem = Log::channel('log_system');
+    }
+
     public function welcome()
     {
         $filmes_comentarios = Filme::withCount('comentarios')->with(['comentarios' => function ($relation) {
@@ -19,20 +34,60 @@ class UsuarioController extends Controller
     public function login(Request $request)
     {
         $request->validate([
-            'senha' => 'required|string',
-            'usuario' => 'required|string',
-        ],[
-            'usuario.required' => 'Faltando campo usuário ou email',
-            'senha.required' => 'Faltando campo senha',
+            'usuario' => ['required', 'string'],
+            'senha' => ['required', 'string'],
         ]);
-        return route('login');
+        $usuario = Usuario::where('usuario', '=', $request->input('usuario'))
+            ->orWhere('email', '=', $request->input('usuario'))->first();
+        if ($usuario != null) {
+            $senhaUsuario = $usuario['senha'];
+            if (!Hash::check($request->input('senha'), $senhaUsuario)) {
+                $this->logSystem->error($request->input('usuario').':Senha Incorreta');
+                return Redirect::back()->withErrors(['senha' => 'Senha Invalida']);
+            }
+        } else {
+            $this->logSystem->error($request->input('usuario').':Usuário Não Existe');
+            return Redirect::back()->withErrors(['usuario' => 'Usuário/Email Invalido']);
+        }
+        $usuario = [
+            'usuario' => $usuario['usuario'],
+            'tipo' => $usuario['tipo'],
+            'perfil' => $usuario['url_perfil'],
+            'api_token' => $usuario['token_api'],
+        ];
+        $request->session()->put('usuario', $usuario);
+        $this->logSystem->info($request->input('usuario').': Fez Login');
+        return redirect('home');
     }
     public function criarConta(Request $request)
     {
-        return view('usuario.entrada.conta');
+        $request->validate([
+            'usuario' => ['required', 'string'],
+            'nome' => ['required', 'string'],
+            'email' => ['required', 'string'],
+            'senha' => ['required', 'string'],
+        ]);
+        $usuario = $request->except(['_token']);
+        $usuario['senha']=Hash::make($request->input('senha'));
+        $usuario['token_api'] = Str::random(25);
+        $usuario['tipo'] = 'Normal';
+        try {
+            Usuario::create($usuario);
+            $this->logSystem->info('Usuário: ' . $usuario['usuario'] . ' e Email: ' . $usuario['email'] . ' Cadastrado');
+        } catch (PDOException $e) {
+            if ($e->errorInfo[1] == 1062) {
+                $this->logSystem->error('Usuário: ' . $usuario['usuario'] . ' ou Email: ' . $usuario['email'] . ' Já Cadastrado');
+                return Redirect::back()->withErrors(['usuario' => 'Usuário ou Email Já Cadastrado']);
+            }
+        }
+        return $this->login($request);
     }
     public function home(Request $request)
     {
         return view('filme.home');
+    }
+
+    public function logout(Request $request){
+        $request->session()->forget('usuario');
     }
 }

@@ -14,7 +14,7 @@ class LogSystem
      */
     public function __invoke(array $config)
     {
-        $loggger=new Logger('log_syste');
+        $loggger=new Logger('log_system');
         return $loggger->pushHandler(new LogSystemHandler());
     }
 }

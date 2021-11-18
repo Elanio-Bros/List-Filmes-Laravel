@@ -1,5 +1,5 @@
 <nav class="navbar navbar-expand-lg navbar-light bg-light mb-2">
-    <a class="navbar-brand" href="{{ route('entrada') }}"><svg id="svg2" width="40" height="40" viewBox="0 0 512 512"
+    <a class="navbar-brand" href="{{ route('home') }}"><svg id="svg2" width="40" height="40" viewBox="0 0 512 512"
             sodipodi:docname="icone.svg">
             <g inkscape:groupmode="layer" inkscape:label="Image" id="g10">
                 <path style="fill-opacity:1"
@@ -14,10 +14,11 @@
     <div class="collapse navbar-collapse" id="conteudoNavbarSuportado">
         <ul class="navbar-nav mr-auto">
             <li class="nav-item">
-                <a class="nav-link" href="{{route('votados')}}">Votados<span class="sr-only">(página atual)</span></a>
+                <a class="nav-link" href="{{ route('votados') }}">Votados<span class="sr-only">(página
+                        atual)</span></a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="{{route('nota')}}">Por Nota</a>
+                <a class="nav-link" href="{{ route('nota') }}">Por Nota</a>
             </li>
             <li class="nav-item dropdown">
                 <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
@@ -26,10 +27,11 @@
                 </a>
                 <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                     @foreach ($categoria_nav as $item)
-                        <a class="dropdown-item" href="{{url('filme/categoria/'.$item['nome'])}}">{{$item['nome']}}</a>
+                        <a class="dropdown-item"
+                            href="{{ url('filme/categoria/' . $item['nome']) }}">{{ $item['nome'] }}</a>
                     @endforeach
                     <div class="dropdown-divider"></div>
-                    <a class="dropdown-item" href="{{route('categorias')}}">Outras Categorias</a>
+                    <a class="dropdown-item" href="{{ route('categorias') }}">Outras Categorias</a>
                 </div>
             </li>
         </ul>
@@ -40,18 +42,37 @@
         <div class="dropdown ml-3">
             <a class="ropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown"
                 aria-haspopup="true" aria-expanded="false">
-                <img class="perfil"
-                    src="https://d11a6trkgmumsb.cloudfront.net/original/3X/f/b/fbbaacfa1033254471f614b67d58dae45236ce5b.jpg">
+                <img class="perfil" src="{{ $url_perfil }}">
             </a>
             <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuLink">
-                <a class="dropdown-item" href="{{route('minha_conta')}}">Minha Conta</a>
-                <a class="dropdown-item" href="{{route('favorito')}}">Favoritos</a>
+                <a class="dropdown-item" href="{{ route('minha_conta') }}">Minha Conta</a>
+                <a class="dropdown-item" href="{{ route('favorito') }}">Favoritos</a>
                 {{-- <a class="dropdown-item" href="{{route('chat')}}">Chats</a> --}}
-                <a class="dropdown-item" href="{{route('aviso')}}">Avisos <span class='dot' date-value='noti'></span></a>
-                <a class="dropdown-item" href="{{route('admin')}}">Administração</a>
+                <div class="dropdown-item link" data-toggle="modal" data-target="#exampleModal">Avisos <span class='dot'
+                        date-value='noti'></span></div>
+                <a class="dropdown-item" href="{{ route('admin') }}">Administração</a>
                 <div class="dropdown-divider"></div>
-                <a type="button" class="dropdown-item btn-danger" >Sair</a>
+                <a type="button" class="dropdown-item btn-danger" href="{{ route('logout') }}" >Sair</a>
             </div>
         </div>
     </div>
 </nav>
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Avisos</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                ...
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary">Save changes</button>
+            </div>
+        </div>
+    </div>
+</div>

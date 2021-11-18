@@ -16,7 +16,8 @@ class Usuario extends Authenticatable
         'email',
         'token_api',
         'url_perfil',
-        'tipo'
+        'tipo',
+        'senha',
     ];
     protected $hidden = [
         'senha'

@@ -9,8 +9,8 @@ class LogSystem extends Model
 {
     use HasFactory;
     protected $table = 'log_system';
-    const UPDATED_AT=false;
-    protected $filleble = [
-        'message', 'level'
-    ];
+    const UPDATED_AT = null;
+    const CREATED_AT = 'created_at';
+    protected $fillable = ['level', 'message','created_at'];
+    protected $hidden=['create_at'];
 }

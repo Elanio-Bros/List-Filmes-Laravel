@@ -1,13 +1,8 @@
-@extends('usuario.layout.layout')
+@extends('usuario.layout.fundo_layout')
 @section('title')
     Login
 @endsection
-@section('contentEntrada')
-@if($errors->any())
-    @foreach ($errors->all()  as $erro)
-        {{$erro}}
-    @endforeach
-@endif
+@section('contentUsuario')
     <div class="mb-3">
         <svg id="svg2" width="70" height="70" viewBox="0 0 512 512" sodipodi:docname="icone.svg">
             <g inkscape:groupmode="layer" inkscape:label="Image" id="g10">
@@ -24,11 +19,11 @@
         @csrf
         <div class="form-group">
             <input type="text" class="form-control" name="usuario" id="emailUsario" aria-describedby="emailHelp"
-                placeholder="Email/Usuário">
+                placeholder="Email/Usuário" required>
         </div>
         <div class="form-group">
             <div class="input-group mb-3">
-                <input type="password" name="password" class="form-control" id="pass" placeholder="Senha">
+                <input type="password" name="senha" class="form-control" id="pass" placeholder="Senha" required>
                 <div class="input-group-append">
                     <span class="input-group-text" id="basic-addon2"><a class="ocultaPass">
                             <i class="fas fa-eye" style="display: none"></i>
