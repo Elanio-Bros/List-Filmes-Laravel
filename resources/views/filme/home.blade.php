@@ -1,6 +1,7 @@
 @extends('filme.layout.layout_scroll_list')
 @section('title') Home @endsection
 @section('list')
+    {{-- {{dd($filmes_mais_comentados)}} --}}
     <div id="m-2">
         <div class="m-4">
             <h4>Ultimos Filmes Adicionados</h4>
@@ -10,13 +11,11 @@
                 <span><i class="fas fa-chevron-left"></i></span>
             </a>
             <div class="FilmCovers w-100">
-                @foreach (range(1, 10) as $item)
-                        <div class="mx-2 cardFilme">
-                            @includeIf('content.card_filme_layout',
-                            ['titulo'=>"$item Titulo Filme",
-                            'imagem'=>'https://images-na.ssl-images-amazon.com/images/I/71yDb8SKTTL.jpg']
-                            )
-                        </div>
+                @foreach ($ult_filmes as $filme)
+                    <div class="mx-2 cardFilme">
+                        @includeIf('content.card_filme_layout',
+                        ['titulo'=>$filme['titulo'],'imagem'=>$filme['capa_url']])
+                    </div>
                 @endforeach
             </div>
             <a class="buttonCarousel next" style="right: 0;">
@@ -33,13 +32,11 @@
                 <span><i class="fas fa-chevron-left"></i></span>
             </a>
             <div class="FilmCovers w-100">
-                @foreach (range(1,10) as $item)
-                    <div class="mx-2 cardFilme">
-                        @includeIf('content.card_filme_layout',
-                        ['titulo'=>"$item Titulo Filme",
-                        'imagem'=>'https://images-na.ssl-images-amazon.com/images/I/71yDb8SKTTL.jpg']
-                        )
-                    </div>
+                @foreach (range(1, 10) as $item)
+                    @includeIf('content.card_filme_layout',
+                    ['titulo'=>"$item Titulo Filme",
+                    'imagem'=>'https://images-na.ssl-images-amazon.com/images/I/71yDb8SKTTL.jpg']
+                    )
                 @endforeach
             </div>
             <a class="buttonCarousel next" style="right: 0;">
@@ -60,12 +57,10 @@
             </a>
             <div class="FilmCovers w-100">
                 @foreach (range(1, 10) as $item)
-                    <div class="mx-2 cardFilme">
-                        @includeIf('content.card_filme_layout',
-                        ['titulo'=>"$item Titulo Filme",
-                        'imagem'=>'https://images-na.ssl-images-amazon.com/images/I/71yDb8SKTTL.jpg']
-                        )
-                    </div>
+                    @includeIf('content.card_filme_layout',
+                    ['titulo'=>"$item Titulo Filme",
+                    'imagem'=>'https://images-na.ssl-images-amazon.com/images/I/71yDb8SKTTL.jpg']
+                    )
                 @endforeach
             </div>
             <a class="buttonCarousel next" style="right: 0;">
@@ -83,12 +78,10 @@
             </a>
             <div class="FilmCovers w-100">
                 @foreach (range(1, 10) as $item)
-                    <div class="mx-2 cardFilme">
-                        @includeIf('content.card_filme_layout',
-                        ['titulo'=>"$item Titulo Filme",
-                        'imagem'=>'https://images-na.ssl-images-amazon.com/images/I/71yDb8SKTTL.jpg']
-                        )
-                    </div>
+                    @includeIf('content.card_filme_layout',
+                    ['titulo'=>"$item Titulo Filme",
+                    'imagem'=>'https://images-na.ssl-images-amazon.com/images/I/71yDb8SKTTL.jpg']
+                    )
                 @endforeach
             </div>
             <a class="buttonCarousel next" style="right: 0;">
@@ -106,12 +99,10 @@
             </a>
             <div class="FilmCovers w-100">
                 @foreach (range(1, 10) as $item)
-                    <div class="mx-2 cardFilme">
-                        @includeIf('content.card_filme_layout',
-                        ['titulo'=>"$item Titulo Filme",
-                        'imagem'=>'https://images-na.ssl-images-amazon.com/images/I/71yDb8SKTTL.jpg']
-                        )
-                    </div>
+                    @includeIf('content.card_filme_layout',
+                    ['titulo'=>"$item Titulo Filme",
+                    'imagem'=>'https://images-na.ssl-images-amazon.com/images/I/71yDb8SKTTL.jpg']
+                    )
                 @endforeach
             </div>
             <a class="buttonCarousel next" style="right: 0;">

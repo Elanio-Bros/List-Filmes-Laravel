@@ -58,7 +58,6 @@
     </style>
 @endsection
 @section('content')
-{{-- {{dd($filmes_comentarios)}} --}}
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
         <a class="navbar-brand" href="{{ route('entrada') }}"><svg id="svg2" width="40" height="40" viewBox="0 0 512 512"
                 sodipodi:docname="icone.svg">
@@ -117,42 +116,44 @@
             </div>
         </div>
     </div>
-    <div id="cometariosFilmes">
-        <div class="m-4">
-            <h4>Filmes Mais Comentados</h4>
-        </div>
-        <div class="CarouselFilmes d-flex my-3 align-items-center" style="max-height: 1280px;">
-            <a class="buttonCarousel prev" style="left:0;">
-                <span><i class="fas fa-chevron-left"></i></span>
-            </a>
-            <div class="FilmCovers w-100">
-                @foreach ($filmes_comentarios as $filme)
-                    <div class="mx-2 cardFilme">
-                        @includeIf('content.card_filme_layout',
-                        ['titulo'=>$filme['titulo'],
-                        'imagem'=>$filme['capa_url']]
-                        )
-                    </div>
-                @endforeach
+    @if (count($filmes_comentarios)>0)
+        <div id="cometariosFilmes">
+            <div class="m-4">
+                <h4>Filmes Mais Comentados</h4>
             </div>
-            <a class="buttonCarousel next" style="right: 0;">
-                <span><i class="fas fa-chevron-right"></i></span>
-            </a>
-        </div>
-        <div class="CommentMovies">
-            @foreach ($filmes_comentarios as $filme)
-                <div class="mx-5">
-                    @foreach ($filme['comentarios'] as $comentario)
-                        <div class="my-2">
-                            @includeIf('content.comentario_layout',
-                            ['name' => $comentario['usuario'][0]['nome'],
-                            'comentario'=>$comentario['comentario']])
+            <div class="CarouselFilmes d-flex my-3 align-items-center" style="max-height: 1280px;">
+                <a class="buttonCarousel prev" style="left:0;">
+                    <span><i class="fas fa-chevron-left"></i></span>
+                </a>
+                <div class="FilmCovers w-100">
+                    @foreach ($filmes_comentarios as $filme)
+                        <div class="mx-2 cardFilme">
+                            @includeIf('content.card_filme_layout',
+                            ['titulo'=>$filme['titulo'],
+                            'imagem'=>$filme['capa_url']]
+                            )
                         </div>
                     @endforeach
                 </div>
-            @endforeach
+                <a class="buttonCarousel next" style="right: 0;">
+                    <span><i class="fas fa-chevron-right"></i></span>
+                </a>
+            </div>
+            <div class="CommentMovies">
+                @foreach ($filmes_comentarios as $filme)
+                    <div class="mx-5">
+                        @foreach ($filme['comentarios'] as $comentario)
+                            <div class="my-2">
+                                @includeIf('content.comentario_layout',
+                                ['name' => $comentario['usuario'][0]['nome'],
+                                'comentario'=>$comentario['comentario']])
+                            </div>
+                        @endforeach
+                    </div>
+                @endforeach
+            </div>
         </div>
-    </div>
+    @endif
 @endsection
 @section('script')
     <script type="text/javascript" src="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
@@ -182,6 +183,7 @@
             centerMode: true,
             slidesToShow: 1,
             arrows: false,
+            adaptiveHeight: true,
         });
         $('.cardFilme').click(function() {
             $('.FilmCovers').slick('slickGoTo', $(this).attr('data-slick-index'))

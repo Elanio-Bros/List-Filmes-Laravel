@@ -36,7 +36,7 @@ class Grupos_ComentariosFactory extends Factory
                     Filme::factory()->create()->id :
                     $this->faker->randomElement($filmes)->id;
             },
-            'titulo' =>$this->faker->title(),
+            'titulo' =>'Comentários Gerais',
         ];
     }
 }

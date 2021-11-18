@@ -6,6 +6,9 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UsuarioController;
 use App\Models\Usuario;
 
+use App\Http\Middleware\AuthUser;
+use GuzzleHttp\Middleware;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -37,42 +40,42 @@ Route::post('/conta', [UsuarioController::class, 'criarConta']);
 
 
 
+Route::middleware(AuthUser::class)->group(function () {
+    Route::get('/logout', [UsuarioController::class, 'logout'])->name('logout');
 
-//usuario auth
-Route::get('/logout', [UsuarioController::class, 'logout'])->name('logout');
+    Route::get('/home', [UsuarioController::class, 'home'])->name('home');
 
-Route::get('/home', [UsuarioController::class, 'home'])->name('home');
+    Route::get('/filme/nota', function () {
+        return view('filme.nota');
+    })->name('nota');
 
-Route::get('/filme/nota', function () {
-    return view('filme.nota');
-})->name('nota');
+    Route::get('/filme/votados', function () {
+        return view('filme.votados');
+    })->name('votados');
 
-Route::get('/filme/votados', function () {
-    return view('filme.votados');
-})->name('votados');
+    Route::get('filme/categorias', function () {
+        return view('filme.categorias');
+    })->name('categorias');
 
-Route::get('filme/categorias', function () {
-    return view('filme.categorias');
-})->name('categorias');
+    Route::get('filme/categoria/{categoria}', function ($categoria) {
+        return view('filme.categoria', compact("categoria"));
+    })->name('categoria');
 
-Route::get('filme/categoria/{categoria}', function ($categoria) {
-    return view('filme.categoria', compact("categoria"));
-})->name('categoria');
+    Route::get('/filme/{idFilme}', function ($idFilme) {
+        return view('filme.layout.filme', compact("idFilme"));
+    });
+    //usuário
+    Route::get('/usuario/conta', function () {
+        return view('usuario.conta_usuario');
+    })->name('minha_conta');
 
-Route::get('/filme/{idFilme}', function ($idFilme) {
-    return view('filme.layout.filme', compact("idFilme"));
+    Route::get('/usuario/favorito', function () {
+        return view('usuario.favorito');
+    })->name('favorito');
+    // Route::get('/usuario/chat', function () {
+    //     return view('usuario.chat');
+    // })->name('chat');
 });
-//usuário
-Route::get('/usuario/conta', function () {
-    return view('usuario.conta_usuario');
-})->name('minha_conta');
-Route::get('/usuario/favorito', function () {
-    return view('usuario.favorito');
-})->name('favorito');
-// Route::get('/usuario/chat', function () {
-//     return view('usuario.chat');
-// })->name('chat');
-
 
 //gerência
 Route::get('/gerência', function (Request $request) {

@@ -59,6 +59,13 @@ class UsuarioController extends Controller
         $this->logSystem->info($request->input('usuario').': Fez Login');
         return redirect('home');
     }
+
+    public function logout(Request $request){
+        $this->logSystem->info($request->input('usuario').': Fez Logout');
+        $request->session()->forget('usuario');
+        return redirect()->route('entrada');
+    }
+
     public function criarConta(Request $request)
     {
         $request->validate([
@@ -82,12 +89,16 @@ class UsuarioController extends Controller
         }
         return $this->login($request);
     }
-    public function home(Request $request)
+    public function home()
     {
-        return view('filme.home');
+        $filmes_comentarios = Filme::select('titulo','imdb_code','capa_url')->withCount('comentarios')->with(['comentarios' => function ($relation) {
+            return $relation->where('grupos_comentario.titulo', '=', 'Comentário Gerais');
+        }])->orderBy('comentarios_count', 'DESC')->take(10)->get();
+        
+        $ult_filmes=Filme::select('titulo','imdb_code','capa_url')->orderBy('created_at', 'DESC')->take(15)->get();
+
+        return view('filme.home',['ult_filmes'=>$ult_filmes,'filmes_mais_comentados'=>$filmes_comentarios]);
     }
 
-    public function logout(Request $request){
-        $request->session()->forget('usuario');
-    }
+   
 }
