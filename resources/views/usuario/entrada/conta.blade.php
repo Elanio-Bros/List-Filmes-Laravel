@@ -27,7 +27,7 @@
     <div class="mb-3">
         <h5>Crie sua conta Já!</h5>
     </div>
-    <form id="formConta" method="POST">
+    <form id="formConta" method="POST" name="contaUsuario">
         @csrf
         <div class="form-group">
             <input type="text" class="form-control" name="nome" id="nome" aria-describedby="Nome" placeholder="Nome"
@@ -43,7 +43,7 @@
         </div>
         <div class="form-group">
             <div class="input-group mb-3">
-                <input type="password" name="senha" class="form-control" id="pass" placeholder="Senha" required>
+                <input type="password" name="senha" class="form-control" placeholder="Senha" required>
                 <div class="input-group-append">
                     <span class="input-group-text" id="basic-addon2"><a class="ocultaPass">
                             <i class="fas fa-eye" style="display: none"></i>
@@ -53,7 +53,8 @@
         </div>
         <div class="form-group">
             <div class="input-group mb-3">
-                <input type="password" class="form-control" id="Confirpass" placeholder="Confirmação de Senha" required>
+                <input type="password" class="form-control" name="confirmSenha" placeholder="Confirmação de Senha"
+                    required>
                 <div class="input-group-append">
                     <span class="input-group-text" id="basic-addon2"><a class="ocultaPass">
                             <i class="fas fa-eye" style="display: none"></i>
@@ -65,7 +66,7 @@
             <input class="mr-1" type="checkbox" required>
             <label>Aceito os Termos e as <a class="text-light" href="{{ url('termo') }}">Politicas de
                     Privacidade</a></label></span>
-        <button type="submit" id="btnConta" class="btn btnPerson" style="width: 100%;">Crie Conta</button>
+        <button type="submit" class="btn btnPerson" style="width: 100%;">Crie Conta</button>
     </form>
     <span class="mt-2 d-flex flex-column"><a class="text-light" href="{{ route('login') }}">Click aqui se já tem uma
             conta</a></span>
@@ -73,12 +74,12 @@
 
 @section('scriptUsuario')
     <script>
-        $('#btnConta').click(function(e) {
-            if ($('#pass').val() != $('#Confirpass').val()) {
+        $('form[name="contaUsuario"]').submit(function(event) {
+            if ($(this).find('input[name="senha"]').val() != $(this).find('input[name="confirmSenha"]').val()) {
                 $('#error').html('<div class="alert alert-danger alert-dismissible fade show" role="alert">' +
-                    '<span>Senha e Confirmações de Senha Incorretas</span><button type="button" class="close" data-dismiss="alert" aria-label="Close">' +
+                    '<span>Senha e Confirmações de Senha Estão Diferentes</span><button type="button" class="close" data-dismiss="alert" aria-label="Close">' +
                     '<span aria-hidden="true">&times;</span></button></div>');
-                e.preventDefault();
+                event.preventDefault();
             }
         });
     </script>

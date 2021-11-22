@@ -61,9 +61,9 @@
                 @endforeach
             </div>
             @foreach (array_slice($capa_filmes, 0, 8) as $key => $item)
-                <div class="imgsFundo">
+                <span class="imgsFundo">
                     <img src="@if ($item['tipo_capa'] == 'file') {{ URL::asset($item['capa_url']) }} @else {{ $item['capa_url'] }} @endif">
-                </div>
+                </span>
             @endforeach
         @endif
     </div>
@@ -75,16 +75,17 @@
     <script>
         $(".ocultaPass").click(function() {
             $(this).children("i").toggle();
-            let senha = $("#" + $(this).parents().children().get(2).id)
-            senha.prop("type", senha.prop("type") == "password" ? "text" : "password");
+            let inputSenha = $(this).closest('.input-group').find('input');
+            inputSenha.prop("type", senha.prop("type") == "password" ? "text" : "password");
         });
         $(function() {
             if ($('.imgsFundo').length == 0) {
                 $('body').css('background-color', '#AAAAAAAA')
             } else {
                 setInterval(function() {
-                    let ListImgsSelect = $('#Listimgs').children().eq(Math.floor(Math.random() * ($(
-                        '#Listimgs').children().length)));
+                    let ListImgs = $('#Listimgs').children();
+                    let ListImgsSelect = ListImgs.eq(Math.floor(Math.random() * ListImgs.length()));
+                    let gridImg
                     let gridImgSelect = $('.imgsFundo').children().eq(Math.floor(Math.random() * ($(
                         '.imgsFundo').children().length)));
                     anime({
@@ -93,7 +94,7 @@
                         opacity: [0, 1],
                     });
                     gridImgSelect.attr('src', ListImgsSelect.attr('src'));
-                }, 2000)
+                }, 2000);
             }
         });
     </script>
