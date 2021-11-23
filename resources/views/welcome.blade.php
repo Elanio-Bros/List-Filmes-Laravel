@@ -88,7 +88,7 @@
             <div class="carousel-inner">
                 @foreach (File::glob(public_path('img/banner_welcome/*.*')) as $key => $imagem)
                     <div class="carousel-item @if ($key == 0) active @endif">
-                        <img class=" d-block w-100" src="{{ URL::asset('img/banner_welcome/' . basename($imagem)) }}">
+                        <img class=" d-block w-100" src="{{ asset('img/banner_welcome/' . basename($imagem)) }}">
                     </div>
                 @endforeach
             </div>
@@ -116,7 +116,7 @@
             </div>
         </div>
     </div>
-    @if (count($filmes_comentarios)>0)
+    @if (count($filmes_comentarios) > 0)
         <div id="cometariosFilmes">
             <div class="m-4">
                 <h4>Filmes Mais Comentados</h4>
@@ -130,7 +130,8 @@
                         <div class="mx-2 cardFilme">
                             @includeIf('content.card_filme_layout',
                             ['titulo'=>$filme['titulo'],
-                            'imagem'=>$filme['capa_url']]
+                            'imagem'=>$filme['capa_url'],
+                            'code_url'=>$filme['imdb_code']]
                             )
                         </div>
                     @endforeach

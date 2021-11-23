@@ -95,11 +95,11 @@ class UsuarioController extends Controller
 
     public function home()
     {
-        $filmes_comentarios = Filme::select('titulo', 'imdb_code', 'capa_url')->withCount('comentarios')->with(['comentarios' => function ($relation) {
+        $filmes_comentarios = Filme::select('titulo', 'imdb_code', 'capa_url', 'tipo_capa')->withCount('comentarios')->with(['comentarios' => function ($relation) {
             return $relation->where('grupos_comentario.titulo', '=', 'Comentário Gerais');
         }])->orderBy('comentarios_count', 'DESC')->take(10)->get();
 
-        $ult_filmes = Filme::select('titulo', 'imdb_code', 'capa_url')->orderBy('created_at', 'DESC')->take(15)->get();
+        $ult_filmes = Filme::select('titulo', 'imdb_code', 'capa_url', 'tipo_capa')->orderBy('created_at', 'DESC')->take(15)->get();
 
         $filmes_categoria = Categoria::with(['filmes' => function ($relation) {
             return $relation->orderBy('created_at', 'DESC');
@@ -109,5 +109,12 @@ class UsuarioController extends Controller
             'filmes_mais_comentados' => $filmes_comentarios,
             'categorias_utimo_filmes' => $filmes_categoria,
         ]);
+    }
+
+    public function filme($code_url)
+    {
+        $filme = Filme::firstWhere('imdb_code', $code_url);
+        $filme['nota_imdb'] = $filme['nota_imdb'] / 2;
+        return view('filme.layout.filme', compact('filme'));
     }
 }

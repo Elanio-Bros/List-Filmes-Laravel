@@ -50,7 +50,9 @@
                 {{-- <a class="dropdown-item" href="{{route('chat')}}">Chats</a> --}}
                 <div class="dropdown-item link" data-toggle="modal" data-target="#exampleModal">Avisos <span class='dot'
                         date-value='noti'></span></div>
+                @if($is_admin==true)
                 <a class="dropdown-item" href="{{ route('admin') }}">Administração</a>
+                @endif
                 <div class="dropdown-divider"></div>
                 <a type="button" class="dropdown-item btn-danger" href="{{ route('logout') }}" >Sair</a>
             </div>

@@ -1,6 +1,6 @@
 @extends('layout')
 @section('title')
-    {{ $idFilme }}
+    {{ $filme['titulo'] }}
 @endsection
 @section('style')
     <link rel="stylesheet" type="text/css" href="{{ URL::asset('libs/rating/css/star-rating-svg.css') }}">
@@ -126,23 +126,23 @@
 @section('content')
     @include('content.nav')
     <div id="mostFilme">
-        <img class="ml-2 py-2" src="https://images-na.ssl-images-amazon.com/images/I/71yDb8SKTTL.jpg">
+        <img class="ml-2 py-2" src="{{$filme['capa_url']}}">
         <div class="ml-3 m-2 w-100">
             <div>
-                <span class="h4">Titulo Filme</span>
-                <span class="dropdown ml-3">
+                <span class="h4">{{ $filme['titulo'] }}</span>
+                {{-- <span class="dropdown ml-3">
                     <a class="ropdown-toggle" role="button" id="moreOptionDropDown" data-toggle="dropdown"
                         aria-haspopup="true"><i class="fas fa-ellipsis-h" style='color:white;'></i></a>
                     <div class="dropdown-menu dropdown-menu-left" aria-labelledby="moreOptionDropDown">
                         <a class="dropdown-item">Adicionar aos Favoritos</a>
-                        {{-- <a class="dropdown-item">Novo Group</a> --}}
+                        {{-- <a class="dropdown-item">Novo Group</a> 
                         <a class="dropdown-item">Novo Aba Comentarios</a>
                     </div>
-                </span>
+                </span> --}}
             </div>
             <div id="categorias" class="d-flex flex-row">
                 @foreach (range(1, 4) as $item)
-                    <a href="{{url('/filme/categoria/'.$item)}}">
+                    <a href="{{ url('/filme/categoria/' . $item) }}">
                         <li>Categoria{{ $item }}</li>
                     </a>
                 @endforeach
@@ -158,48 +158,14 @@
                     </span>
                 </form>
                 <span><span class="voteUserVal">3.1</span> media de 250 votos</span>
-                {{-- <a href="https://www.imdb.com/title/{code}/">
-                <div id="voteIMDB" class="vote w-25 border3"></div>
-            </a> --}}
-                <a href="#">
-                    <div id="voteIMDB"></div>
+                <a href="https://www.imdb.com/title/{{ $filme['imdb_code'] }}/">
+                    <div id="voteIMDB" class="vote w-25"></div>
                 </a>
-                <span><span class="voteIMDBVal">4.5</span> media de 250 votos no IMDB</span>
+                <span><span class="voteIMDBVal">{{ $filme['nota_imdb'] }}</span> media de 250 votos no IMDB</span>
             </div>
             <div>
                 <div class="area">
-                    <div id="desc" class="w-100">
-                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas a quam vestibulum, dapibus tellus
-                        ac,
-                        commodo lorem. Ut elementum tempus aliquam. Duis faucibus tincidunt sem a placerat. Nullam
-                        facilisis,
-                        urna.Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas a quam vestibulum, dapibus
-                        tellus
-                        ac,
-                        commodo lorem. Ut elementum tempus aliquam. Duis faucibus tincidunt sem a placerat. Nullam
-                        facilisis,
-                        urna.Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas a quam vestibulum, dapibus
-                        tellus
-                        ac,
-                        commodo lorem. Ut elementum tempus aliquam. Duis faucibus tincidunt sem a placerat. Nullam
-                        facilisis,
-                        urna.
-                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas a quam vestibulum, dapibus tellus
-                        ac,
-                        commodo lorem. Ut elementum tempus aliquam. Duis faucibus tincidunt sem a placerat. Nullam
-                        facilisis,
-                        urna.Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas a quam vestibulum, dapibus
-                        tellus
-                        ac,
-                        commodo lorem. Ut elementum tempus aliquam. Duis faucibus tincidunt sem a placerat. Nullam
-                        facilisis,
-                        urna.Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas a quam vestibulum, dapibus
-                        tellus
-                        ac,
-                        commodo lorem. Ut elementum tempus aliquam. Duis faucibus tincidunt sem a placerat. Nullam
-                        facilisis,
-                        urna.
-                    </div>
+                    <div id="desc" class="w-100">{{ $filme['descricao'] }}</div>
                     <a id="leanMore">Ler Mais</a>
                 </div>
                 <div class="descOcult d-none">
@@ -273,9 +239,6 @@
                 <div class="chat p-2 d-flex justify-content-center">
                         <i class="fas fa-plus"></i>
                 </div>
-                @includeIf('content.chat_layout',['title'=>'Titulo Massa','users'=>'12/30','value'=>'active'])
-                @includeIf('content.chat_layout',['title'=>'Titulo Massa','users'=>'12/30','value'=>'suspended'])
-                @includeIf('content.chat_layout',['title'=>'Titulo Massa','users'=>'12/30','value'=>'deactivate'])
                 @includeIf('content.chat_layout',['title'=>'Titulo Massa','users'=>'12/30','value'=>'active'])
                 @includeIf('content.chat_layout',['title'=>'Titulo Massa','users'=>'12/30','value'=>'suspended'])
                 @includeIf('content.chat_layout',['title'=>'Titulo Massa','users'=>'12/30','value'=>'deactivate'])

@@ -61,9 +61,7 @@ Route::middleware(AuthUser::class)->group(function () {
         return view('filme.categoria', compact("categoria"));
     })->name('categoria');
 
-    Route::get('/filme/{idFilme}', function ($idFilme) {
-        return view('filme.layout.filme', compact("idFilme"));
-    });
+    Route::get('/filme/{code_url}',[UsuarioController::class, 'filme']);
     //usuário
     Route::get('/usuario/conta', function () {
         return view('usuario.conta_usuario');

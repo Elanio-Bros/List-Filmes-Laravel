@@ -1,7 +1,6 @@
 @extends('filme.layout.layout_scroll_list')
 @section('title') Home @endsection
 @section('list')
-    {{-- {{dd($filmes_mais_comentados)}} --}}
     <div id="m-2">
         <div class="m-4">
             <h4>Ultimos Filmes Adicionados</h4>
@@ -14,7 +13,10 @@
                 @foreach ($ult_filmes as $filme)
                     <div class="mx-2 cardFilme">
                         @includeIf('content.card_filme_layout',
-                        ['titulo'=>$filme['titulo'],'imagem'=>$filme['capa_url']])
+                        ['titulo'=>$filme['titulo'],
+                        'imagem'=>$filme['capa_url'],
+                        'code_url'=>$filme['imdb_code']]
+                        )
                     </div>
                 @endforeach
             </div>
@@ -36,7 +38,10 @@
                     @foreach ($filmes_mais_comentados as $filme)
                         <div class="mx-2 cardFilme">
                             @includeIf('content.card_filme_layout',
-                            ['titulo'=>$filme['titulo'],'imagem'=>$filme['capa_url']])
+                            ['titulo'=>$filme['titulo'],
+                            'imagem'=>$filme['capa_url'],
+                            'code_url'=>$filme['imdb_code']]
+                            )
                         </div>
                     @endforeach
                 </div>
@@ -63,7 +68,10 @@
                         @foreach ($categoria['filmes'] as $filme)
                             <div class="mx-2 cardFilme">
                                 @includeIf('content.card_filme_layout',
-                                ['titulo'=>$filme['titulo'],'imagem'=>$filme['capa_url']])
+                                ['titulo'=>$filme['titulo'],
+                                'imagem'=>$filme['capa_url'],
+                                'code_url'=>$filme['imdb_code']]
+                                )
                             </div>
                         @endforeach
                     </div>
