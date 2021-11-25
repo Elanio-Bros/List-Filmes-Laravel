@@ -14,4 +14,5 @@ class Filme_Votos extends Model
         'id_usuario',
         'id_filme',
     ];
+    
 }

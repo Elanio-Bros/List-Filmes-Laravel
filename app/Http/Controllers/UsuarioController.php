@@ -8,12 +8,11 @@ use App\Models\Filme;
 use App\Models\LogSystem;
 use App\Models\Usuario;
 use Exception;
-use Illuminate\Database\QueryException;
+use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Redirect;
-use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Str;
 use PDOException;
 
@@ -29,7 +28,7 @@ class UsuarioController extends Controller
     {
         $filmes_comentarios = Filme::withCount('comentarios')->with(['comentarios' => function ($relation) {
             return $relation->where('grupos_comentario.titulo', '=', 'Comentário Gerais');
-        }], 'comentarios.usuario')->orderBy('comentarios_count', 'DESC')->take(10)->get();
+        }])->orderBy('comentarios_count', 'DESC')->take(10)->get();
         return view('welcome', ['filmes_comentarios' => $filmes_comentarios]);
     }
 
@@ -64,7 +63,7 @@ class UsuarioController extends Controller
 
     public function logout(Request $request)
     {
-        $this->logSystem->info($request->input('usuario') . ': Fez Logout');
+        $this->logSystem->info($request->session()->get('usuario')['usuario'] . ':Fez Logout');
         $request->session()->forget('usuario');
         return redirect()->route('entrada');
     }
@@ -83,10 +82,10 @@ class UsuarioController extends Controller
         $usuario['tipo'] = 'Normal';
         try {
             Usuario::create($usuario);
-            $this->logSystem->info('Usuário: ' . $usuario['usuario'] . ' e Email: ' . $usuario['email'] . ' Cadastrado');
+            $this->logSystem->info('Usuário: ' . $usuario['usuario'] . ' e Email: ' . $usuario['email'] . 'Cadastrado');
         } catch (PDOException $e) {
             if ($e->errorInfo[1] == 1062) {
-                $this->logSystem->error('Usuário: ' . $usuario['usuario'] . ' ou Email: ' . $usuario['email'] . ' Já Cadastrado');
+                $this->logSystem->error('Usuário:' . $usuario['usuario'] . ' ou Email:' . $usuario['email'] . ' Já Cadastrado');
                 return Redirect::back()->withErrors(['usuario' => 'Usuário ou Email Já Cadastrado']);
             }
         }
@@ -113,8 +112,22 @@ class UsuarioController extends Controller
 
     public function filme($code_url)
     {
-        $filme = Filme::firstWhere('imdb_code', $code_url);
-        $filme['nota_imdb'] = $filme['nota_imdb'] / 2;
-        return view('filme.layout.filme', compact('filme'));
+        $filme = Filme::with(['categoriasFilmes' => function ($relation) {
+            return $relation->orderBy('nome');
+        }, 'grupos', 'grupos.comentarios', 'grupos.comentarios.usuario'])
+            ->withCount('votos')->firstWhere('imdb_code', $code_url);
+        $filme['nota_media'] = round($filme->mediaVotos(), 1);
+        $filme['nota_imdb'] = round($filme['nota_imdb'], 1);
+        if ($filme != null) {
+            return view('filme.layout.filme', compact('filme'));
+        }
+        return redirect()->route('home');
+    }
+
+    public function avaliacaoFilme(Request $request,$code_url)
+    {
+        // dd($code_url);
+        // $filme=Filme::where()
+        dd($request);
     }
 }

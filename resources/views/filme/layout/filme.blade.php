@@ -126,7 +126,7 @@
 @section('content')
     @include('content.nav')
     <div id="mostFilme">
-        <img class="ml-2 py-2" src="{{$filme['capa_url']}}">
+        <img class="ml-2 py-2" src="{{ $filme['capa_url'] }}">
         <div class="ml-3 m-2 w-100">
             <div>
                 <span class="h4">{{ $filme['titulo'] }}</span>
@@ -140,28 +140,41 @@
                     </div>
                 </span> --}}
             </div>
-            <div id="categorias" class="d-flex flex-row">
-                @foreach (range(1, 4) as $item)
-                    <a href="{{ url('/filme/categoria/' . $item) }}">
-                        <li>Categoria{{ $item }}</li>
+            <div id="categorias" class="d-flex flex-row my-2">
+                @foreach ($filme['categoriasFilmes'] as $categoria)
+                    <a href="{{ url('/filme/categoria/' . $categoria['nome']) }}">
+                        <li>{{ $categoria['nome'] }}</li>
                     </a>
                 @endforeach
             </div>
             <div class="my-2 area">
                 <strong>Quantidade de Votos</strong>
                 <div id="voteUsers"></div>
-                <form class="formUser d-none">
-                    <div id="voteUsersForm" class=""></div>
+                <form class="formUser d-none" method="POST"
+                    action="{{ route('voto', ['code_url' => $filme['imdb_code']]) }}">
+                    @csrf
+                    <div id="areaStarVote">
+                        <div id="voteUsersForm" class=""></div>
+                        <select name="voto" hidden>
+                            <option value="0" selected></option>
+                            <option value="1"></option>
+                            <option value="2"></option>
+                            <option value="3"></option>
+                            <option value="4"></option>
+                            <option value="5"></option>
+                        </select>
+                    </div>
                     <span class="ml-2">
-                        <button type="submit" class="btn btnPerson ">Votar</button>
-                        <button type="button" class="btn btnPerson " onclick="document.location.reload()">Cancelar</button>
+                        <button type="submit" class="btn btnPerson">Votar</button>
+                        <button name="cancelar" type="button" class="btn btnPerson">Cancelar</button>
                     </span>
                 </form>
-                <span><span class="voteUserVal">3.1</span> media de 250 votos</span>
+                <span><span class="voteUserVal">{{ $filme['nota_media'] }}</span>/5 em média de
+                    {{ $filme['votos_count'] }} votos</span>
                 <a href="https://www.imdb.com/title/{{ $filme['imdb_code'] }}/">
                     <div id="voteIMDB" class="vote w-25"></div>
                 </a>
-                <span><span class="voteIMDBVal">{{ $filme['nota_imdb'] }}</span> media de 250 votos no IMDB</span>
+                <span><span class="voteIMDBVal">{{ $filme['nota_imdb'] }}</span>/10 em média no IMDB</span>
             </div>
             <div>
                 <div class="area">
@@ -192,48 +205,36 @@
                     </div>
                 </div>
             </div>
-            <div class="accordion" id="accordionExample">
-                <div class="card">
-                    <div class="card-header" id="headingOne">
-                        <h2 class="mb-0">
-                            <button class="btn btnPerson  btn-block text-left" type="button" data-toggle="collapse"
-                                data-target="#collapse1" aria-expanded="true">Comentarios Gerais</button>
-                        </h2>
-                    </div>
-                    <div id="collapse1" class="collapse" aria-labelledby="headingOne" data-parent="#accordionExample">
-                        <div class="card-body">
-                            @includeIf('content.comentario_layout',['name'=>'juaão','comentario'=>'olaolaolaolaolaolaolaolaolaolaolaolaolaolaolaolaolaolaolaolaolaolaolaolaolaolaolaolaolaolaolaolaolaola'])
-                            @includeIf('content.comentario_layout',['name'=>'juaão','comentario'=>'olaolaolaolaolaolaolaolaolaolaolaolaolaolaolaolaolaolaolaolaolaolaolaolaolaolaolaolaolaolaolaolaolaola'])
+            @foreach ($filme['grupos'] as $grupo)
+                <div class="accordion">
+                    <div class="card">
+                        <div class="card-header" id="headingOne">
+                            <h2 class="mb-0">
+                                <button class="btn btnPerson  btn-block text-left" type="button" data-toggle="collapse"
+                                    data-target="#collapse1" aria-expanded="true">{{ $grupo['titulo'] }}</button>
+                            </h2>
                         </div>
-                        <div class="card-footer">
-                            <form>
-                                <div class="input-group mb-3">
-                                    <input type="text" class="form-control" placeholder="Username" aria-label="Username"
-                                        aria-describedby="basic-addon1">
-                                    <button type="button" class="btn btnPerson ">Comentar</button>
-                                </div>
-                            </form>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="accordion" id="accordionExample">
-                <div class="card">
-                    <div class="card-header" id="headingOne">
-                        <h2 class="mb-0">
-                            <button class="btn btnPerson btn-block text-left" type="button" data-toggle="collapse"
-                                data-target="#collapse2" aria-expanded="true">Comentário Sobre Ola</button>
-                        </h2>
-                    </div>
-                    <div id="collapse2" class="collapse" aria-labelledby="headingOne" data-parent="#accordionExample">
-                        <div class="card-body">
-                            @includeIf('content.comentario_layout',['name'=>'maria','comentario'=>'olaolaolaolaolaolaolaolaolaolaolaolaolaolaolaolaolaolaolaolaolaolaolaolaolaolaolaolaolaolaolaolaolaola'])
+                        <div id="collapse1" class="collapse" aria-labelledby="headingOne"
+                            data-parent="#accordionExample">
+                            <div class="card-body">
+                                @foreach ($grupo['comentarios'] as $comentario)
+                                    @includeIf('content.comentario_layout',['name'=>$comentario['usuario'][0]['nome'],'comentario'=>$comentario['comentario']])
+                                @endforeach
+                            </div>
+                            <div class="card-footer">
+                                <form>
+                                    <div class="input-group mb-3">
+                                        <input type="text" class="form-control" placeholder="Username"
+                                            aria-label="Username" aria-describedby="basic-addon1">
+                                        <button type="button" class="btn btnPerson ">Comentar</button>
+                                    </div>
+                                </form>
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div>
-        </div>
-        {{-- <div class="w-25 ml-2">
+            @endforeach
+            {{-- <div class="w-25 ml-2">
             <div class="titulo text-center">Groups</div>
             <div class="d-flex flex-column groups">
                 <div class="chat p-2 d-flex justify-content-center">
@@ -244,49 +245,65 @@
                 @includeIf('content.chat_layout',['title'=>'Titulo Massa','users'=>'12/30','value'=>'deactivate'])
             </div>
         </div> --}}
-    </div>
+        </div>
 
-@endsection
-@section('script')
-    <script src='{{ URL::asset('libs/rating/jquery.star-rating-svg.js') }}'></script>
-    <script>
-        $('#leanMore').click(function() {
-            window.scrollTo(0, 0);
-            if ($('.descOcult p').text().length <= 0) {
-                $('.descOcult p').text($('#desc').text())
+    @endsection
+    @section('script')
+        <script src='{{ URL::asset('libs/rating/jquery.star-rating-svg.js') }}'></script>
+        <script>
+            $('#leanMore').click(function() {
+                window.scrollTo(0, 0);
+                if ($('.descOcult p').text().length <= 0) {
+                    $('.descOcult p').text($('#desc').text())
+                }
+                $('.descOcult').attr('style', 'display: flex !important');
+                $('body').attr('style', 'overflow: hidden');
+            });
+            $('#close').click(function() {
+                $('.descOcult').removeAttr('style', 'display: flex !important');
+                $('body').removeAttr('style', 'overflow: hidden');
+            });
+            let configRating = {
+                totalStars: 5,
+                minRating: 0,
+                starShape: 'rounded',
+                starSize: 30,
+                emptyColor: '#FFFFFFFF',
+                hoverColor: '#FFAE00FF',
+                strokeColor: '#FFA500FF',
+                strokeWidth: 9,
+                useGradient: false,
+                disableAfterRate: true,
+                readOnly: true,
+                useFullStars: true,
+                callback: function(currentRating, element) {
+                    console.log(currentRating);
+                    $('select[name="voto"]').val(currentRating);
+                },
             }
-            $('.descOcult').attr('style', 'display: flex !important');
-            $('body').attr('style', 'overflow: hidden');
-        });
-        $('#close').click(function() {
-            $('.descOcult').removeAttr('style', 'display: flex !important');
-            $('body').removeAttr('style', 'overflow: hidden');
-        });
-        let configRating = {
-            totalStars: 5,
-            minRating: 0,
-            starShape: 'rounded',
-            starSize: 30,
-            emptyColor: '#FFFFFFFF',
-            hoverColor: '#FFAE00FF',
-            strokeColor: '#FFA500FF',
-            strokeWidth: 9,
-            useGradient: false,
-            disableAfterRate: true,
-            readOnly: true,
-            useFullStars: true,
-        }
-        $(function() {
-            $('#voteUsers, #voteIMDB').starRating(configRating);
-            $('#voteUsers').starRating('setRating', parseFloat($('.voteUserVal').text()))
-            $('#voteIMDB').starRating('setRating', parseFloat($('.voteIMDBVal').text()))
-        });
-        $('#voteUsers').dblclick(function() {
-            $('#voteUsers').hide();
-            configRating['disableAfterRate'] = false
-            configRating['readOnly'] = false
-            $('.formUser').attr('style', 'display: flex !important');
-            $("#voteUsersForm").starRating(configRating);
-        });
-    </script>
-@endsection
+            $(function() {
+                $('#voteUsers,#voteIMDB').starRating(configRating);
+                $('#voteUsers').starRating('setRating', parseFloat($('.voteUserVal').text()))
+                $('#voteIMDB').starRating('setRating', parseFloat($('.voteIMDBVal').text() / 2))
+            });
+            $('#voteUsers').dblclick(function() {
+                $('#voteUsers').hide();
+                configRating['disableAfterRate'] = false
+                configRating['readOnly'] = false
+                $('.formUser').attr('style', 'display: flex !important');
+                $("#voteUsersForm").starRating(configRating);
+            });
+            $('button[name="cancelar"]').on({
+                click: function() {
+                    $("#voteUsersForm").remove();
+                    $('#areaStarVote').append('<div id="voteUsersForm" class=""></div>')
+                    $("#voteUsersForm").starRating(configRating);
+                    $('select[name="voto"]').val(0);
+                },
+                dblclick: function() {
+                    $('.formUser').hide();
+                    $('#voteUsers').show();
+                }
+            })
+        </script>
+    @endsection

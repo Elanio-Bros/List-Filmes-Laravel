@@ -26,8 +26,12 @@ Route::get('/termo', function () {
     return view('termo');
 });
 
-Route::get('/login', function () {
-    return view('usuario.entrada.login');
+Route::get('/login', function (Request $request) {
+    if (!$request->session()->has('usuario')) {
+        return view('usuario.entrada.login');
+    } else {
+        return redirect()->route('home');
+    }
 })->name('login');
 
 Route::post('/login', [UsuarioController::class, 'login']);
@@ -61,7 +65,9 @@ Route::middleware(AuthUser::class)->group(function () {
         return view('filme.categoria', compact("categoria"));
     })->name('categoria');
 
-    Route::get('/filme/{code_url}',[UsuarioController::class, 'filme']);
+    Route::get('/filme/{code_url}', [UsuarioController::class, 'filme']);
+    Route::post('/filme/{code_url}/voto', [UsuarioController::class, 'avaliacaoFilme'])->name('voto');
+
     //usuário
     Route::get('/usuario/conta', function () {
         return view('usuario.conta_usuario');
