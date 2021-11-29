@@ -17,4 +17,7 @@ class Grupos_Comentarios extends Model
     public function comentarios(){
         return $this->hasMany(Comentarios::class,'id_grupo','id');
     }
+    public function filme(){
+        return  $this->hasMany(Filme::class,'id','id_filme');
+    }
 }

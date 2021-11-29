@@ -143,6 +143,10 @@ input {
 
 }
 
+.modal {
+    color: black;
+}
+
 .dot {
     height: 0.5em;
     width: 0.5em;

@@ -66,7 +66,10 @@ Route::middleware(AuthUser::class)->group(function () {
     })->name('categoria');
 
     Route::get('/filme/{code_url}', [UsuarioController::class, 'filme']);
-    Route::post('/filme/{code_url}/voto', [UsuarioController::class, 'avaliacaoFilme'])->name('voto');
+    Route::post('/filme/{code_url}/voto/', [UsuarioController::class, 'avaliacaoFilme'])->name('voto');
+    Route::post('/filme/{code_url}/grupo/', [UsuarioController::class, 'criarGroupoComentario'])->name('criarGrupo');
+    Route::post('/filme/{code_url}/grupo/comentario', [UsuarioController::class, 'comentario'])->name('comentario');
+
 
     //usuário
     Route::get('/usuario/conta', function () {

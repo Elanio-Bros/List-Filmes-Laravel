@@ -31,10 +31,12 @@ class Filme extends Model
     {
         return $this->hasMany(Grupos_Comentarios::class, 'id_filme', 'id');
     }
+    
     public function comentarios()
     {
         return $this->hasManyThrough(Comentarios::class, Grupos_Comentarios::class, 'id_filme', 'id_grupo', 'id', 'id');
     }
+
     public function categoriasFilmes()
     {
         return $this->hasManyThrough(Categoria::class, Categoria_Filme::class, 'id_filme', 'id', 'id', 'id_categoria');
@@ -43,9 +45,5 @@ class Filme extends Model
     public function votos()
     {
         return $this->hasMany(Filme_Votos::class, 'id_filme', 'id');
-    }
-    public function mediaVotos()
-    {
-        return $this->votos->avg('voto');
     }
 }

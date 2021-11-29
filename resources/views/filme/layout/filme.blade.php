@@ -194,13 +194,14 @@
     <hr class="my-2">
     <div class="d-flex flex-row justify-content-between p-2 w-100">
         <div class="w-100 d-flex flex-column">
-            <div class="titulo text-center">Comentários</div>
+            <div class="titulo text-center">Grupos de Comentários</div>
             <div class="accordion" id="accordionExample">
                 <div class="card">
                     <div class="card-header">
                         <h2 class="mb-0">
-                            <button class="btn btnPerson  btn-block" arial-label="criar novo tópico" type="button"><i
-                                    class="fas fa-plus"></i></button>
+                            <button class="btn btnPerson  btn-block" arial-label="criar novo tópico" type="button"
+                                data-toggle="modal" data-target="#modalGrupoComentario">
+                                <i class="fas fa-plus"></i></button>
                         </h2>
                     </div>
                 </div>
@@ -210,11 +211,12 @@
                     <div class="card">
                         <div class="card-header" id="headingOne">
                             <h2 class="mb-0">
-                                <button class="btn btnPerson  btn-block text-left" type="button" data-toggle="collapse"
-                                    data-target="#collapse1" aria-expanded="true">{{ $grupo['titulo'] }}</button>
+                                <button class="btn btnPerson btn-block text-left" type="button" data-toggle="collapse"
+                                    data-target="#grupo{{ $grupo['id'] }}"
+                                    aria-expanded="true">{{ $grupo['titulo'] }}</button>
                             </h2>
                         </div>
-                        <div id="collapse1" class="collapse" aria-labelledby="headingOne"
+                        <div id="grupo{{ $grupo['id'] }}" class="collapse" aria-labelledby="headingOne"
                             data-parent="#accordionExample">
                             <div class="card-body">
                                 @foreach ($grupo['comentarios'] as $comentario)
@@ -224,7 +226,7 @@
                             <div class="card-footer">
                                 <form>
                                     <div class="input-group mb-3">
-                                        <input type="text" class="form-control" placeholder="Username"
+                                        <input type="text" class="form-control" name="comentario" placeholder="Comentario..."
                                             aria-label="Username" aria-describedby="basic-addon1">
                                         <button type="button" class="btn btnPerson ">Comentar</button>
                                     </div>
@@ -247,22 +249,43 @@
         </div> --}}
         </div>
 
+        <!-- Modal -->
+        <div class="modal fade" id="modalGrupoComentario" tabindex="-1" role="dialog"
+            aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                @if ($errors->any() && array_key_exists('grupo', $errors->messages()))
+                    <div class="alert alert-danger alert-dismissible fade show mb-2" role="alert">
+                        {{ $errors->messages()['grupo'][0] }}
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                @endif
+                <form class="modal-content" method="POST"
+                    action="{{ route('criarGrupo', ['code_url' => $filme['imdb_code']]) }}">
+                    @csrf
+                    <div class="modal-header">
+                        <h5 class="modal-title">Criar Grupo para Comentario</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="form-group">
+                            <input type="text" class="form-control" name="titulo_grupo" placeholder="Título do Grupo">
+                            <small class="form-text text-muted">Não coloque Títulos Já Existentes</small>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="submit" class="btn btnPerson">Criar</button>
+                    </div>
+                </form>
+            </div>
+        </div>
     @endsection
     @section('script')
         <script src='{{ URL::asset('libs/rating/jquery.star-rating-svg.js') }}'></script>
         <script>
-            $('#leanMore').click(function() {
-                window.scrollTo(0, 0);
-                if ($('.descOcult p').text().length <= 0) {
-                    $('.descOcult p').text($('#desc').text())
-                }
-                $('.descOcult').attr('style', 'display: flex !important');
-                $('body').attr('style', 'overflow: hidden');
-            });
-            $('#close').click(function() {
-                $('.descOcult').removeAttr('style', 'display: flex !important');
-                $('body').removeAttr('style', 'overflow: hidden');
-            });
             let configRating = {
                 totalStars: 5,
                 minRating: 0,
@@ -283,15 +306,29 @@
             }
             $(function() {
                 $('#voteUsers,#voteIMDB').starRating(configRating);
-                $('#voteUsers').starRating('setRating', parseFloat($('.voteUserVal').text()))
-                $('#voteIMDB').starRating('setRating', parseFloat($('.voteIMDBVal').text() / 2))
+                let voteUser = parseFloat($('.voteUserVal').text())
+                let voteIMDB = parseFloat($('.voteIMDBVal').text() / 2)
+                if (voteUser > 0) {
+                    $('#voteUsers').starRating('setRating', voteUser)
+                }
+                if (voteIMDB > 0) {
+                    $('#voteIMDB').starRating('setRating', voteIMDB)
+                }
+                @if ($errors->any() && array_key_exists('grupo', $errors->messages()))
+                    $('#modalGrupoComentario').modal('show');
+                    setTimeout(function(){
+                    $('.alert').alert('close')
+                    }, 5000);
+                @endif
+
             });
             $('#voteUsers').dblclick(function() {
                 $('#voteUsers').hide();
                 configRating['disableAfterRate'] = false
                 configRating['readOnly'] = false
                 $('.formUser').attr('style', 'display: flex !important');
-                $("#voteUsersForm").starRating(configRating);
+                startFromStar();
+
             });
             $('button[name="cancelar"]').on({
                 click: function() {
@@ -304,6 +341,30 @@
                     $('.formUser').hide();
                     $('#voteUsers').show();
                 }
-            })
+            });
+            $('#leanMore').click(function() {
+                window.scrollTo(0, 0);
+                if ($('.descOcult p').text().length <= 0) {
+                    $('.descOcult p').text($('#desc').text())
+                }
+                $('.descOcult').attr('style', 'display: flex !important');
+                $('body').attr('style', 'overflow: hidden');
+            });
+            $('#close').click(function() {
+                $('.descOcult').removeAttr('style', 'display: flex !important');
+                $('body').removeAttr('style', 'overflow: hidden');
+            });
+            $('')
+
+            function startFromStar() {
+                $("#voteUsersForm").starRating(configRating);
+                @if (isset($filme['usuario_voto']))
+                    let user_voto = {{ $filme['usuario_voto'] }};
+                    if (user_voto > 0) {
+                    $("#voteUsersForm").starRating('setRating',user_voto)
+                    $('select[name="voto"]').val(user_voto);
+                    }
+                @endif
+            }
         </script>
     @endsection

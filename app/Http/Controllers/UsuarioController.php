@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Categoria;
 use Illuminate\Http\Request;
 use App\Models\Filme;
+use App\Models\Filme_Votos;
 use App\Models\LogSystem;
 use App\Models\Usuario;
 use Exception;
@@ -116,18 +117,61 @@ class UsuarioController extends Controller
             return $relation->orderBy('nome');
         }, 'grupos', 'grupos.comentarios', 'grupos.comentarios.usuario'])
             ->withCount('votos')->firstWhere('imdb_code', $code_url);
-        $filme['nota_media'] = round($filme->mediaVotos(), 1);
-        $filme['nota_imdb'] = round($filme['nota_imdb'], 1);
         if ($filme != null) {
+            $voto_usuario = Usuario::with(['votos' => function ($relation) use ($filme) {
+                return $relation->firstWhere('id_filme', $filme['id']);
+            }])->firstWhere('usuario', session()->get('usuario')['usuario'])->votos;
+            if (count($voto_usuario) != 0) {
+                $filme['usuario_voto'] = $voto_usuario->first()->voto;
+            }
+            $filme['nota_media'] = round($filme->votos->avg('voto'), 1);
+            $filme['nota_imdb'] = round($filme['nota_imdb'], 1);
             return view('filme.layout.filme', compact('filme'));
         }
         return redirect()->route('home');
     }
 
-    public function avaliacaoFilme(Request $request,$code_url)
+    public function avaliacaoFilme(Request $request, $code_url)
     {
-        // dd($code_url);
-        // $filme=Filme::where()
-        dd($request);
+        $request->validate([
+            'voto' => ['required', 'integer'],
+        ]);
+        $usuario = Usuario::firstWhere('usuario', $request->session()->get('usuario')['usuario']);
+        $filme = Filme::firstWhere('imdb_code', $code_url);
+        $voto_usuario = $usuario->votos()->firstWhere("id_filme", $filme->id);
+        if ($voto_usuario == null) {
+            $filme->votos()->create([
+                'voto' => $request->input('voto'),
+                'id_usuario' => $usuario->id,
+            ]);
+        } else if ($voto_usuario->voto != $request->input('voto')) {
+            $voto_usuario->voto = $request->input('voto');
+            $voto_usuario->save();
+        }
+        return redirect()->back();
     }
+
+    public function criarGroupoComentario(Request $request, $code_url)
+    {
+        $request->validate([
+            'titulo_grupo' => ['required', 'string'],
+        ]);
+        $filme = Filme::firstWhere('imdb_code', $code_url);
+        $usuario = Usuario::firstWhere('usuario', $request->session()->get('usuario')['usuario']);
+        $grupo = $filme->grupos()->firstOrNew(['titulo' => 'Sobre ' . $request->input('titulo_grupo')]);
+        if ($grupo->exists) {
+            return Redirect::back()->withErrors(['grupo' => 'Grupo Sobre ' . $request->input('titulo_grupo') . ' Já Existe']);
+        } else {
+            $grupo['id_usuario'] = $usuario->id;
+            $grupo->save();
+        }
+        return redirect()->back();
+    }
+    public function comentarioGrupoFilme(Request $request, $code_url)
+    {
+        $request->validate([
+            'titulo_grupo' => ['required', 'string'],
+        ]);
+    }
+    
 }

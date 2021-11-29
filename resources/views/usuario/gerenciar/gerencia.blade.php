@@ -106,10 +106,6 @@
             color: #000000DD;
         }
 
-        .modal {
-            color: black;
-        }
-
     </style>
 @endsection
 @section('content')
@@ -198,6 +194,7 @@
             </div>
         </div>
     </div>
+    {{-- Modal --}}
     <div class="modal-fade">
         <div id="categories" class="modal fade" data-backdrop="static" aria-hidden="false">
             <div class="modal-dialog">

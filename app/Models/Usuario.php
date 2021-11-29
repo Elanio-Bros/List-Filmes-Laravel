@@ -22,4 +22,8 @@ class Usuario extends Authenticatable
     protected $hidden = [
         'senha'
     ];
+
+    public function votos(){
+        return $this->hasMany(Filme_Votos::class,'id_usuario','id');
+    }
 }
