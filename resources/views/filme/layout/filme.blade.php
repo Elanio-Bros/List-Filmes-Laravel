@@ -210,11 +210,9 @@
                 <div class="accordion">
                     <div class="card">
                         <div class="card-header" id="headingOne">
-                            <h2 class="mb-0">
-                                <button class="btn btnPerson btn-block text-left" type="button" data-toggle="collapse"
-                                    data-target="#grupo{{ $grupo['id'] }}"
-                                    aria-expanded="true">{{ $grupo['titulo'] }}</button>
-                            </h2>
+                            <button class="btn btnPerson btn-block text-left" type="button" data-toggle="collapse"
+                                data-target="#grupo{{ $grupo['id'] }}"
+                                aria-expanded="true">{{ $grupo['titulo'] }}</button>
                         </div>
                         <div id="grupo{{ $grupo['id'] }}" class="collapse" aria-labelledby="headingOne"
                             data-parent="#accordionExample">
@@ -226,9 +224,10 @@
                             <div class="card-footer">
                                 <form>
                                     <div class="input-group mb-3">
-                                        <input type="text" class="form-control" name="comentario" placeholder="Comentario..."
-                                            aria-label="Username" aria-describedby="basic-addon1">
-                                        <button type="button" class="btn btnPerson ">Comentar</button>
+                                        <input type="text" class="form-control" name="comentario"
+                                            placeholder="Comentario..." aria-label="Username"
+                                            aria-describedby="basic-addon1">
+                                        <button type="button" class="btn btnPerson comentar">Comentar</button>
                                     </div>
                                 </form>
                             </div>
@@ -354,7 +353,26 @@
                 $('.descOcult').removeAttr('style', 'display: flex !important');
                 $('body').removeAttr('style', 'overflow: hidden');
             });
-            $('')
+            $('.comentar').click(function() {
+                $.ajax({
+                    headers: {
+                        'X-CSRF-TOKEN': "{{ csrf_token() }}",
+                    },
+                    url: "{{ route('comentario', ['code_url' => $filme['imdb_code']]) }}",
+                    type: "post",
+                    data: {
+                        "_token": "{{ csrf_token() }}",
+                    },
+                }).done(function(response) {
+                    // let id = $(this).closest('.collapse').attr('id')
+                    // console.log($(this).closest('.accordion .card .card-header').children());
+                    console.log(response);
+
+                }).fail(function(jqXHR, textStatus) {
+                    console.log("Request failed: " + textStatus);
+
+                })
+            });
 
             function startFromStar() {
                 $("#voteUsersForm").starRating(configRating);

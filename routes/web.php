@@ -68,8 +68,7 @@ Route::middleware(AuthUser::class)->group(function () {
     Route::get('/filme/{code_url}', [UsuarioController::class, 'filme']);
     Route::post('/filme/{code_url}/voto/', [UsuarioController::class, 'avaliacaoFilme'])->name('voto');
     Route::post('/filme/{code_url}/grupo/', [UsuarioController::class, 'criarGroupoComentario'])->name('criarGrupo');
-    Route::post('/filme/{code_url}/grupo/comentario', [UsuarioController::class, 'comentario'])->name('comentario');
-
+    Route::post('/filme/{code_url}/grupo/comentario', [UsuarioController::class, 'comentarioGrupoFilme'])->name('comentario');
 
     //usuário
     Route::get('/usuario/conta', function () {
@@ -83,6 +82,7 @@ Route::middleware(AuthUser::class)->group(function () {
     //     return view('usuario.chat');
     // })->name('chat');
 });
+
 
 //gerência
 Route::get('/gerência', function (Request $request) {

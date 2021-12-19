@@ -6,6 +6,7 @@ use App\Models\Categoria;
 use Illuminate\Http\Request;
 use App\Models\Filme;
 use App\Models\Filme_Votos;
+use App\Models\Grupos_Comentarios;
 use App\Models\LogSystem;
 use App\Models\Usuario;
 use Exception;
@@ -169,9 +170,12 @@ class UsuarioController extends Controller
     }
     public function comentarioGrupoFilme(Request $request, $code_url)
     {
-        $request->validate([
-            'titulo_grupo' => ['required', 'string'],
-        ]);
+        // $request->validate([
+        //     'comentario' => ['required', 'string'],
+        //     'id_grupo' => ['required', 'integer'],
+        // ]);
+        $grupo = Grupos_Comentarios::with('comentarios')->get()->toArray();
+        $grupo=$request->session()->get('usuario');
+        return response()->json($grupo, 200);
     }
-    
 }
