@@ -4,6 +4,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UsuarioController;
+use App\Http\Controllers\FilmeController;
 use App\Models\Usuario;
 
 use App\Http\Middleware\AuthUser;
@@ -47,7 +48,7 @@ Route::post('/conta', [UsuarioController::class, 'criarConta']);
 Route::middleware(AuthUser::class)->group(function () {
     Route::get('/logout', [UsuarioController::class, 'logout'])->name('logout');
 
-    Route::get('/home', [UsuarioController::class, 'home'])->name('home');
+    Route::get('/home', [FilmeController::class, 'home'])->name('home');
 
     Route::get('/filme/nota', function () {
         return view('filme.nota');
@@ -65,10 +66,10 @@ Route::middleware(AuthUser::class)->group(function () {
         return view('filme.categoria', compact("categoria"));
     })->name('categoria');
 
-    Route::get('/filme/{code_url}', [UsuarioController::class, 'filme']);
-    Route::post('/filme/{code_url}/voto/', [UsuarioController::class, 'avaliacaoFilme'])->name('voto');
-    Route::post('/filme/{code_url}/grupo/', [UsuarioController::class, 'criarGroupoComentario'])->name('criarGrupo');
-    Route::post('/filme/{code_url}/grupo/comentario', [UsuarioController::class, 'comentarioGrupoFilme'])->name('comentario');
+    Route::get('/filme/{code_url}', [FilmeController::class, 'filme']);
+    Route::post('/filme/{code_url}/voto/', [FilmeController::class, 'avaliacaoFilme'])->name('voto');
+    Route::post('/filme/{code_url}/grupo/', [FilmeController::class, 'criarGrupoComentario'])->name('criarGrupo');
+    Route::post('/filme/{code_url}/grupo/comentario', [FilmeController::class, 'comentarioGrupoFilme'])->name('comentario');
 
     //usuário
     Route::get('/usuario/conta', function () {

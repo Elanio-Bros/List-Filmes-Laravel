@@ -209,10 +209,10 @@
             @foreach ($filme['grupos'] as $grupo)
                 <div class="accordion">
                     <div class="card">
-                        <div class="card-header" id="headingOne">
+                        <div class="card-header">
                             <button class="btn btnPerson btn-block text-left" type="button" data-toggle="collapse"
                                 data-target="#grupo{{ $grupo['id'] }}"
-                                aria-expanded="true">{{ $grupo['titulo'] }}</button>
+                                aria-expanded="true"><span class="grupo-titulo">{{ $grupo['titulo'] }}</span></button>
                         </div>
                         <div id="grupo{{ $grupo['id'] }}" class="collapse" aria-labelledby="headingOne"
                             data-parent="#accordionExample">
@@ -354,6 +354,7 @@
                 $('body').removeAttr('style', 'overflow: hidden');
             });
             $('.comentar').click(function() {
+                console.log($(this).parents('.grupo-titulo'))
                 $.ajax({
                     headers: {
                         'X-CSRF-TOKEN': "{{ csrf_token() }}",
@@ -361,7 +362,7 @@
                     url: "{{ route('comentario', ['code_url' => $filme['imdb_code']]) }}",
                     type: "post",
                     data: {
-                        "_token": "{{ csrf_token() }}",
+                        "_token": "{{ csrf_token() }}","id_grupo":$(this).closest('.collapse').attr('id')
                     },
                 }).done(function(response) {
                     // let id = $(this).closest('.collapse').attr('id')
