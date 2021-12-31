@@ -109,6 +109,10 @@
             height: 30vh;
         }
 
+        .card .perfil {
+            cursor: auto;
+        }
+
         .accordion .card {
             background-color: #191919;
         }
@@ -198,11 +202,9 @@
             <div class="accordion" id="accordionExample">
                 <div class="card">
                     <div class="card-header">
-                        <h2 class="mb-0">
-                            <button class="btn btnPerson  btn-block" arial-label="criar novo tópico" type="button"
-                                data-toggle="modal" data-target="#modalGrupoComentario">
-                                <i class="fas fa-plus"></i></button>
-                        </h2>
+                        <button class="btn btnPerson  btn-block" arial-label="criar novo tópico" type="button"
+                            data-toggle="modal" data-target="#modalGrupoComentario">
+                            <i class="fas fa-plus"></i></button>
                     </div>
                 </div>
             </div>
@@ -211,23 +213,26 @@
                     <div class="card">
                         <div class="card-header">
                             <button class="btn btnPerson btn-block text-left" type="button" data-toggle="collapse"
-                                data-target="#grupo{{ $grupo['id'] }}"
-                                aria-expanded="true"><span class="grupo-titulo">{{ $grupo['titulo'] }}</span></button>
+                                data-target="#grupo{{ $grupo['id'] }}" aria-expanded="true"><span
+                                    class="grupo-titulo">{{ $grupo['titulo'] }}</span></button>
                         </div>
                         <div id="grupo{{ $grupo['id'] }}" class="collapse" aria-labelledby="headingOne"
                             data-parent="#accordionExample">
-                            <div class="card-body">
+                            <div class="card-body body-grupo">
                                 @foreach ($grupo['comentarios'] as $comentario)
-                                    @includeIf('content.comentario_layout',['name'=>$comentario['usuario'][0]['nome'],'comentario'=>$comentario['comentario']])
+                                    @includeIf('content.comentario_layout',['perfil'=>$comentario['usuario'][0]['url_perfil'],'name'=>$comentario['usuario'][0]['nome'],'comentario'=>$comentario['comentario']])
                                 @endforeach
                             </div>
                             <div class="card-footer">
-                                <form>
+                                <form class="d-flex formComentario">
                                     <div class="input-group mb-3">
+                                        <div class="spinner-border mx-2 d-none" role="status">
+                                            <span class="sr-only">Loading...</span>
+                                        </div>
                                         <input type="text" class="form-control" name="comentario"
                                             placeholder="Comentario..." aria-label="Username"
                                             aria-describedby="basic-addon1">
-                                        <button type="button" class="btn btnPerson comentar">Comentar</button>
+                                        <button type="submit" class="btn btnPerson comentar">Comentar</button>
                                     </div>
                                 </form>
                             </div>
@@ -353,27 +358,60 @@
                 $('.descOcult').removeAttr('style', 'display: flex !important');
                 $('body').removeAttr('style', 'overflow: hidden');
             });
-            $('.comentar').click(function() {
-                console.log($(this).parents('.grupo-titulo'))
-                $.ajax({
-                    headers: {
-                        'X-CSRF-TOKEN': "{{ csrf_token() }}",
-                    },
-                    url: "{{ route('comentario', ['code_url' => $filme['imdb_code']]) }}",
-                    type: "post",
-                    data: {
-                        "_token": "{{ csrf_token() }}","id_grupo":$(this).closest('.collapse').attr('id')
-                    },
-                }).done(function(response) {
-                    // let id = $(this).closest('.collapse').attr('id')
-                    // console.log($(this).closest('.accordion .card .card-header').children());
-                    console.log(response);
+            $('.formComentario').submit(function(event) {
+                event.preventDefault();
+                var ElementCard = $(this).closest('.card')
+                var comentario = $(this).find('input').val();
+                if (comentario != '') {
+                    const loading = $(this).parent().find('.spinner-border');
+                    loading.removeClass('d-none');
+                    $(this).find('input').val('');
+                    //requisição
+                    $.ajax({
+                        headers: {
+                            'X-CSRF-TOKEN': "{{ csrf_token() }}",
+                        },
+                        url: "{{ route('comentario', ['code_url' => $filme['imdb_code']]) }}",
+                        type: "post",
+                        data: {
+                            "_token": "{{ csrf_token() }}",
+                            "id_grupo": $(this).closest('.collapse').attr('id'),
+                            "titulo_grupo": ElementCard.find('.card-header button').text(),
+                            "comentario": comentario,
+                        },
+                    }).done(function(response) {
+                        loading.addClass('d-none');
+                        setComentario(ElementCard, response)
+                    }).fail(function(jqXHR, textStatus) {
+                        console.log("Request failed: " + jqXHR);
+                        console.log("Request failed: " + textStatus);
+                        loading.addClass('d-none');
+                    })
 
-                }).fail(function(jqXHR, textStatus) {
-                    console.log("Request failed: " + textStatus);
-
-                })
+                } else { //alert erro
+                }
             });
+
+            function setComentario(card, listComentarios) {
+                var cardBody = card.find('.body-grupo');
+                cardBody.html('');
+                listComentarios.forEach(function(element) {
+                    const div = `<div class="card comentario">
+                                <div class="card-header d-flex border-0" style="background-color: #FFF;">
+            <img class="perfil" src=${element.usuario[0].url_perfil}> 
+            <b class="p-2">${element.usuario[0].usuario}</b>
+            </div>
+        <div class="card-body p-2">
+            <blockquote class="m-2">
+                <p>${element.comentario}</p>
+            </blockquote>
+        </div>
+        </div>
+        `
+                    cardBody.append(div)
+                });
+
+            };
 
             function startFromStar() {
                 $("#voteUsersForm").starRating(configRating);

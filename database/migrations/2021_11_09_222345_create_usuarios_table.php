@@ -19,8 +19,8 @@ class CreateUsuariosTable extends Migration
             $table->string('usuario')->unique();
             $table->string('email')->unique();
             $table->longText('senha');
-            // $table->enum('tipo_perfil',['url','file'])->default('file');
-            $table->string('url_perfil')->default('img/img_user/default.png');
+            $table->enum('tipo_perfil',['url','file'])->default('file');
+            $table->string('url_perfil')->default('default.png');
             $table->string('token_api',25)->unique();
             $table->enum('tipo', ['Admin', 'Gerente', 'Normal']);
             $table->timestamps();

@@ -35,7 +35,7 @@ class UsuarioController extends Controller
             'usuario' => ['required', 'string'],
             'senha' => ['required', 'string'],
         ]);
-        $usuario = Usuario::where('usuario', '=', $request->input('usuario'))
+        $usuario = Usuario::where('usuario', $request->input('usuario'))
             ->orWhere('email', '=', $request->input('usuario'))->first();
         if ($usuario != null) {
             $senhaUsuario = $usuario['senha'];
