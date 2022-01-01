@@ -76,7 +76,7 @@
         $(".ocultaPass").click(function() {
             $(this).children("i").toggle();
             let inputSenha = $(this).closest('.input-group').find('input');
-            inputSenha.prop("type", senha.prop("type") == "password" ? "text" : "password");
+            inputSenha.prop("type", inputSenha.prop("type") == "password" ? "text" : "password");
         });
         $(function() {
             if ($('.imgsFundo').length == 0) {

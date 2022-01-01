@@ -220,7 +220,7 @@
                             data-parent="#accordionExample">
                             <div class="card-body body-grupo">
                                 @foreach ($grupo['comentarios'] as $comentario)
-                                    @includeIf('content.comentario_layout',['perfil'=>$comentario['usuario'][0]['url_perfil'],'name'=>$comentario['usuario'][0]['nome'],'comentario'=>$comentario['comentario']])
+                                    @includeIf('content.comentario_layout',['perfil'=>$comentario['usuario'][0]['url_perfil'],'name'=>$comentario['usuario'][0]['usuario'],'comentario'=>$comentario['comentario']])
                                 @endforeach
                             </div>
                             <div class="card-footer">
@@ -392,25 +392,19 @@
                 }
             });
 
-            function setComentario(card, listComentarios) {
+            function setComentario(card, ListaComentarios) {
                 var cardBody = card.find('.body-grupo');
                 cardBody.html('');
-                listComentarios.forEach(function(element) {
-                    const div = `<div class="card comentario">
-                                <div class="card-header d-flex border-0" style="background-color: #FFF;">
-            <img class="perfil" src=${element.usuario[0].url_perfil}> 
-            <b class="p-2">${element.usuario[0].usuario}</b>
-            </div>
-        <div class="card-body p-2">
-            <blockquote class="m-2">
-                <p>${element.comentario}</p>
-            </blockquote>
-        </div>
-        </div>
-        `
-                    cardBody.append(div)
+                ListaComentarios.forEach(function(element) {
+                    var card = $(document.createElement('div')).addClass("card comentario");
+                    var card_head = $(document.createElement('div')).addClass("card-header d-flex border-0").css('background-color', '#FFF');
+                    var img_user = $(document.createElement('img')).addClass('perfil').attr('src', element.usuario[0].url_perfil);
+                    var username = $(document.createElement('b')).addClass('p-2').append(element.usuario[0].usuario);
+                    var card_body = $(document.createElement('div')).addClass("card-body p-2");
+                    var comentario = $(document.createElement('p')).addClass("m-2").append(element.comentario);
+                    card.append([card_head.append([img_user, username]), card_body.append(comentario)]);
+                    cardBody.append(card);
                 });
-
             };
 
             function startFromStar() {
