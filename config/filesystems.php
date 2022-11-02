@@ -38,9 +38,24 @@ return [
         'public' => [
             'driver' => 'local',
             'root' => storage_path('app/public'),
-            'url' => env('APP_URL').'/storage',
+            'url' => env('APP_URL') . '/storage',
             'visibility' => 'public',
         ],
+
+        'user' => [
+            'driver' => 'local',
+            'root' => storage_path('app/public/img/user'),
+            'url' => env('APP_URL') . '/storage/img/user',
+            'visibility' => 'public',
+        ],
+
+        'case' => [
+            'driver' => 'local',
+            'root' => storage_path('app/public/img/cases'),
+            'url' => env('APP_URL') . '/storage/img/cases',
+            'visibility' => 'public',
+        ],
+
 
         's3' => [
             'driver' => 's3',

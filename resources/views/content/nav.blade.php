@@ -21,42 +21,28 @@
                 <a class="nav-link" href="{{ route('nota') }}">Por Nota</a>
             </li>
             <li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
-                    aria-haspopup="true" aria-expanded="false">
-                    Categoria
-                </a>
-                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                    @foreach ($categoria_nav as $item)
-                        <a class="dropdown-item"
-                            href="{{ url('filme/categoria/' . $item['nome']) }}">{{ $item['nome'] }}</a>
-                    @endforeach
-                    <div class="dropdown-divider"></div>
-                    <a class="dropdown-item" href="{{ route('categorias') }}">Outras Categorias</a>
-                </div>
+                @if (count($categoria_nav) > 1)
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
+                        data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        Categoria
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                        @foreach ($categoria_nav as $item)
+                            <a class="dropdown-item"
+                                href="{{ url('filme/categoria/' . $item['nome']) }}">{{ $item['nome'] }}</a>
+                        @endforeach
+                        <div class="dropdown-divider"></div>
+                        <a class="dropdown-item" href="{{ route('categorias') }}">Outras Categorias</a>
+                    </div>
             </li>
+            @endif
         </ul>
         {{-- <form class="form-inline my-1">
             <input class="form-control" type="search" placeholder="Nome do Filmes" aria-label="Pesquisar">
             <button class="btn btnPerson" type="submit">Pesquisar</button>
         </form> --}}
-        <div class="dropdown ml-3">
-            <a class="ropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown"
-                aria-haspopup="true" aria-expanded="false">
-                <img class="perfil" src="{{ $url_perfil }}">
-            </a>
-            <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuLink">
-                <a class="dropdown-item" href="{{ route('minha_conta') }}">Minha Conta</a>
-                <a class="dropdown-item" href="{{ route('favorito') }}">Favoritos</a>
-                {{-- <a class="dropdown-item" href="{{route('chat')}}">Chats</a> --}}
-                <div class="dropdown-item link" data-toggle="modal" data-target="#exampleModal">Avisos <span class='dot'
-                        date-value='noti'></span></div>
-                @if($is_admin==true)
-                <a class="dropdown-item" href="{{ route('admin') }}">Administração</a>
-                @endif
-                <div class="dropdown-divider"></div>
-                <a type="button" class="dropdown-item btn-danger" href="{{ route('logout') }}" >Sair</a>
-            </div>
-        </div>
+        @include('usuario.layout.nav_user')
+    </div>
     </div>
 </nav>
 <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">

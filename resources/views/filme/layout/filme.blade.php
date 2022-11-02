@@ -388,7 +388,6 @@
                         loading.addClass('d-none');
                     })
 
-                } else { //alert erro
                 }
             });
 

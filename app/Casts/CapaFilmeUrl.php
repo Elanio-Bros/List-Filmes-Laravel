@@ -3,6 +3,7 @@
 namespace App\Casts;
 
 use Illuminate\Contracts\Database\Eloquent\CastsAttributes;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\URL;
 
 class CapaFilmeUrl implements CastsAttributes
@@ -19,7 +20,7 @@ class CapaFilmeUrl implements CastsAttributes
     public function get($model, $key, $value, $attributes)
     {
         if ($attributes['tipo_capa'] == 'file') {
-            return URL::asset('img/capa_filmes/' . $value);
+            return Storage::drive('case')->url($value);
         } else {
             return $value;
         }

@@ -3,6 +3,7 @@
 namespace App\Casts;
 
 use Illuminate\Contracts\Database\Eloquent\CastsAttributes;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\URL;
 
 class PerfilUrl implements CastsAttributes
@@ -19,7 +20,7 @@ class PerfilUrl implements CastsAttributes
     public function get($model, $key, $value, $attributes)
     {
         if ($attributes['tipo_perfil'] == 'file') {
-            return URL::asset('img/img_user/' . $value);
+            return Storage::drive('user')->url($value);
         } else {
             return $value;
         }

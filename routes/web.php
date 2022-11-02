@@ -74,10 +74,12 @@ Route::middleware(AuthUser::class)->group(function () {
 
     //usuário
     Route::get('/usuario/conta', [GerenciaController::class, 'user_conta'])->name('minha_conta');
+    Route::post('/usuario/conta', [GerenciaController::class, 'update_user_conta'])->name('update_conta');
 
-    Route::get('/usuario/favorito', function () {
-        return view('usuario.favorito');
-    })->name('favorito');
+    // Route::get('/usuario/favorito', function () {
+    //     return view('usuario.favorito');
+    // })->name('favorito');
+
     // Route::get('/usuario/chat', function () {
     //     return view('usuario.chat');
     // })->name('chat');

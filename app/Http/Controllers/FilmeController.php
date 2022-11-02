@@ -16,6 +16,7 @@ class FilmeController extends Controller
     protected $logSystem;
     public function __construct()
     {
+        parent::__construct();
         $this->logSystem = Log::channel('log_system');
     }
 
@@ -46,7 +47,7 @@ class FilmeController extends Controller
         if ($filme != null) {
             $voto_usuario = Usuario::with(['votos' => function ($relation) use ($filme) {
                 return $relation->firstWhere('id_filme', $filme['id']);
-            }])->firstWhere('usuario', session()->get('usuario')['usuario'])->votos;
+            }])->firstWhere('usuario', $this->usuario['usuario'])->votos;
             if (count($voto_usuario) != 0) {
                 $filme['usuario_voto'] = $voto_usuario->first()->voto;
             }
@@ -62,7 +63,7 @@ class FilmeController extends Controller
         $request->validate([
             'voto' => ['required', 'integer'],
         ]);
-        $usuario = Usuario::firstWhere('usuario', $request->session()->get('usuario')['usuario']);
+        $usuario = Usuario::firstWhere('usuario', $this->usuario['usuario']);
         $filme = Filme::firstWhere('imdb_code', $code_url);
         $voto_usuario = $usuario->votos()->firstWhere("id_filme", $filme->id);
         if ($voto_usuario == null) {
@@ -83,7 +84,7 @@ class FilmeController extends Controller
             'titulo_grupo' => ['required', 'string'],
         ]);
         $filme = Filme::firstWhere('imdb_code', $code_url);
-        $usuario = Usuario::firstWhere('usuario', $request->session()->get('usuario')['usuario']);
+        $usuario = Usuario::firstWhere('usuario', $this->usuario['usuario']);
         $grupo = $filme->grupos()->firstOrNew(['titulo' => 'Sobre ' . $request->input('titulo_grupo')]);
         if ($grupo->exists) {
             return Redirect::back()->withErrors(['grupo' => 'Grupo Sobre ' . $request->input('titulo_grupo') . ' Já Existe']);
@@ -107,7 +108,7 @@ class FilmeController extends Controller
                 ->where('id', $id_grupo)->where('titulo', $titulo)->first();
             $grupo->comentarios()->create([
                 'comentario' => $request->input('comentario'),
-                'id_usuario' => $request->session()->get('usuario')['id'],
+                'id_usuario' => $this->id_usuario,
             ]);
             $comentarios = Comentarios::select('comentario', 'id_usuario')->where('id_grupo', $grupo->id)->with(['usuario' => function ($relation) {
                 $relation->select('id', 'usuario', 'url_perfil', 'tipo_perfil');
