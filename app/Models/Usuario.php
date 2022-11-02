@@ -28,7 +28,8 @@ class Usuario extends Authenticatable
         'url_perfil' => PerfilUrl::class,
     ];
 
-    public function votos(){
-        return $this->hasMany(Filme_Votos::class,'id_usuario','id');
+    public function votos()
+    {
+        return $this->hasMany(Filme_Votos::class, 'id_usuario', 'id');
     }
 }

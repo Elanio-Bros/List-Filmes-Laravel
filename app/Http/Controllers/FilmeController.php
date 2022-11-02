@@ -107,11 +107,11 @@ class FilmeController extends Controller
                 ->where('id', $id_grupo)->where('titulo', $titulo)->first();
             $grupo->comentarios()->create([
                 'comentario' => $request->input('comentario'),
-                'id_usuario' => Usuario::where('usuario', $request->session()->get('usuario')['usuario'])->first()->id
+                'id_usuario' => $request->session()->get('usuario')['id'],
             ]);
             $comentarios = Comentarios::select('comentario', 'id_usuario')->where('id_grupo', $grupo->id)->with(['usuario' => function ($relation) {
-                    $relation->select('id', 'usuario', 'url_perfil','tipo_perfil');
-                }])->get()->toArray();
+                $relation->select('id', 'usuario', 'url_perfil', 'tipo_perfil');
+            }])->get()->toArray();
             return response()->json($comentarios, 200);
         } else {
             abort(404);

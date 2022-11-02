@@ -58,19 +58,19 @@
                                 Tipo
                             </div>
                             <div class="card-body">
-                                <p class="card-text text-center">Usuário</p>
+                                <p class="card-text text-center">{{$tipo}}</p>
                             </div>
                         </div>
                     </span>
                 </div>
                 <div class="form-group w-100">
-                    <input type="text" class="form-control" name="name" placeholder="Nome">
+                    <input type="text" class="form-control" name="nome" value="{{$nome}}" placeholder="Nome">
                 </div>
                 <div class="form-group">
-                    <input type="email" class="form-control" name="email" placeholder="Email">
+                    <input type="email" class="form-control" name="email" value="{{$email}}" placeholder="Email">
                 </div>
                 <div class="form-group">
-                    <input type="text" class="form-control" name="user" placeholder="Usuário">
+                    <input type="text" class="form-control" name="usuario" value="{{$usuario}}" placeholder="Usuário">
                 </div>
                 <div class="d-flex justify-content-between">
                     <div class="input-group mr-2">

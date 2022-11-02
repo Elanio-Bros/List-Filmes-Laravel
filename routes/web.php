@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UsuarioController;
 use App\Http\Controllers\FilmeController;
+use App\Http\Controllers\GerenciaController;
 use App\Models\Usuario;
 
 use App\Http\Middleware\AuthUser;
@@ -72,9 +73,7 @@ Route::middleware(AuthUser::class)->group(function () {
     Route::post('/filme/{code_url}/grupo/comentario', [FilmeController::class, 'comentarioGrupoFilme'])->name('comentario');
 
     //usuário
-    Route::get('/usuario/conta', function () {
-        return view('usuario.conta_usuario');
-    })->name('minha_conta');
+    Route::get('/usuario/conta', [GerenciaController::class, 'user_conta'])->name('minha_conta');
 
     Route::get('/usuario/favorito', function () {
         return view('usuario.favorito');

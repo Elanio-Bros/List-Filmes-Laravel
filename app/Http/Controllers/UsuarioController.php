@@ -48,6 +48,7 @@ class UsuarioController extends Controller
             return Redirect::back()->withErrors(['usuario' => 'Usuário/Email Invalido']);
         }
         $usuario = [
+            'id' => $usuario['id'],
             'usuario' => $usuario['usuario'],
             'tipo' => $usuario['tipo'],
             'perfil' => $usuario['url_perfil'],
