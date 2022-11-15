@@ -59,7 +59,7 @@
                                 Tipo
                             </div>
                             <div class="card-body">
-                                <p class="card-text text-center">{{ $usuario['tipo'] }}</p>
+                                <p class="card-text text-center">{{ ucwords($usuario['tipo']) }}</p>
                             </div>
                         </div>
                     </span>

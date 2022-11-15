@@ -7,11 +7,15 @@
 @endsection
 @section('grade')
     <div class="gridPerson w-100">
-        @foreach (range(1, 15) as $item)
+        @foreach ($filmes as $filme)
             <div class="col-auto mb-2">
-                @includeIf('content.card_filme_layout', ['titulo'=>"$item Titulo Filme",
-                'imagem'=>'https://images-na.ssl-images-amazon.com/images/I/71yDb8SKTTL.jpg'])
+                @includeIf('content.card_filme_layout', [
+                    'titulo' => $filme['titulo'],
+                    'imagem' => $filme['capa_url'],
+                    'code_url' => $filme['imdb_code'],
+                ])
             </div>
         @endforeach
     </div>
+    @includeIf('content.paginate', ['element' => $filmes])
 @endsection

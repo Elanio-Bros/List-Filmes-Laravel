@@ -20,24 +20,6 @@ class FilmeController extends Controller
         $this->logSystem = Log::channel('log_system');
     }
 
-    public function home()
-    {
-        $filmes_comentarios = Filme::select('titulo', 'imdb_code', 'capa_url', 'tipo_capa')->withCount('comentarios')->with(['comentarios' => function ($relation) {
-            return $relation->where('grupos_comentario.titulo', '=', 'Comentário Gerais');
-        }])->orderBy('comentarios_count', 'DESC')->take(10)->get();
-
-        $ult_filmes = Filme::select('titulo', 'imdb_code', 'capa_url', 'tipo_capa')->orderBy('created_at', 'DESC')->take(15)->get();
-
-        $filmes_categoria = Categoria::with(['filmes' => function ($relation) {
-            return $relation->orderBy('created_at', 'DESC');
-        }])->orderBy('created_at', 'DESC')->take(5)->get();
-        return view('filme.home', [
-            'ult_filmes' => $ult_filmes,
-            'filmes_mais_comentados' => $filmes_comentarios,
-            'categorias_utimo_filmes' => $filmes_categoria,
-        ]);
-    }
-
     public function filme($code_url)
     {
         $filme = Filme::with(['categoriasFilmes' => function ($relation) {
@@ -94,6 +76,7 @@ class FilmeController extends Controller
         }
         return redirect()->back();
     }
+
     public function comentarioGrupoFilme(Request $request, $code_url)
     {
         $request->validate([

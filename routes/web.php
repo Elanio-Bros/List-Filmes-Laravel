@@ -1,15 +1,13 @@
 <?php
 
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UsuarioController;
 use App\Http\Controllers\FilmeController;
 use App\Http\Controllers\GerenciaController;
-use App\Models\Usuario;
+use App\Http\Controllers\ListagemFilmes;
 
 use App\Http\Middleware\AuthUser;
-use GuzzleHttp\Middleware;
 
 /*
 |--------------------------------------------------------------------------
@@ -49,15 +47,13 @@ Route::post('/conta', [UsuarioController::class, 'criarConta']);
 Route::middleware(AuthUser::class)->group(function () {
     Route::get('/logout', [UsuarioController::class, 'logout'])->name('logout');
 
-    Route::get('/home', [FilmeController::class, 'home'])->name('home');
+    Route::get('/home', [ListagemFilmes::class, 'home'])->name('home');
 
     Route::get('/filme/nota', function () {
         return view('filme.nota');
     })->name('nota');
 
-    Route::get('/filme/votados', function () {
-        return view('filme.votados');
-    })->name('votados');
+    Route::get('/filme/votados', [ListagemFilmes::class, 'votados'])->name('votados');
 
     Route::get('filme/categorias', function () {
         return view('filme.categorias');
