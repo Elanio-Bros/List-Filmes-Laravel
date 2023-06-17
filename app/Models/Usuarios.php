@@ -7,7 +7,7 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 use App\Casts\PerfilUrl;
 // use Illuminate\Database\Eloquent\Model;
 
-class Usuario extends Authenticatable
+class Usuarios extends Authenticatable
 {
     use HasFactory;
     protected $table = 'usuarios';

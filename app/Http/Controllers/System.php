@@ -3,16 +3,16 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\Filme;
-use App\Models\Usuario;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Redirect;
-use Illuminate\Support\Str;
-use PDOException;
+use App\Models\Filmes;
+use App\Models\Usuarios;
 
-class UsuarioController extends Controller
+
+class System extends Controller
 {
+
     protected $logSystem;
     public function __construct()
     {
@@ -20,9 +20,9 @@ class UsuarioController extends Controller
         $this->logSystem = Log::channel('log_system');
     }
 
-    public function welcome(Request $request)
+    public function index(Request $request)
     {
-        $filmes_comentarios = Filme::withCount('comentarios')->with(['comentarios' => function ($relation) {
+        $filmes_comentarios = Filmes::withCount('comentarios')->with(['comentarios' => function ($relation) {
             return $relation->where('grupos_comentario.titulo', '=', 'Comentário Gerais');
         }])->orderBy('comentarios_count', 'DESC')->take(10)->get();
         return view('welcome', [
@@ -37,7 +37,7 @@ class UsuarioController extends Controller
             'usuario' => ['required', 'string'],
             'senha' => ['required', 'string'],
         ]);
-        $usuario = Usuario::where('usuario', $request->input('usuario'))
+        $usuario = Usuarios::where('usuario', $request->input('usuario'))
             ->orWhere('email', '=', $request->input('usuario'))->first();
         if ($usuario != null) {
             $senhaUsuario = $usuario['senha'];
@@ -66,29 +66,5 @@ class UsuarioController extends Controller
         $this->logSystem->info($request->session()->get('usuario')['usuario'] . ':Fez Logout');
         $request->session()->forget('usuario');
         return redirect()->route('entrada');
-    }
-
-    public function criarConta(Request $request)
-    {
-        $request->validate([
-            'usuario' => ['required', 'string'],
-            'nome' => ['required', 'string'],
-            'email' => ['required', 'string'],
-            'senha' => ['required', 'string'],
-        ]);
-        $usuario = $request->except(['_token']);
-        $usuario['senha'] = Hash::make($request->input('senha'));
-        $usuario['token_api'] = Str::random(25);
-        $usuario['tipo'] = 'Normal';
-        try {
-            Usuario::create($usuario);
-            $this->logSystem->info('Usuário: ' . $usuario['usuario'] . ' e Email: ' . $usuario['email'] . 'Cadastrado');
-        } catch (PDOException $e) {
-            if ($e->errorInfo[1] == 1062) {
-                $this->logSystem->error('Usuário:' . $usuario['usuario'] . ' ou Email:' . $usuario['email'] . ' Já Cadastrado');
-                return Redirect::back()->withErrors(['usuario' => 'Usuário ou Email Já Cadastrado']);
-            }
-        }
-        return $this->login($request);
     }
 }

@@ -10,7 +10,7 @@ use App\Models\Comentarios;
 use App\Models\Categoria_Filme;
 use App\Models\Categoria;
 
-class Filme extends Model
+class Filmes extends Model
 {
     use HasFactory;
     protected $table = 'filmes';
