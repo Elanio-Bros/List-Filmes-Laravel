@@ -22,7 +22,13 @@ class FilmeFactory extends Factory
      */
     public function definition()
     {
-        $code = $this->faker->randomElement(['tt2277860', 'tt0266543', 'tt1677720', 'tt3748528', 'tt0983193']);
+        $code = $this->faker->randomElement([
+            'tt1677720', 'tt2277860', 'tt0266543', 'tt3748528', 'tt0983193',
+            'tt1675434', 'tt0446029', 'tt4633694', 'tt9362722', 'tt2250912',
+            'tt0478970', 'tt5095030', 'tt0371746', 'tt1300854', 'tt1228705',
+            'tt2245084', 'tt3606756', 'tt0317705', 'tt2096673', 'tt1049413',
+            'tt0910970', 'tt0441773', 'tt1323594', 'tt0351283', 'tt0268380'
+        ]);
         $imdb = new IMDB_API();
         $datasMovie = $imdb->getDatasFilmesCode($code);
         return [

@@ -4,7 +4,9 @@ namespace Database\Factories;
 
 use App\Models\Filme_Votos;
 use App\Models\Filme;
+use App\Models\Filmes;
 use App\Models\Usuario;
+use App\Models\Usuarios;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 class Filme_VotosFactory extends Factory
@@ -25,15 +27,15 @@ class Filme_VotosFactory extends Factory
     {
         return [
             'id_usuario' => function () {
-                $usuarios = Usuario::all();
+                $usuarios = Usuarios::all();
                 return $usuarios->count() === 0 ?
-                    Usuario::factory()->create()->id :
+                    Usuarios::factory()->create()->id :
                     $this->faker->randomElement($usuarios)->id;
             },
             'id_filme' => function () {
-                $filmes = Filme::all();
+                $filmes = Filmes::all();
                 return $filmes->count() === 0 ?
-                    Filme::factory()->create()->id :
+                    Filmes::factory()->create()->id :
                     $this->faker->randomElement($filmes)->id;
             },
             'voto' => $this->faker->numberBetween(0,5),

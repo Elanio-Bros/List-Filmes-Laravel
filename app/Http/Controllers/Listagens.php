@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Categoria;
+use App\Models\Categorias;
 use App\Models\Filmes;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
@@ -26,7 +26,7 @@ class Listagens extends Controller
 
         $ult_filmes = Filmes::select('titulo', 'imdb_code', 'capa_url', 'tipo_capa')->orderBy('created_at', 'DESC')->take(15)->get();
 
-        $filmes_categoria = Categoria::with(['filmes' => function ($relation) {
+        $filmes_categoria = Categorias::with(['filmes' => function ($relation) {
             return $relation->orderBy('created_at', 'DESC');
         }])->orderBy('created_at', 'DESC')->take(5)->get();
 

@@ -5,6 +5,7 @@ namespace Database\Factories;
 use App\Models\Comentarios;
 use App\Models\Grupos_Comentarios;
 use App\Models\Usuario;
+use App\Models\Usuarios;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 class ComentariosFactory extends Factory
@@ -25,9 +26,9 @@ class ComentariosFactory extends Factory
     {
         return [
             'id_usuario' => function () {
-                $usuarios = Usuario::all();
+                $usuarios = Usuarios::all();
                 return $usuarios->count() === 0 ?
-                    Usuario::factory()->create()->id :
+                    Usuarios::factory()->create()->id :
                     $this->faker->randomElement($usuarios)->id;
             },
             'id_grupo' => function () {

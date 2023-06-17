@@ -3,8 +3,8 @@
 namespace Database\Factories;
 
 use App\Models\Categoria_Filme;
-use App\Models\Filme;
-use App\Models\Categoria;
+use App\Models\Categorias;
+use App\Models\Filmes;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 class Categoria_FilmeFactory extends Factory
@@ -25,15 +25,15 @@ class Categoria_FilmeFactory extends Factory
     {
         return [
             'id_filme' => function () {
-                $filmes = Filme::all();
+                $filmes = Filmes::all();
                 return $filmes->count() === 0 ?
-                    Filme::factory()->create()->id :
+                    Filmes::factory()->create()->id :
                     $this->faker->randomElement($filmes)->id;
             },
             'id_categoria' => function () {
-                $categorias = Categoria::all();
+                $categorias = Categorias::all();
                 return $categorias->count() === 0 ?
-                    Filme::factory()->create()->id :
+                    Filmes::factory()->create()->id :
                     $this->faker->randomElement($categorias)->id;
             },
         ];

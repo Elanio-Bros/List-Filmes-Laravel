@@ -4,7 +4,6 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use App\Models\Usuario;
 class Comentarios extends Model
 {
     use HasFactory;
@@ -16,6 +15,6 @@ class Comentarios extends Model
     ];
 
     public function usuario(){
-        return $this->hasMany(Usuario::class,'id','id_usuario');
+        return $this->hasMany(Usuarios::class,'id','id_usuario');
     }
 }

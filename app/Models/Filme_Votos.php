@@ -17,11 +17,11 @@ class Filme_Votos extends Model
 
     public function usuario()
     {
-        return $this->hasMany(Usuario::class,'id','id_usuario');
+        return $this->hasMany(Usuarios::class,'id','id_usuario');
     }
 
     public function filme()
     {
-        return $this->hasMany(Filme::class,'id','id_filme');
+        return $this->hasMany(Filmes::class,'id','id_filme');
     }
 }

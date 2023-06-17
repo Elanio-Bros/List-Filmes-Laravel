@@ -5,10 +5,6 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use App\Casts\CapaFilmeUrl;
-use App\Models\Grupos_Comentarios;
-use App\Models\Comentarios;
-use App\Models\Categoria_Filme;
-use App\Models\Categoria;
 
 class Filmes extends Model
 {
@@ -39,7 +35,7 @@ class Filmes extends Model
 
     public function categoriasFilmes()
     {
-        return $this->hasManyThrough(Categoria::class, Categoria_Filme::class, 'id_filme', 'id', 'id', 'id_categoria');
+        return $this->hasManyThrough(Categorias::class, Categoria_Filme::class, 'id_filme', 'id', 'id', 'id_categoria');
     }
 
     public function votos()

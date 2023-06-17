@@ -7,7 +7,6 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Str;
-use App\Models\Filme;
 use App\Models\Usuarios;
 use App\Models\Filme_Votos;
 use App\Models\Grupos_Comentarios;

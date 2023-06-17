@@ -3,7 +3,6 @@
 namespace Database\Factories;
 
 use App\Models\Categoria;
-use App\Models\Model;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 class CategoriaFactory extends Factory
@@ -25,7 +24,7 @@ class CategoriaFactory extends Factory
         return [
             'nome' => $this->faker->unique()->randomElement([
                 'Aventura', 'Biográfico',
-                'Comédia', 'Comédia dramática', 'Comédia romântica',
+                'Comédia', 'Comédia Dramática', 'Comédia Romântica',
                 'Histórico', 'Drama', 'Ficção'
             ]),
         ];

@@ -18,6 +18,6 @@ class Grupos_Comentarios extends Model
         return $this->hasMany(Comentarios::class,'id_grupo','id');
     }
     public function filme(){
-        return  $this->hasMany(Filme::class,'id','id_filme');
+        return  $this->hasMany(Filmes::class,'id','id_filme');
     }
 }
