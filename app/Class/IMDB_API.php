@@ -4,14 +4,14 @@ namespace App\Class;
 
 class IMDB_API
 {
-    protected $API_KEY;
+    protected $API_KEY, $API_KEY_ALTER;
     protected $response;
     public function __construct()
     {
         /*as duas API tem um limite por dia então se caso uma falhar 
         ,sendo a principal da IMDB API, a segunda como alternativa entrar em ação*/
-        $this->API_KEY= getenv('API_KEY_IMDB');
-        $this->API_KEY_ALTER=getenv('API_KEY_OMDB');
+        $this->API_KEY = getenv('API_KEY_IMDB');
+        $this->API_KEY_ALTER = getenv('API_KEY_OMDB');
     }
     public function getDatasFilmesCode($code)
     {

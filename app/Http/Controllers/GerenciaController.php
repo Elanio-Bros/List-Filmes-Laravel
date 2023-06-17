@@ -12,6 +12,7 @@ use Illuminate\Support\Facades\Storage;
 
 class GerenciaController extends Controller
 {
+    protected $logSystem;
     public function __construct()
     {
         parent::__construct();
