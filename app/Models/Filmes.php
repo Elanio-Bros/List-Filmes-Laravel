@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use App\Casts\CapaFilmeUrl;
+use Database\Factories\FilmeFactory;
 
 class Filmes extends Model
 {
@@ -27,7 +28,7 @@ class Filmes extends Model
     {
         return $this->hasMany(Grupos_Comentarios::class, 'id_filme', 'id');
     }
-    
+
     public function comentarios()
     {
         return $this->hasManyThrough(Comentarios::class, Grupos_Comentarios::class, 'id_filme', 'id_grupo', 'id', 'id');
