@@ -2,8 +2,8 @@
 
 namespace Database\Factories;
 
-use App\Models\Filme;
 use App\Class\IMDB_API;
+use App\Models\Filmes;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 class FilmeFactory extends Factory
@@ -13,7 +13,7 @@ class FilmeFactory extends Factory
      *
      * @var string
      */
-    protected $model = Filme::class;
+    protected $model = Filmes::class;
 
     /**
      * Define the model's default state.

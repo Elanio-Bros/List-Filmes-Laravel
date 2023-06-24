@@ -4,7 +4,6 @@ namespace Database\Factories;
 
 use App\Models\Comentarios;
 use App\Models\Grupos_Comentarios;
-use App\Models\Usuario;
 use App\Models\Usuarios;
 use Illuminate\Database\Eloquent\Factories\Factory;
 

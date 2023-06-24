@@ -3,9 +3,7 @@
 namespace Database\Factories;
 
 use App\Models\Filme_Votos;
-use App\Models\Filme;
 use App\Models\Filmes;
-use App\Models\Usuario;
 use App\Models\Usuarios;
 use Illuminate\Database\Eloquent\Factories\Factory;
 

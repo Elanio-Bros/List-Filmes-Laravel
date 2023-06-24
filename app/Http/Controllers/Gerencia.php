@@ -17,6 +17,7 @@ class Gerencia extends Controller
     }
 
     function index(Request $request) {
-        // return view('usuario.gerenciar.gerencia', ['request' => $request->all()]);
+        // ['request' => $request->all()]
+        // return view('usuario.gerenciar.gerencia', );
     }
 }

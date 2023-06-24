@@ -2,7 +2,7 @@
 
 namespace Database\Factories;
 
-use App\Models\Usuario;
+use App\Models\Usuarios;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Str;
@@ -14,7 +14,7 @@ class UsuarioFactory extends Factory
      *
      * @var string
      */
-    protected $model = Usuario::class;
+    protected $model = Usuarios::class;
 
     /**
      * Define the model's default state.

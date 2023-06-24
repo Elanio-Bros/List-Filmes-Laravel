@@ -117,7 +117,7 @@
                 <form method="get">
                     <ul class="d-flex flex-column">
                         <input class="btn btnPerson" type="submit" value="Últimos adicionados">
-                        @foreach (range(1, 10) as $item)
+                        @foreach (range(1, 1) as $item)
                             <input class="btn btnPerson" type="submit" name="categoria"
                                 value="Categoria {{ $item }}">
                         @endforeach
@@ -135,7 +135,7 @@
                             <i class="fas fa-plus mb-2"></i>
                         </div>
                     </a>
-                    @foreach (range(1, 10) as $item)
+                    @foreach (range(1, 1) as $item)
                         @includeIf('content.card_filme_layout', ['date_value'=>$item,'url'=>'#','titulo'=>"$item
                         Titulo Filme",
                         'imagem'=>'https://images-na.ssl-images-amazon.com/images/I/71yDb8SKTTL.jpg'])
@@ -143,7 +143,7 @@
                 </div>
                 <div id="categeria" class="@if (!isset($request['categoria'])) d-none @endif gridPerson">
                     @if (isset($request['categoria']))
-                        @foreach (range(1, 10) as $item)
+                        @foreach (range(1, 1) as $item)
                             @includeIf('content.card_filme_layout', ['date_value'=>$item,'url'=>'#','titulo'=>"$item
                             Titulo Filme",
                             'imagem'=>'https://images-na.ssl-images-amazon.com/images/I/71yDb8SKTTL.jpg'])
@@ -153,7 +153,7 @@
             </div>
             <div class="d-none user">
                 <div class="gridPerson">
-                    @foreach (range(1, 20) as $item)
+                    @foreach (range(1, 1) as $item)
                         <div class="cardUser" date-value="{{ $item }}">
                             <div class="head mt-1">
                                 <img class="perfil"
@@ -186,7 +186,7 @@
                 <div class="gridPerson">
                     <span id="addCategori" onClick="$('#categories .modal-body input').val('')" class="btn btnPerson m-2"
                         data-toggle="modal" data-target="#categories"><i class="fas fa-plus"></i></span>
-                    @foreach (range(1, 10) as $item)
+                    @foreach (range(1, 1) as $item)
                         <span class="btn btnPerson m-2 categories" date-id='{{ $item }}' data-toggle="modal"
                             data-target="#categories">Ação{{ $item }}</span>
                     @endforeach
