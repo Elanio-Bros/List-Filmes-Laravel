@@ -29,7 +29,7 @@ Route::get('/termo', function () {
 
 Route::get('/login', function (Request $request) {
     if (!$request->session()->has('usuario')) {
-        return view('usuario.entrada.login',[]);
+        return view('usuario.entrada.login');
     } else {
         return redirect()->route('home');
     }
