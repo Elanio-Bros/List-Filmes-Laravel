@@ -42,7 +42,7 @@ class Usuario extends Controller
                 return Redirect::back()->withErrors(['usuario' => 'Usuário ou Email Já Cadastrado']);
             }
         }
-        return $this->login($request);
+        return (new System)->login($request);
     }
 
     public function user_conta()

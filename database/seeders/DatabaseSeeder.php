@@ -2,7 +2,6 @@
 
 namespace Database\Seeders;
 
-use App\Models\Usuario;
 use App\Models\Usuarios;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\Hash;
@@ -17,8 +16,8 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-        // \App\Models\User::factory(10)->create();
-        Usuarios::create([
+
+        Usuarios::firstOrCreate([
             'nome' => 'Admin',
             'usuario' => 'Admin',
             'email' => 'Admin@Admin.com',

@@ -105,7 +105,6 @@
             border-color: #000000DD;
             color: #000000DD;
         }
-
     </style>
 @endsection
 @section('content')
@@ -136,17 +135,24 @@
                         </div>
                     </a>
                     @foreach (range(1, 1) as $item)
-                        @includeIf('content.card_filme_layout', ['date_value'=>$item,'url'=>'#','titulo'=>"$item
-                        Titulo Filme",
-                        'imagem'=>'https://images-na.ssl-images-amazon.com/images/I/71yDb8SKTTL.jpg'])
+                        @includeIf('content.card_filme_layout', [
+                            'date_value' => $item,
+                            'url' => '#',
+                            'titulo' => "$item Titulo Filme",
+                            'imagem' => 'https://images-na.ssl-images-amazon.com/images/I/71yDb8SKTTL.jpg',
+                        ])
                     @endforeach
                 </div>
                 <div id="categeria" class="@if (!isset($request['categoria'])) d-none @endif gridPerson">
                     @if (isset($request['categoria']))
                         @foreach (range(1, 1) as $item)
-                            @includeIf('content.card_filme_layout', ['date_value'=>$item,'url'=>'#','titulo'=>"$item
-                            Titulo Filme",
-                            'imagem'=>'https://images-na.ssl-images-amazon.com/images/I/71yDb8SKTTL.jpg'])
+                            @includeIf('content.card_filme_layout', [
+                                'date_value' => $item,
+                                'url' => '#',
+                                'titulo' => "$item
+                                                        Titulo Filme",
+                                'imagem' => 'https://images-na.ssl-images-amazon.com/images/I/71yDb8SKTTL.jpg',
+                            ])
                         @endforeach
                     @endif
                 </div>
@@ -164,11 +170,14 @@
                                         data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                         <i class="fas fa-exclamation-triangle"></i></button>
                                     <div class="dropdown-menu" aria-labelledby="buttonNoticeUser">
-                                        <a class="dropdown-item" href="#" data-toggle="modal" date-value='1'>Avisar Sobre
+                                        <a class="dropdown-item" href="#" data-toggle="modal" date-value='1'>Avisar
+                                            Sobre
                                             Comentário</a>
-                                        <a class="dropdown-item" href="#" data-toggle="modal" date-value='2'>Avisar Sobre
+                                        <a class="dropdown-item" href="#" data-toggle="modal" date-value='2'>Avisar
+                                            Sobre
                                             Nome Do Usuário</a>
-                                        <a class="dropdown-item" href="#" data-toggle="modal" date-value='3'>Avisar Sobre
+                                        <a class="dropdown-item" href="#" data-toggle="modal" date-value='3'>Avisar
+                                            Sobre
                                             Outra Coisa</a>
                                     </div>
                                 </span>
@@ -186,9 +195,9 @@
                 <div class="gridPerson">
                     <span id="addCategori" onClick="$('#categories .modal-body input').val('')" class="btn btnPerson m-2"
                         data-toggle="modal" data-target="#categories"><i class="fas fa-plus"></i></span>
-                    @foreach (range(1, 1) as $item)
+                    @foreach ($categories as $item)
                         <span class="btn btnPerson m-2 categories" date-id='{{ $item }}' data-toggle="modal"
-                            data-target="#categories">Ação{{ $item }}</span>
+                            data-target="#categories">{{ $item['nome'] }}</span>
                     @endforeach
                 </div>
             </div>
@@ -235,7 +244,8 @@
                             </select>
                         </div>
                         <div class="input-group mb-3">
-                            <input type="text" class="form-control" name="titulo" placeholder="Título" value="" required>
+                            <input type="text" class="form-control" name="titulo" placeholder="Título"
+                                value="" required>
                         </div>
                         <div class="input-group mb-3">
                             <textarea class="form-control" rows="3" required></textarea>
@@ -281,14 +291,17 @@
                                 </div>
                                 <div class="d-flex flex-column w-75">
                                     <div class="form-group">
-                                        <input type="text" class="form-control" name="title" placeholder="Titulo Filme">
+                                        <input type="text" class="form-control" name="title"
+                                            placeholder="Titulo Filme">
                                     </div>
                                     <div class="form-group">
-                                        <input type="text" class="form-control" name="cod" placeholder="Código IMDB">
+                                        <input type="text" class="form-control" name="cod"
+                                            placeholder="Código IMDB">
                                     </div>
                                     <div class="form-group">
-                                        <select name="categoria" class="selectpicker w-100" title="Selecione as categorias"
-                                            data-live-search="true" data-size="4" multiple>
+                                        <select name="categoria" class="selectpicker w-100"
+                                            title="Selecione as categorias" data-live-search="true" data-size="4"
+                                            multiple>
                                             <option value="ola">Ola</option>
                                             <option value='tudo bem'>Tudo bem</option>
                                             <option value='massa'>Massa</option>
@@ -325,7 +338,9 @@
                                 <div class="mr-2 d-flex flex-column">
                                     <div
                                         class="card add-filme-case add-filme-case-active d-flex justify-content-center align-items-center mb-2">
-                                        <img class="d-block mx-auto img-fluid" src="https://images-na.ssl-images-amazon.com/images/I/71yDb8SKTTL.jpg" alt="Imagem Filme">
+                                        <img class="d-block mx-auto img-fluid"
+                                            src="https://images-na.ssl-images-amazon.com/images/I/71yDb8SKTTL.jpg"
+                                            alt="Imagem Filme">
                                         {{-- <i class="fas fa-plus mb-2"></i> --}}
                                     </div>
                                     <input type="file" name="img" style="display:none" id="case-filme"
@@ -337,14 +352,17 @@
                                 </div>
                                 <div class="d-flex flex-column w-75">
                                     <div class="form-group">
-                                        <input type="text" class="form-control" name="title" placeholder="Titulo Filme">
+                                        <input type="text" class="form-control" name="title"
+                                            placeholder="Titulo Filme">
                                     </div>
                                     <div class="form-group">
-                                        <input type="text" class="form-control" name="cod" placeholder="Código IMDB">
+                                        <input type="text" class="form-control" name="cod"
+                                            placeholder="Código IMDB">
                                     </div>
                                     <div class="form-group">
-                                        <select name="categoria" class="selectpicker w-100" title="Selecione as categorias"
-                                            data-live-search="true" data-size="4" multiple>
+                                        <select name="categoria" class="selectpicker w-100"
+                                            title="Selecione as categorias" data-live-search="true" data-size="4"
+                                            multiple>
                                             <option>Ola</option>
                                             <option>Tudo bem</option>
                                             <option>Massa</option>
@@ -440,5 +458,4 @@
             }
         });
     </script>
-
 @endsection

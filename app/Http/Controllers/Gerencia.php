@@ -2,10 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Categorias;
+use App\Models\Filmes;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
-use Illuminate\Support\Facades\Storage;
 
 class Gerencia extends Controller
 {
@@ -16,8 +17,10 @@ class Gerencia extends Controller
         $this->logSystem = Log::channel('log_system');
     }
 
-    function index(Request $request) {
-        // ['request' => $request->all()]
-        // return view('usuario.gerenciar.gerencia', );
+    function index(Request $request)
+    {
+        $categories = Categorias::all();
+        $filmes_ult = Filmes::whereRaw(DB::raw('YEAR(created_at)=' . date('Y')))->whereRaw(DB::raw('MONTH(created_at)=' . date('m')))->get();
+        return view('usuario.gerenciar.gerencia', compact("categories", "filmes_ult"));
     }
 }

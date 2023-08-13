@@ -42,7 +42,7 @@ class AppServiceProvider extends ServiceProvider
         });
 
         view()->composer(['usuario.layout.fundo_layout'], function ($view) {
-            $capa_filmes = Filmes::select('capa_url', 'tipo_capa')->get();
+            $capa_filmes = Filmes::select('capa_url', 'tipo_capa')->get()->toArray();
             if (count($capa_filmes) >= 8) {
                 $view->with(compact('capa_filmes'));
             }
