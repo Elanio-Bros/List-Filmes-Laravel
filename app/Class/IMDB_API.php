@@ -31,7 +31,8 @@ class IMDB_API
             'nota' => $response[2],
         ] : ['erro' => 'Código Invalido'];
     }
-    protected function AcessoApi($url)
+    
+    private function AcessoApi($url)
     {
         $ch = curl_init($url);
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);

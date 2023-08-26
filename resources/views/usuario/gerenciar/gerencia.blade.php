@@ -116,9 +116,9 @@
                 <form method="get">
                     <ul class="d-flex flex-column">
                         <input class="btn btnPerson" type="submit" value="Últimos adicionados">
-                        @foreach (range(1, 1) as $item)
+                        @foreach ($categories as $item)
                             <input class="btn btnPerson" type="submit" name="categoria"
-                                value="Categoria {{ $item }}">
+                                value="Categoria {{ $item['nome'] }}">
                         @endforeach
                     </ul>
                 </form>
@@ -134,12 +134,12 @@
                             <i class="fas fa-plus mb-2"></i>
                         </div>
                     </a>
-                    @foreach (range(1, 1) as $item)
+                    @foreach ($filmes_ult as $item)
                         @includeIf('content.card_filme_layout', [
-                            'date_value' => $item,
+                            'date_value' => $item['id'],
                             'url' => '#',
-                            'titulo' => "$item Titulo Filme",
-                            'imagem' => 'https://images-na.ssl-images-amazon.com/images/I/71yDb8SKTTL.jpg',
+                            'titulo' => $item['titulo'],
+                            'imagem' => $item['capa_url'],
                         ])
                     @endforeach
                 </div>
