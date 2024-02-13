@@ -30,11 +30,6 @@ class Listagens extends Controller
             return $relation->orderBy('created_at', 'DESC');
         }])->orderBy('created_at', 'DESC')->take(5)->get();
 
-        return view('filme.home', [
-            'ult_filmes' => $ult_filmes,
-            'filmes_mais_comentados' => $filmes_comentarios,
-            'categorias_utimo_filmes' => $filmes_categoria,
-        ]);
     }
 
     public function votados(Request $request)
@@ -43,6 +38,5 @@ class Listagens extends Controller
             ->withCount('votos')
             ->orderBy('votos_count', 'DESC')
             ->paginate(20, page: $request->input('page', 1));
-        return view('filme.votados', ['filmes' => $filmes]);
     }
 }

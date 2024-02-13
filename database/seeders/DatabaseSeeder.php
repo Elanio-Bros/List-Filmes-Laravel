@@ -16,14 +16,12 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-
         Usuarios::firstOrCreate([
             'nome' => 'Admin',
             'usuario' => 'Admin',
             'email' => 'Admin@Admin.com',
             'senha' => Hash::make('admin'),
-            'token_api' => Str::random(25),
-            'tipo' => 'Admin'
+            'tipo' => 1
         ]);
     }
 }

@@ -71,6 +71,6 @@ class Usuario extends Controller
         }
 
         Usuarios::where('id', $this->id_usuario)->update($update);
-        return redirect()->route('minha_conta');
+        // return redirect()->route('minha_conta');
     }
 }

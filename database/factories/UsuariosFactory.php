@@ -28,7 +28,6 @@ class UsuariosFactory extends Factory
             'usuario' => $this->faker->unique()->userName(),
             'email' => $this->faker->unique()->safeEmail(),
             'senha' => Hash::make('senhaTeste'),
-            'token_api' => Str::random(25),
             'tipo' => $this->faker->randomElement(['Admin','Gerente','Normal']),
         ];
     }

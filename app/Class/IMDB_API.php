@@ -10,12 +10,12 @@ class IMDB_API
     {
         /*as duas API tem um limite por dia então se caso uma falhar 
         ,sendo a principal da IMDB API, a segunda como alternativa entrar em ação*/
-        $this->API_KEY = getenv('API_KEY_IMDB');
-        $this->API_KEY_ALTER = getenv('API_KEY_OMDB');
+        $this->API_KEY = env('API_KEY_IMDB');
+        $this->API_KEY_ALTER = env('API_KEY_OMDB');
     }
     public function getDatasFilmesCode($code)
     {
-        $url = 'https://imdb-api.com/API/Title/' . $this->API_KEY . '/' . $code;
+        $url = 'https://tv-api.com/API/Title/' . $this->API_KEY . '/' . $code;
         $response = $this->AcessoApi($url);
         if (!key_exists('errorMessage', $response) && !str_contains($response['errorMessage'], 'Maximum usage')) {
             $response = [0 => $response['title'], 1 => $response['image'], 2 => $response['imDbRating'],];

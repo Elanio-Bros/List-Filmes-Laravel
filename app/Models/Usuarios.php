@@ -15,7 +15,6 @@ class Usuarios extends Authenticatable
         'nome',
         'usuario',
         'email',
-        'token_api',
         'url_perfil',
         'tipo',
         'tipo_perfil',

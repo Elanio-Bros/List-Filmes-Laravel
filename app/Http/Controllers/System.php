@@ -25,10 +25,7 @@ class System extends Controller
         $filmes_comentarios = Filmes::withCount('comentarios')->with(['comentarios' => function ($relation) {
             return $relation->where('grupos_comentario.titulo', '=', 'Comentário Gerais');
         }])->orderBy('comentarios_count', 'DESC')->take(10)->get();
-        return view('welcome', [
-            'filmes_comentarios' => $filmes_comentarios,
-            'is_login' => $request->session()->has('usuario')
-        ]);
+        
     }
 
     public function login(Request $request)
@@ -58,13 +55,13 @@ class System extends Controller
         ];
         $request->session()->put('usuario', $usuario);
         $this->logSystem->info($request->input('usuario') . ': Fez Login');
-        return redirect('home');
+        // return redirect('home');
     }
 
     public function logout(Request $request)
     {
         $this->logSystem->info($request->session()->get('usuario')['usuario'] . ':Fez Logout');
         $request->session()->forget('usuario');
-        return redirect()->route('entrada');
+        // return redirect()->route('entrada');
     }
 }

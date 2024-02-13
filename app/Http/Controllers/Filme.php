@@ -35,9 +35,8 @@ class Filme extends Controller
             }
             $filme['nota_media'] = round($filme->votos->avg('voto'), 1);
             $filme['nota_imdb'] = round($filme['nota_imdb'], 1);
-            return view('filme.layout.filme', compact('filme'));
         }
-        return redirect()->route('home');
+        // return redirect()->route('home');
     }
 
     public function avaliacao_filme(Request $request, $code_url)
@@ -57,7 +56,7 @@ class Filme extends Controller
             $voto_usuario->voto = $request->input('voto');
             $voto_usuario->save();
         }
-        return redirect()->back();
+        // return redirect()->back();
     }
 
     public function criar_grupo_comentario(Request $request, $code_url)
@@ -74,7 +73,7 @@ class Filme extends Controller
             $grupo['id_usuario'] = $usuario->id;
             $grupo->save();
         }
-        return redirect()->back();
+        // return redirect()->back();
     }
 
     public function comentario_grupo_filme(Request $request, $code_url)
