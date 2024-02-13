@@ -14,21 +14,16 @@ use PDOException;
 
 class Usuario extends Controller
 {
-    protected $logSystem;
-    public function __construct()
-    {
-        parent::__construct();
-        $this->logSystem = Log::channel('log_system');
-    }
 
     public function criar_conta(Request $request)
     {
-        $request->validate([
+        $this->validate($request, [
             'usuario' => ['required', 'string'],
             'nome' => ['required', 'string'],
             'email' => ['required', 'string'],
             'senha' => ['required', 'string'],
         ]);
+
         $usuario = $request->except(['_token']);
         $usuario['senha'] = Hash::make($request->input('senha'));
         $usuario['token_api'] = Str::random(25);

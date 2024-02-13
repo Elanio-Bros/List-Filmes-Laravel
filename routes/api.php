@@ -17,14 +17,6 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', [App\Http\Controllers\System::class, 'index'])->name('entrada');
 
-Route::get('/login', function (Request $request) {
-    if (!$request->session()->has('usuario')) {
-        return view('usuario.entrada.login');
-    } else {
-        return redirect()->route('home');
-    }
-})->name('login');
-
 Route::post('/login', [App\Http\Controllers\System::class, 'login']);
 
 Route::post('/conta', [App\Http\Controllers\System::class, 'criar_conta']);

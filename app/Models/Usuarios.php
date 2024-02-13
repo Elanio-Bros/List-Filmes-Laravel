@@ -3,11 +3,12 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Foundation\Auth\User as Authenticatable;
 use App\Casts\PerfilUrl;
+use Illuminate\Database\Eloquent\Model;
+
 // use Illuminate\Database\Eloquent\Model;
 
-class Usuarios extends Authenticatable
+class Usuarios extends Model
 {
     use HasFactory;
     protected $table = 'usuarios';
@@ -18,11 +19,13 @@ class Usuarios extends Authenticatable
         'url_perfil',
         'tipo',
         'tipo_perfil',
-        'senha',
     ];
+
     protected $hidden = [
         'senha'
     ];
+
+
     protected $casts = [
         'url_perfil' => PerfilUrl::class,
     ];

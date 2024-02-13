@@ -13,11 +13,12 @@ use Illuminate\Support\Facades\Redirect;
 
 class Filme extends Controller
 {
-    protected $logSystem;
-    public function __construct()
+    
+    public function index(Request $request)
     {
-        parent::__construct();
-        $this->logSystem = Log::channel('log_system');
+        $filmes_comentarios = Filmes::withCount('comentarios')->with(['comentarios' => function ($relation) {
+            return $relation->where('grupos_comentario.titulo', '=', 'Comentário Gerais');
+        }])->orderBy('comentarios_count', 'DESC')->take(10)->get();
     }
 
     public function filme($code_url)
@@ -41,7 +42,7 @@ class Filme extends Controller
 
     public function avaliacao_filme(Request $request, $code_url)
     {
-        $request->validate([
+        $this->validate($request,[
             'voto' => ['required', 'integer'],
         ]);
         $usuario = Usuarios::firstWhere('usuario', $this->usuario['usuario']);
@@ -61,7 +62,7 @@ class Filme extends Controller
 
     public function criar_grupo_comentario(Request $request, $code_url)
     {
-        $request->validate([
+        $this->validate($request,[
             'titulo_grupo' => ['required', 'string'],
         ]);
         $filme = Filmes::firstWhere('imdb_code', $code_url);
@@ -78,7 +79,7 @@ class Filme extends Controller
 
     public function comentario_grupo_filme(Request $request, $code_url)
     {
-        $request->validate([
+        $this->validate($request,[
             'titulo_grupo' => ['required', 'string'],
             'comentario' => ['required', 'string'],
             'id_grupo' => ['required', 'string'],

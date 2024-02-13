@@ -13,12 +13,6 @@ use Illuminate\Support\Facades\Storage;
 
 class Gerencia extends Controller
 {
-    protected $logSystem;
-    public function __construct()
-    {
-        parent::__construct();
-        $this->logSystem = Log::channel('log_system');
-    }
 
     public function index(Request $request)
     {
@@ -35,7 +29,7 @@ class Gerencia extends Controller
 
     public function adicionar_filmes(Request $request)
     {
-        $validate = $request->validate([
+        $validate = $this->validate($request,[
             'titulo' => ['string'],
             'imdb_code' => ['required', 'string'],
             'descricao' => ['string'],
@@ -73,7 +67,7 @@ class Gerencia extends Controller
 
     public function atualizar_filmes(Request $request)
     {
-        $validate = $request->validate([
+        $validate = $this->validate($request,[
             'id' => ['required', 'integer'],
             'titulo' => ['string'],
             'imdb_code' => ['required', 'string'],
@@ -115,7 +109,7 @@ class Gerencia extends Controller
 
     public function adicionar_categoria(Request $request)
     {
-        $validate = $request->validate([
+        $validate = $this->validate($request,[
             'nome' => ['required', 'string'],
         ]);
 
@@ -130,7 +124,7 @@ class Gerencia extends Controller
 
     public function atualizar_categoria(Request $request)
     {
-        $validate = $request->validate([
+        $validate = $this->validate($request,[
             'id' => ['required', 'integer'],
             'nome' => ['required', 'string'],
         ]);
