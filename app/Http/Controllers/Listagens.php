@@ -5,18 +5,10 @@ namespace App\Http\Controllers;
 use App\Models\Categorias;
 use App\Models\Filmes;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Log;
 
 class Listagens extends Controller
 {
-    protected $logSystem;
-    public function __construct()
-    {
-        parent::__construct();
-        $this->logSystem = Log::channel('log_system');
-    }
-
-    public function home()
+    public function filme()
     {
         $filmes_comentarios = Filmes::select('titulo', 'imdb_code', 'capa_url', 'tipo_capa')
             ->withCount('comentarios')
@@ -30,6 +22,7 @@ class Listagens extends Controller
             return $relation->orderBy('created_at', 'DESC');
         }])->orderBy('created_at', 'DESC')->take(5)->get();
 
+        return response()->json(Filmes::all());
     }
 
     public function votados(Request $request)

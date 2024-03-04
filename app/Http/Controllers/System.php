@@ -2,10 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Usuarios;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Redirect;
+use Illuminate\Support\Str;
+use PDOException;
 
 class System extends Controller
 {
@@ -28,8 +31,33 @@ class System extends Controller
 
     public function logout(Request $request)
     {
-        $this->logSystem->info($request->session()->get('usuario')['usuario'] . ':Fez Logout');
+        $this->logSystem->info(Auth::user()['usuario'] . ':Fez Logout');
         Auth::logout();
         return response()->json(['message' => 'User Logout']);
+    }
+
+    public function criar_conta(Request $request)
+    {
+        $this->validate($request, [
+            'usuario' => ['required', 'string'],
+            'nome' => ['required', 'string'],
+            'email' => ['required', 'string'],
+            'senha' => ['required', 'string'],
+        ]);
+
+        $usuario = $request->except(['_token']);
+        $usuario['senha'] = Hash::make($request->input('senha'));
+        $usuario['token_api'] = Str::random(25);
+        $usuario['tipo'] = 'Normal';
+        try {
+            Usuarios::create($usuario);
+            $this->logSystem->info('Usuário: ' . $usuario['usuario'] . ' e Email: ' . $usuario['email'] . 'Cadastrado');
+        } catch (PDOException $e) {
+            if ($e->errorInfo[1] == 1062) {
+                $this->logSystem->error('Usuário:' . $usuario['usuario'] . ' ou Email:' . $usuario['email'] . ' Já Cadastrado');
+                return Redirect::back()->withErrors(['usuario' => 'Usuário ou Email Já Cadastrado']);
+            }
+        }
+        return (new System)->login($request);
     }
 }

@@ -22,11 +22,11 @@ Route::post('/login', [App\Http\Controllers\System::class, 'login']);
 Route::post('/conta', [App\Http\Controllers\System::class, 'criar_conta']);
 
 Route::middleware(App\Http\Middleware\AuthUser::class)->group(function () {
-    Route::get('/logout', [App\Http\Controllers\System::class, 'logout'])->name('logout');
+    Route::post('/logout', [App\Http\Controllers\System::class, 'logout']);
 
-    Route::get('/home', [App\Http\Controllers\Listagens::class, 'home'])->name('home');
+    Route::get('/filmes', [App\Http\Controllers\Listagens::class, 'filmes']);
 
-    Route::get('/filme/votados', [App\Http\Controllers\Listagens::class, 'votados'])->name('votados');
+    Route::get('/filme/votados', [App\Http\Controllers\Listagens::class, 'votados']);
 
     Route::get('/filme/{code_url}', [App\Http\Controllers\Filme::class, 'filme']);
     Route::post('/filme/{code_url}/voto/', [App\Http\Controllers\Filme::class, 'avaliacao_filme'])->name('voto');

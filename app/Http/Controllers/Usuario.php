@@ -4,41 +4,12 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
-use Illuminate\Support\Facades\Log;
-use Illuminate\Support\Facades\Redirect;
-use Illuminate\Support\Str;
 use App\Models\Usuarios;
 use App\Models\Filme_Votos;
 use App\Models\Grupos_Comentarios;
-use PDOException;
 
 class Usuario extends Controller
 {
-
-    public function criar_conta(Request $request)
-    {
-        $this->validate($request, [
-            'usuario' => ['required', 'string'],
-            'nome' => ['required', 'string'],
-            'email' => ['required', 'string'],
-            'senha' => ['required', 'string'],
-        ]);
-
-        $usuario = $request->except(['_token']);
-        $usuario['senha'] = Hash::make($request->input('senha'));
-        $usuario['token_api'] = Str::random(25);
-        $usuario['tipo'] = 'Normal';
-        try {
-            Usuarios::create($usuario);
-            $this->logSystem->info('Usuário: ' . $usuario['usuario'] . ' e Email: ' . $usuario['email'] . 'Cadastrado');
-        } catch (PDOException $e) {
-            if ($e->errorInfo[1] == 1062) {
-                $this->logSystem->error('Usuário:' . $usuario['usuario'] . ' ou Email:' . $usuario['email'] . ' Já Cadastrado');
-                return Redirect::back()->withErrors(['usuario' => 'Usuário ou Email Já Cadastrado']);
-            }
-        }
-        return (new System)->login($request);
-    }
 
     public function user_conta()
     {
