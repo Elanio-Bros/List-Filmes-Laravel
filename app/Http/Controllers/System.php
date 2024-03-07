@@ -47,8 +47,7 @@ class System extends Controller
 
         $usuario = $request->except(['_token']);
         $usuario['senha'] = Hash::make($request->input('senha'));
-        $usuario['token_api'] = Str::random(25);
-        $usuario['tipo'] = 'Normal';
+        $usuario['tipo'] = 2;
         try {
             Usuarios::create($usuario);
             $this->logSystem->info('Usuário: ' . $usuario['usuario'] . ' e Email: ' . $usuario['email'] . 'Cadastrado');

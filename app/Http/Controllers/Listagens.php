@@ -8,33 +8,63 @@ use Illuminate\Http\Request;
 
 class Listagens extends Controller
 {
-    public function filmes()
+    public function filmes(Request $request)
     {
-        $ult_filmes = Filmes::select('titulo', 'imdb_code', 'capa_url', 'tipo_capa')->orderBy('created_at', 'DESC')->take(15)->get();
-        return response()->json(Filmes::all());
+        $validate = $this->validate($request, [
+            'order' => 'in:created_at,titulo,imdb_code,nota_imdb', 'order_by' => 'in:desc,asc',
+            'page' => 'integer', 'per_page' => 'integer'
+        ]);
+
+        $filmes = Filmes::select('*')->orderBy($validate['order'] ?? 'id', $validate['order_by'] ?? 'ASC');
+
+        if (isset($validate['per_page']) && $validate['per_page'] == 0) {
+            // If send 0 returns all the films
+            $validate['per_page'] = $filmes->count();
+        }
+
+        return response()->json($filmes->paginate($validate['per_page'] ?? 10, $validate['page'] ?? 1));
     }
 
-    public function filmes_comentarios()
+    public function filmes_comentados(Request $request)
     {
-        $filmes_comentarios = Filmes::select('titulo', 'imdb_code', 'capa_url', 'tipo_capa')
-            ->withCount('comentarios')
-            ->with(['comentarios' => function ($relation) {
-                return $relation->where('grupos_comentario.titulo', '=', 'Comentário Gerais');
-            }])->orderBy('comentarios_count', 'DESC')->take(10)->get();
+        $validate = $this->validate($request, [
+            'order_by' => 'in:desc,asc',
+            'page' => 'integer', 'per_page' => 'integer'
+        ]);
+
+        $filmes_comentados = Filmes::select('titulo', 'imdb_code', 'capa_url', 'tipo_capa')
+            ->withCount('comentarios')->orderBy('comentarios_count', $validate['order_by'] ?? 'DESC');
+
+        return response()->json($filmes_comentados->paginate($validate['per_page'] ?? 10, $validate['page'] ?? 1));
     }
 
-    public function filmes_categorias()
+    public function filmes_categorias(Request $request)
     {
-        $filmes_categoria = Categorias::with(['filmes' => function ($relation) {
+        $validate = $this->validate($request, [
+            'id_categoria' => 'integer'
+        ]);
+
+        $filmes_categoria = Categorias::select('id', 'nome')->with(['filmes' => function ($relation) {
             return $relation->orderBy('created_at', 'DESC');
-        }])->orderBy('created_at', 'DESC')->take(5)->get();
+        }]);
+
+        if (isset($validate['id_categoria'])) {
+            $filmes_categoria->where('id', '=', $validate['id_categoria']);
+        }
+
+        return response()->json($filmes_categoria->orderBy('id', 'DESC')->get());
     }
 
-    public function votados(Request $request)
+    public function filmes_votados(Request $request)
     {
-        $filmes = Filmes::select('titulo', 'imdb_code', 'capa_url', 'tipo_capa')
+        $validate = $this->validate($request, [
+            'order_by' => 'in:desc,asc', 'page' => 'integer', 'per_page' => 'integer'
+        ]);
+
+        $filmes_votados = Filmes::select('titulo', 'imdb_code', 'capa_url', 'tipo_capa')
             ->withCount('votos')
-            ->orderBy('votos_count', 'DESC')
-            ->paginate(20, page: $request->input('page', 1));
+            ->orderBy('votos_count', $validate['order_by'] ?? 'DESC');
+
+        return response()->json($filmes_votados->paginate($validate['per_page'] ?? 10, $validate['page'] ?? 1));
     }
 }

@@ -37,6 +37,7 @@ class Gerencia extends Controller
             'tipo_capa' => ['required', 'in:imdb,file'],
             'imagem' => 'imagem',
         ]);
+        
         $movie_code = $validate['imdb_code'];
         $imdb = new IMDB_API();
         $datasMovie = $imdb->getDatasFilmesCode($movie_code);

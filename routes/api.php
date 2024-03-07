@@ -25,8 +25,9 @@ Route::middleware(App\Http\Middleware\AuthUser::class)->group(function () {
     Route::post('/logout', [App\Http\Controllers\System::class, 'logout']);
 
     Route::get('/filmes', [App\Http\Controllers\Listagens::class, 'filmes']);
-
-    Route::get('/filme/votados', [App\Http\Controllers\Listagens::class, 'votados']);
+    Route::get('/filmes/categorias', [App\Http\Controllers\Listagens::class, 'filmes_categorias']);
+    Route::get('/filmes/comentados', [App\Http\Controllers\Listagens::class, 'filmes_comentados']);
+    Route::get('/filmes/votados', [App\Http\Controllers\Listagens::class, 'filmes_votados']);
 
     Route::get('/filme/{code_url}', [App\Http\Controllers\Filme::class, 'filme']);
     Route::post('/filme/{code_url}/voto/', [App\Http\Controllers\Filme::class, 'avaliacao_filme'])->name('voto');
