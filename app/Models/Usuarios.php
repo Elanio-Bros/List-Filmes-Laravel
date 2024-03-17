@@ -22,7 +22,8 @@ class Usuarios extends Model
     ];
 
     protected $hidden = [
-        'senha'
+        'senha', 'id', "created_at", "updated_at"
+
     ];
 
 
@@ -30,7 +31,7 @@ class Usuarios extends Model
         'url_perfil' => PerfilUrl::class,
     ];
 
-    public function votos()
+    public function voto()
     {
         return $this->hasMany(Filme_Votos::class, 'id_usuario', 'id');
     }

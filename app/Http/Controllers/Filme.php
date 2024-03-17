@@ -8,41 +8,42 @@ use Illuminate\Http\Request;
 use App\Models\Filmes;
 use App\Models\Grupos_Comentarios;
 use App\Models\Usuarios;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Redirect;
 
 class Filme extends Controller
 {
-    
-    public function index(Request $request)
+    public function filme(int $id)
     {
-        $filmes_comentarios = Filmes::withCount('comentarios')->with(['comentarios' => function ($relation) {
-            return $relation->where('grupos_comentario.titulo', '=', 'Comentário Gerais');
-        }])->orderBy('comentarios_count', 'DESC')->take(10)->get();
-    }
-
-    public function filme($code_url)
-    {
-        $filme = Filmes::with(['categoriasFilmes' => function ($relation) {
+        $filme = Filmes::with(['categorias' => function ($relation) {
             return $relation->orderBy('nome');
         }, 'grupos', 'grupos.comentarios', 'grupos.comentarios.usuario'])
-            ->withCount('votos')->firstWhere('imdb_code', $code_url);
+            ->withCount('votos')->firstWhere('id', '=', $id);
+
         if ($filme != null) {
-            $voto_usuario = Usuarios::with(['votos' => function ($relation) use ($filme) {
-                return $relation->firstWhere('id_filme', $filme['id']);
-            }])->firstWhere('usuario', $this->usuario['usuario'])->votos;
-            if (count($voto_usuario) != 0) {
-                $filme['usuario_voto'] = $voto_usuario->first()->voto;
+            $filme['usuario_voto'] = 0;
+
+            if (Auth::check() == true) {
+                $voto_usuario = Usuarios::with(['voto' => function ($relation) use ($filme) {
+                    return $relation->firstWhere('id_filme', $filme['id']);
+                }])->firstWhere('id',)->votos;
+
+                if (count($voto_usuario) !== 0) {
+                    $filme['usuario_voto'] = $voto_usuario->first()->voto;
+                }
             }
             $filme['nota_media'] = round($filme->votos->avg('voto'), 1);
             $filme['nota_imdb'] = round($filme['nota_imdb'], 1);
+            return response()->json($filme);
         }
-        // return redirect()->route('home');
+
+        return response()->json(['erro' => 'filme', 'message' => 'filme not found'], 404);
     }
 
     public function avaliacao_filme(Request $request, $code_url)
     {
-        $this->validate($request,[
+        $this->validate($request, [
             'voto' => ['required', 'integer'],
         ]);
         $usuario = Usuarios::firstWhere('usuario', $this->usuario['usuario']);
@@ -62,7 +63,7 @@ class Filme extends Controller
 
     public function criar_grupo_comentario(Request $request, $code_url)
     {
-        $this->validate($request,[
+        $this->validate($request, [
             'titulo_grupo' => ['required', 'string'],
         ]);
         $filme = Filmes::firstWhere('imdb_code', $code_url);
@@ -79,7 +80,7 @@ class Filme extends Controller
 
     public function comentario_grupo_filme(Request $request, $code_url)
     {
-        $this->validate($request,[
+        $this->validate($request, [
             'titulo_grupo' => ['required', 'string'],
             'comentario' => ['required', 'string'],
             'id_grupo' => ['required', 'string'],

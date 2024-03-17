@@ -14,6 +14,7 @@ class User_Auth extends Authenticatable implements JWTSubject
     protected $table = 'usuarios';
 
     protected $fillable = [
+        'id',
         'usuario',
         'email',
         'url_perfil',
@@ -48,6 +49,7 @@ class User_Auth extends Authenticatable implements JWTSubject
     public function getJWTCustomClaims()
     {
         return [
+            'id' => $this->id,
             'usuario' => $this->usuario,
             'url_perfil' => $this->url_perfil,
         ];

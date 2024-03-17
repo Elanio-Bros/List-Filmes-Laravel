@@ -9,11 +9,19 @@ class Grupos_Comentarios extends Model
 {
     use HasFactory;
     protected $table = 'grupos_comentario';
+
     protected $fillable = [
         'titulo',
         'id_filme',
-        'id_usuario',
     ];
+
+    protected $hidden = [
+        'id_usuario',
+        "created_at",
+        "updated_at",
+    ];
+
+
     public function comentarios(){
         return $this->hasMany(Comentarios::class,'id_grupo','id');
     }

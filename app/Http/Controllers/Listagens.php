@@ -22,7 +22,7 @@ class Listagens extends Controller
             $validate['per_page'] = $filmes->count();
         }
 
-        return response()->json($filmes->paginate($validate['per_page'] ?? 10, $validate['page'] ?? 1));
+        return response()->json($filmes->paginate($validate['per_page'] ?? 10, page: $validate['page'] ?? 1));
     }
 
     public function filmes_comentados(Request $request)
@@ -35,7 +35,7 @@ class Listagens extends Controller
         $filmes_comentados = Filmes::select('titulo', 'imdb_code', 'capa_url', 'tipo_capa')
             ->withCount('comentarios')->orderBy('comentarios_count', $validate['order_by'] ?? 'DESC');
 
-        return response()->json($filmes_comentados->paginate($validate['per_page'] ?? 10, $validate['page'] ?? 1));
+        return response()->json($filmes_comentados->paginate($validate['per_page'] ?? 10, page: $validate['page'] ?? 1));
     }
 
     public function filmes_categorias(Request $request)
@@ -65,6 +65,6 @@ class Listagens extends Controller
             ->withCount('votos')
             ->orderBy('votos_count', $validate['order_by'] ?? 'DESC');
 
-        return response()->json($filmes_votados->paginate($validate['per_page'] ?? 10, $validate['page'] ?? 1));
+        return response()->json($filmes_votados->paginate($validate['per_page'] ?? 10, page: $validate['page'] ?? 1));
     }
 }

@@ -19,7 +19,7 @@ class PerfilUrl implements CastsAttributes
      */
     public function get($model, $key, $value, $attributes)
     {
-        if ($attributes['tipo_perfil'] == 'file') {
+        if ($model['tipo_perfil'] == 'file') {
             return Storage::drive('user')->url($value);
         } else {
             return $value;
