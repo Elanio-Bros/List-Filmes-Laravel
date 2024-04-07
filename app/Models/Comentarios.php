@@ -12,6 +12,9 @@ class Comentarios extends Model
     protected $fillable = [
         'id_grupo',
         'comentario',
+        
+        // hidden
+        'id_usuario',
     ];
 
     protected $hidden = [
@@ -23,6 +26,6 @@ class Comentarios extends Model
 
     public function usuario()
     {
-        return $this->hasMany(Usuarios::class, 'id', 'id_usuario')->select('id', 'usuario', 'url_perfil','tipo_perfil');
+        return $this->hasMany(Usuarios::class, 'id', 'id_usuario')->select('id', 'usuario', 'url_perfil', 'tipo_perfil');
     }
 }

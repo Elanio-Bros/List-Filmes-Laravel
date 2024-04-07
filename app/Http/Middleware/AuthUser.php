@@ -20,8 +20,10 @@ class AuthUser
         
         if (Auth::check()) {
             return $next($request);
+        }else{
+            return response()->json(['erro' => 'user', 'message' => 'token not valid'], 406);
         }
 
-        return response()->json(['erro' => 'user', 'message' => 'user not permition'], 406);
+        
     }
 }

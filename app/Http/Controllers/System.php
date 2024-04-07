@@ -36,22 +36,22 @@ class System extends Controller
 
     public function criar_conta(Request $request)
     {
-        $this->validate($request, [
+        $validate = $this->validate($request, [
             'usuario' => ['required', 'string'],
             'nome' => ['required', 'string'],
             'email' => ['required', 'string'],
             'senha' => ['required', 'string'],
         ]);
 
-        $usuario = $request->except(['_token']);
-        $usuario['senha'] = Hash::make($request->input('senha'));
-        $usuario['tipo'] = 2;
+        $validate['senha'] = Hash::make($validate['senha']);
+        $validate['tipo'] = 2;
+
         try {
-            Usuarios::create($usuario);
-            $this->logSystem->info('Usuário: ' . $usuario['usuario'] . ' e Email: ' . $usuario['email'] . 'Cadastrado');
+            Usuarios::create($validate);
+            $this->logSystem->info('Usuário: ' . $validate['usuario'] . ' e Email: ' . $validate['email'] . 'Cadastrado');
         } catch (PDOException $e) {
             if ($e->errorInfo[1] == 1062) {
-                $this->logSystem->error('Usuário:' . $usuario['usuario'] . ' ou Email:' . $usuario['email'] . ' Já Cadastrado');
+                $this->logSystem->error('Usuário:' . $validate['usuario'] . ' ou Email:' . $validate['email'] . ' Já Cadastrado');
                 return Redirect::back()->withErrors(['usuario' => 'Usuário ou Email Já Cadastrado']);
             }
         }

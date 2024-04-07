@@ -13,19 +13,25 @@ class Grupos_Comentarios extends Model
     protected $fillable = [
         'titulo',
         'id_filme',
+
+        // hidden
+        'id_usuario',
     ];
 
     protected $hidden = [
+        "id",
         'id_usuario',
         "created_at",
         "updated_at",
     ];
 
 
-    public function comentarios(){
-        return $this->hasMany(Comentarios::class,'id_grupo','id');
+    public function comentarios()
+    {
+        return $this->hasMany(Comentarios::class, 'id_grupo', 'id');
     }
-    public function filme(){
-        return  $this->hasMany(Filmes::class,'id','id_filme');
+    public function filme()
+    {
+        return  $this->hasMany(Filmes::class, 'id', 'id_filme');
     }
 }
